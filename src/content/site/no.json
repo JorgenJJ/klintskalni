@@ -2,16 +2,16 @@
   "houseName": "Klintskalni",
   "airbnbUrl": "https://www.airbnb.com/rooms/REPLACE-WITH-YOUR-LISTING-ID",
   "email": "hello@klintskalni.example",
-  "heroImage": "hero/hero.jpg",
+  "heroImage": "/src/images/20211009_165135.jpg",
+  "ogImage": "/src/images/20211009_165135.jpg",
   "gallery": [
-    "gallery/living-room.jpg",
-    "gallery/bedroom.jpg",
-    "gallery/kitchen.jpg",
-    "gallery/terrace.jpg",
-    "gallery/sea-view.jpg",
-    "gallery/surroundings.jpg"
+    "/src/images/20211009_164946.jpg",
+    "/src/images/20211009_165259.jpg",
+    "/src/images/20211010_105755.jpg",
+    "/src/images/20211010_105844.jpg",
+    "/src/images/20211010_111244.jpg",
+    "/src/images/20211010_180647.jpg"
   ],
-  "ogImage": "hero/hero.jpg",
   "map": {
     "lat": 56.9215,
     "lon": 21.3742,
