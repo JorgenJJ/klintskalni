@@ -1,0 +1,69 @@
+---
+import { languages, type Lang } from '../i18n/languages';
+import { localizedPath } from '../i18n/utils';
+
+interface Props {
+  current: Lang;
+  available: Lang[];
+  label: string;
+}
+
+const { current, available, label } = Astro.props;
+---
+
+<nav class="lang" aria-label={label}>
+  <span class="lang-label" aria-hidden="true">{label}:</span>
+  <ul>
+    {
+      available.map((lang) => (
+        <li>
+          <a
+            href={localizedPath(lang)}
+            hreflang={lang}
+            lang={lang}
+            aria-current={lang === current ? 'true' : undefined}
+            class={lang === current ? 'active' : undefined}
+          >
+            {languages[lang]}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .lang {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .lang-label {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    display: inline-block;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--brand-dark);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  a:hover {
+    background: #eef4f3;
+  }
+  a.active {
+    background: var(--brand);
+    color: var(--brand-contrast);
+  }
+</style>
