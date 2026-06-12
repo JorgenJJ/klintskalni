@@ -1,6 +1,7 @@
 ---
 import { languages, type Lang } from '../i18n/languages';
 import { localizedPath } from '../i18n/utils';
+import Flag from './Flag.astro';
 
 interface Props {
   current: Lang;
@@ -11,9 +12,16 @@ interface Props {
 const { current, available, label } = Astro.props;
 ---
 
-<nav class="lang" aria-label={label}>
-  <span class="lang-label" aria-hidden="true">{label}:</span>
-  <ul>
+<details class="langpicker" aria-label={label}>
+  <summary aria-label={label}>
+    <Flag lang={current} />
+    <span class="current-name">{languages[current]}</span>
+    <svg class="chev" viewBox="0 0 12 12" aria-hidden="true">
+      <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6"
+        stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </summary>
+  <ul role="list">
     {
       available.map((lang) => (
         <li>
@@ -24,46 +32,146 @@ const { current, available, label } = Astro.props;
             aria-current={lang === current ? 'true' : undefined}
             class={lang === current ? 'active' : undefined}
           >
-            {languages[lang]}
+            <Flag lang={lang} />
+            <span>{languages[lang]}</span>
+            {lang === current && (
+              <svg class="check" viewBox="0 0 14 14" aria-hidden="true">
+                <path d="M2.5 7.5 6 11l5.5-7" fill="none" stroke="currentColor"
+                  stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            )}
           </a>
         </li>
       ))
     }
   </ul>
-</nav>
+</details>
+
+<script is:inline>
+  // Lukk dropdownen ved klikk utenfor eller Escape (progressiv forbedring).
+  document.addEventListener('click', (e) => {
+    document.querySelectorAll('details.langpicker[open]').forEach((d) => {
+      if (!d.contains(e.target)) d.removeAttribute('open');
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document
+        .querySelectorAll('details.langpicker[open]')
+        .forEach((d) => d.removeAttribute('open'));
+    }
+  });
+</script>
 
 <style>
-  .lang {
-    display: flex;
+  .langpicker {
+    position: relative;
+  }
+
+  /* Knappen (alltid synlig) */
+  summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-  .lang-label {
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
-  ul {
-    list-style: none;
-    display: flex;
-    gap: 0.25rem;
-    margin: 0;
-    padding: 0;
-  }
-  a {
-    display: inline-block;
-    padding: 0.35rem 0.7rem;
+    padding: 0.4rem 0.7rem;
+    border: 1px solid var(--border);
     border-radius: 999px;
-    text-decoration: none;
-    color: var(--brand-dark);
+    background: var(--surface);
     font-size: 0.9rem;
     font-weight: 600;
+    color: var(--text);
+    user-select: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
-  a:hover {
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary:hover {
+    border-color: #c9c6bd;
+  }
+  .langpicker[open] summary {
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px rgba(42, 111, 107, 0.15);
+  }
+  .current-name {
+    line-height: 1;
+  }
+  .chev {
+    width: 0.7rem;
+    height: 0.7rem;
+    color: var(--muted);
+    transition: transform 0.15s ease;
+  }
+  .langpicker[open] .chev {
+    transform: rotate(180deg);
+  }
+
+  /* Nedtrekkspanelet */
+  ul {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.4rem);
+    min-width: 11rem;
+    margin: 0;
+    padding: 0.35rem;
+    list-style: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    z-index: 60;
+  }
+  li + li {
+    margin-top: 0.1rem;
+  }
+  ul a {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.6rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  ul a:hover {
     background: #eef4f3;
   }
-  a.active {
-    background: var(--brand);
-    color: var(--brand-contrast);
+  ul a.active {
+    color: var(--brand-dark);
+    font-weight: 700;
+  }
+  ul a span {
+    flex: 1;
+  }
+  .check {
+    width: 0.85rem;
+    height: 0.85rem;
+    color: var(--brand);
+  }
+
+  /* Lett innanimasjon når panelet åpnes */
+  .langpicker[open] ul {
+    animation: lp-in 0.14s ease-out;
+  }
+  @keyframes lp-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .chev,
+    .langpicker[open] ul {
+      transition: none;
+      animation: none;
+    }
   }
 </style>
