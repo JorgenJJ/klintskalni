@@ -1,33 +1,64 @@
 ---
-heroTitle: "Klintskalni — a seaside holiday house"
-heroTagline: "Quiet, light and right by the Baltic cliffs. Your home away from home."
-heroAlt: "The log holiday house Klintskalni with balcony and terrace, seen from the garden"
-bookButtonLabel: "Book on Airbnb"
+heroTitle: "Klintskalni — two seaside houses on one property"
+heroTagline: "A large house and a small house by the Baltic cliffs. Rent either one — or both."
+heroAlt: "The Klintskalni property with the large log house and a second house behind, seen from the garden"
+heroCtaLabel: "See the two houses"
 
-keyPointsTitle: "Why you'll love it"
+keyPointsTitle: "The setting"
 keyPoints:
   - icon: "🌊"
     label: "Sea view"
-  - icon: "🛏️"
-    label: "6 beds"
   - icon: "🏖️"
     label: "10 min to the beach"
-  - icon: "🔥"
-    label: "Wood-fired sauna"
+  - icon: "🏐"
+    label: "Beach volleyball"
   - icon: "🐾"
     label: "Pets welcome"
 
-galleryTitle: "The house and its surroundings"
+housesTitle: "Two separate houses"
+housesIntro: "Klintskalni has two independent holiday houses on the same grounds, each with its own entrance and its own Airbnb listing. Book either one online — or rent both together by contacting us directly."
+houses:
+  - id: "large"
+    name: "The Large House"
+    tagline: "Spacious log house with a balcony and sea views."
+    keyPoints:
+      - icon: "🛏️"
+        label: "Sleeps 6"
+      - icon: "🏡"
+        label: "3 bedrooms"
+      - icon: "🔥"
+        label: "Wood-fired sauna"
+      - icon: "🍳"
+        label: "Full kitchen"
+    description: "A bright, two-storey log home with a furnished terrace and a balcony facing the sea. It comfortably sleeps six across three bedrooms, with a full kitchen, living room and wood-fired sauna — ideal for families or two couples travelling together."
+    bookLabel: "Book the Large House on Airbnb"
+    imageAlt: "The large log house with balcony and terrace"
+  - id: "small"
+    name: "The Small House"
+    tagline: "A cosy timber cabin, perfect for two."
+    keyPoints:
+      - icon: "🛏️"
+        label: "Sleeps 2"
+      - icon: "🔥"
+        label: "Fireplace"
+      - icon: "🌲"
+        label: "Quiet, by the trees"
+      - icon: "☕"
+        label: "Kitchenette"
+    description: "A charming, traditional timber cabin a few steps from the large house. Snug and private, it is perfect for a couple, with a kitchenette, a fireplace and the same direct access to the beach and grounds."
+    bookLabel: "Book the Small House on Airbnb"
+    imageAlt: "The small timber cabin in evening light"
+
+galleryTitle: "The surroundings"
 galleryAlts:
-  - "The house terrace and garden lawn with autumn trees and the sea beyond"
-  - "The timber cabin at dusk with the sea and sunset glow behind"
+  - "The grounds with terrace, lawn and the sea beyond"
   - "Grassy bluff with trees overlooking the beach and the Baltic Sea"
   - "Wide sandy beach with sunlight and gentle waves"
   - "Sandy beach lined by forest under a clear blue sky"
   - "Sunset over the sea with a silhouetted tree on the shore"
-  - "Beach-volleyball net on the lawn by the house"
+  - "Beach-volleyball net on the lawn"
 
-infoTitle: "About the house"
+infoTitle: "About Klintskalni"
 
 reviewsTitle: "What guests say"
 reviewsNote: "★ 4.9 on Airbnb"
@@ -38,25 +69,24 @@ mapAreaLabel: "Jūrkalne coast, Latvia"
 mapLinkLabel: "Open larger map"
 
 contactTitle: "Get in touch"
-contactText: "Booking and questions are handled fastest through Airbnb messages. You can also send us an email."
-airbnbButtonLabel: "Message us on Airbnb"
-emailButtonLabel: "Send an email"
+contactText: "Booking each house is easiest on Airbnb. Want to rent both houses at the same time, or have a question? Email us directly and we'll help you arrange it."
+emailButtonLabel: "Email us"
 
-seoTitle: "Klintskalni — seaside holiday house on the Baltic coast"
-seoDescription: "A quiet, light holiday house by the Baltic cliffs. Sea view, sauna and 10 minutes to the beach. Book on Airbnb."
+seoTitle: "Klintskalni — two seaside holiday houses on the Baltic coast"
+seoDescription: "Two separate holiday houses on one seaside property by the Baltic cliffs — a large house and a small house. Book on Airbnb, or rent both via direct contact."
 
 languageLabel: "Language"
 skipToContent: "Skip to content"
 ---
 
-Klintskalni sits among pines on the cliffs of the Baltic coast, a short walk
-from a long, quiet beach. The house is bright and simply furnished, with room
-for up to six guests across three bedrooms.
+Klintskalni is a quiet seaside property on the cliffs of the Baltic coast, a
+short walk from a long sandy beach. There are two separate holiday houses on the
+grounds — a larger log house and a smaller timber cabin — which you can rent
+individually.
 
-The open kitchen and living room face the sea, and the terrace catches the
-evening sun. There is a wood-fired sauna, fast Wi‑Fi, and parking right by the
-door. Whether you come to swim, walk the coastline, or simply slow down, the
-house is made for a calm, comfortable stay.
+Both share the same calm setting: pine trees, sea views, a beach-volleyball
+court and direct access to the coastline. Travelling as a larger group? You can
+book both houses together — just get in touch and we'll arrange it.
 
-We keep the listing and calendar up to date on Airbnb, where you can check
-availability and book in a few clicks.
+Each house has its own listing on Airbnb, where you can check availability and
+book in a few clicks.

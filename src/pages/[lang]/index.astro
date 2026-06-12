@@ -6,9 +6,12 @@ import { resolveImage } from '../../lib/images';
 import reviewsData from '../../content/reviews/reviews.json';
 // Bilder er felles for alle språk (kun alt-tekst oversettes – se sections).
 import media from '../../data/media.json';
+// De to husene: felles data (bilde + Airbnb-lenke), koblet med tekst per språk.
+import housesData from '../../data/houses.json';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import KeyPoints from '../../components/KeyPoints.astro';
+import Houses from '../../components/Houses.astro';
 import Gallery from '../../components/Gallery.astro';
 import Info from '../../components/Info.astro';
 import Reviews from '../../components/Reviews.astro';
@@ -29,6 +32,20 @@ const site = await getSite(lang);
 const sectionEntry = await getSection(lang);
 const s = sectionEntry.data;
 const { Content } = await render(sectionEntry);
+
+// Slå sammen felles husdata (houses.json) med oversatt tekst (sections) via id.
+const houses = housesData.houses
+  .map((h) => {
+    const t = s.houses.find((x) => x.id === h.id);
+    return t ? { ...h, ...t } : null;
+  })
+  .filter((h): h is NonNullable<typeof h> => h !== null);
+
+// «Les alle anmeldelser» peker til det store huset (primær annonse).
+const reviewsUrl =
+  housesData.houses.find((h) => h.id === 'large')?.airbnbUrl ??
+  housesData.houses[0]?.airbnbUrl ??
+  '';
 ---
 
 <Layout
@@ -46,11 +63,13 @@ const { Content } = await render(sectionEntry);
     alt={s.heroAlt}
     title={s.heroTitle}
     tagline={s.heroTagline}
-    bookUrl={site.airbnbUrl}
-    bookLabel={s.bookButtonLabel}
+    ctaHref="#houses"
+    ctaLabel={s.heroCtaLabel}
   />
 
   <KeyPoints title={s.keyPointsTitle} points={s.keyPoints} />
+
+  <Houses title={s.housesTitle} intro={s.housesIntro} houses={houses} />
 
   <Gallery title={s.galleryTitle} files={media.gallery} alts={s.galleryAlts} />
 
@@ -62,7 +81,7 @@ const { Content } = await render(sectionEntry);
     title={s.reviewsTitle}
     note={s.reviewsNote}
     linkLabel={s.reviewsLinkLabel}
-    airbnbUrl={site.airbnbUrl}
+    airbnbUrl={reviewsUrl}
     reviews={reviews}
   />
 
@@ -79,8 +98,6 @@ const { Content } = await render(sectionEntry);
   <Contact
     title={s.contactTitle}
     text={s.contactText}
-    airbnbUrl={site.airbnbUrl}
-    airbnbLabel={s.airbnbButtonLabel}
     email={site.email}
     emailLabel={s.emailButtonLabel}
   />

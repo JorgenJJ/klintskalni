@@ -1,9 +1,10 @@
 # Klintskalni — feriehus-nettside
 
-Enkel, flerspråklig og vedlikeholdsvennlig informasjonsside for et feriehus.
-Booking håndteres av Airbnb; nettsidens mål er synlighet. Bygget som en
-**statisk side med [Astro](https://astro.build)** etter kravspesifikasjonen i
-prosjektrapporten.
+Enkel, flerspråklig og vedlikeholdsvennlig informasjonsside for eiendommen
+Klintskalni, som har **to separate feriehus** (det store og det lille huset) på
+samme tomt. Hvert hus har sin egen Airbnb-annonse; begge kan leies sammen ved
+direkte kontakt. Bygget som en **statisk side med [Astro](https://astro.build)**
+etter kravspesifikasjonen i prosjektrapporten.
 
 - **Flerspråklig:** engelsk, norsk, latvisk (`/en/`, `/no/`, `/lv/`) – enkelt å utvide.
 - **Redigerbart uten kode:** all tekst, alle bilder og kontaktinfo bor i innholdsfiler.
@@ -30,25 +31,31 @@ Forhåndsvis bygget: `npm run preview`.
 Koden og strukturen er ferdig. Disse stegene krever dine egne kontoer/verdier
 og kan ikke gjøres for deg:
 
-1. **Legg inn ditt Airbnb-lenke og e-post.**
-   I `src/content/site/en.json`, `no.json` og `lv.json`:
-   - bytt `airbnbUrl` (står nå som `REPLACE-WITH-YOUR-LISTING-ID`) til din ekte annonse-URL.
-   - bytt `email` til din dedikerte e-post (eller sett `""` for å skjule e-postknappen til domenet er klart).
+1. **Kontroller de to husene.** Airbnb-lenkene ligger ferdig i
+   **`src/data/houses.json`** (store + lille hus). Sjekk at hver `image` peker til
+   riktig hus-foto. **Detaljene per hus** (antall sengeplasser/soverom osv.) i
+   `sections/*.md` under `houses:` er foreløpig plausible plassholdere – rett dem
+   til de faktiske tallene for hvert hus. `bookLabel`, `name`, `tagline` og
+   `description` oversettes per språk her.
 
-2. **Bytt ut bildene.** Legg dine egne foto i `src/images/hero/` og `src/images/gallery/`,
-   og pek på dem i **`src/data/media.json`** (felles for alle språk). Oppdater
-   alt-tekstene i `sections/*.md` (`heroAlt` / `galleryAlts`, samme rekkefølge).
+2. **E-post.** I `src/content/site/en.json`, `no.json`, `lv.json`: bytt `email`
+   til din dedikerte adresse (eller sett `""` for å skjule e-postknappen).
+
+3. **Bytt ut bildene.** Legg dine egne foto i `src/images/hero/` og `src/images/gallery/`.
+   Hus-bildene pekes på i `src/data/houses.json`; eiendoms-/omgivelsesbildene
+   (hero + galleri «Omgivelsene») i **`src/data/media.json`** (felles for alle språk).
+   Oppdater alt-tekstene i `sections/*.md` (samme rekkefølge som `gallery`).
    Tips: nedskaler til ~2000 px lengste side – Astro lager resten av størrelsene.
 
-3. **Juster kartposisjonen.** I `site/*.json` under `map`: sett `lat`/`lon` til
+4. **Juster kartposisjonen.** I `site/*.json` under `map`: sett `lat`/`lon` til
    ditt nærområde. Standard viser *området*, ikke nøyaktig adresse (`showMarker: false`).
 
-4. **Koble GitHub → Cloudflare Pages** (publisering). Se egen seksjon under.
+5. **Koble GitHub → Cloudflare Pages** (publisering). Se egen seksjon under.
 
-5. **Sett opp Sveltia CMS-innlogging** hvis du vil redigere i nettleseren på `/admin`.
+6. **Sett opp Sveltia CMS-innlogging** hvis du vil redigere i nettleseren på `/admin`.
    Se egen seksjon under. (Helt valgfritt – du kan redigere filene direkte i GitHub.)
 
-6. **(Senere) eget domene + delingsbilde-URL.** Når domenet er klart, bytt
+7. **(Senere) eget domene + delingsbilde-URL.** Når domenet er klart, bytt
    `site:` i `astro.config.mjs` og `Sitemap:`-linjen i `public/robots.txt` til
    ditt domene.
 
@@ -83,16 +90,20 @@ under **Custom domains** når du er klar.
 
 | Hva | Fil |
 |-----|-----|
-| Overskrifter, tekster, knappetekster, bilde-/alt-tekst, SEO | `src/content/sections/<språk>.md` |
-| Airbnb-lenke, e-post, kartposisjon | `src/content/site/<språk>.json` |
-| **Bilder (hero, galleri, delingsbilde) – felles for alle språk** | `src/data/media.json` |
-| Lengre «om huset»-tekst | brødteksten nederst i `sections/<språk>.md` |
+| All tekst (hero, husene, omgivelser, kontakt, SEO, alt-tekst) | `src/content/sections/<språk>.md` |
+| **Husenes Airbnb-lenke + bilde** (felles, store/lille) | `src/data/houses.json` |
+| **Eiendoms-/omgivelsesbilder** (hero, galleri) – felles | `src/data/media.json` |
+| Eiendomsnavn, e-post, kartposisjon | `src/content/site/<språk>.json` |
+| Lengre «om eiendommen»-tekst | brødteksten nederst i `sections/<språk>.md` |
 | Anmeldelser | `src/content/reviews/reviews.json` (under nøkkelen `reviews`) |
 
-> **Bilder er felles for alle språk.** Du bytter et bilde ett sted (`src/data/media.json`)
-> og det gjelder alle språk. Kun **alt-tekstene** (`heroAlt` / `galleryAlts` i
-> `sections/<språk>.md`) oversettes – og `galleryAlts` må stå i **samme rekkefølge**
-> som `gallery` i `media.json`.
+> **To hus, delt eiendom.** Hvert hus har egne detaljer og egen Airbnb-lenke.
+> Bilde + lenke per hus ligger i `src/data/houses.json`; den oversatte teksten
+> (navn, beskrivelse, nøkkelpunkter) ligger under `houses:` i `sections/<språk>.md`
+> og kobles sammen via `id` (`large` / `small`).
+>
+> **Bilder er felles for alle språk.** Bytt et bilde ett sted; kun **alt-tekstene**
+> oversettes. `galleryAlts` må stå i **samme rekkefølge** som `gallery` i `media.json`.
 
 ### Via Sveltia CMS på `/admin` (skjema i nettleser)
 1. Opprett et **fine-grained Personal Access Token (PAT)** på GitHub:

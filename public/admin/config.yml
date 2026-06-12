@@ -42,17 +42,37 @@ collections:
           - { label: "Hero – tittel", name: "heroTitle", widget: "string" }
           - { label: "Hero – undertekst", name: "heroTagline", widget: "string" }
           - { label: "Hero – bildebeskrivelse (alt)", name: "heroAlt", widget: "string", required: false }
-          - { label: "Knapp: Book på Airbnb", name: "bookButtonLabel", widget: "string" }
-          - { label: "Nøkkelpunkter – tittel", name: "keyPointsTitle", widget: "string", required: false }
-          - label: "Nøkkelpunkter"
+          - { label: "Hero-knapp (ruller til husene)", name: "heroCtaLabel", widget: "string" }
+          - { label: "Nøkkelpunkter (om stedet) – tittel", name: "keyPointsTitle", widget: "string", required: false }
+          - label: "Nøkkelpunkter (om stedet)"
             name: "keyPoints"
             widget: "list"
             required: false
             fields:
               - { label: "Ikon (emoji)", name: "icon", widget: "string", default: "•" }
               - { label: "Tekst", name: "label", widget: "string" }
-          - { label: "Galleri – tittel", name: "galleryTitle", widget: "string", required: false }
-          - label: "Galleri – bildebeskrivelser (alt), i samme rekkefølge som bildene"
+          - { label: "Husene – seksjonstittel", name: "housesTitle", widget: "string", required: false }
+          - { label: "Husene – introtekst", name: "housesIntro", widget: "text", required: false }
+          - label: "De to husene (tekst – bilde/Airbnb-lenke ligger i «Husene»)"
+            name: "houses"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "ID (large / small – må matche «Husene»)", name: "id", widget: "string" }
+              - { label: "Navn", name: "name", widget: "string" }
+              - { label: "Kort undertekst", name: "tagline", widget: "string", required: false }
+              - label: "Nøkkelpunkter for huset"
+                name: "keyPoints"
+                widget: "list"
+                required: false
+                fields:
+                  - { label: "Ikon (emoji)", name: "icon", widget: "string", default: "•" }
+                  - { label: "Tekst", name: "label", widget: "string" }
+              - { label: "Beskrivelse", name: "description", widget: "text", required: false }
+              - { label: "Knapp: Book på Airbnb", name: "bookLabel", widget: "string" }
+              - { label: "Bildebeskrivelse (alt)", name: "imageAlt", widget: "string", required: false }
+          - { label: "Omgivelsene – tittel", name: "galleryTitle", widget: "string", required: false }
+          - label: "Omgivelsene – bildebeskrivelser (alt), i samme rekkefølge som bildene"
             name: "galleryAlts"
             widget: "list"
             required: false
@@ -66,13 +86,12 @@ collections:
           - { label: "Kart – lenketekst", name: "mapLinkLabel", widget: "string", required: false }
           - { label: "Kontakt – tittel", name: "contactTitle", widget: "string", required: false }
           - { label: "Kontakt – tekst", name: "contactText", widget: "text", required: false }
-          - { label: "Knapp: Send melding på Airbnb", name: "airbnbButtonLabel", widget: "string", required: false }
           - { label: "Knapp: Send e-post", name: "emailButtonLabel", widget: "string", required: false }
           - { label: "SEO – sidetittel", name: "seoTitle", widget: "string" }
           - { label: "SEO – beskrivelse", name: "seoDescription", widget: "text" }
           - { label: "Språkvelger-etikett", name: "languageLabel", widget: "string", required: false, default: "Language" }
           - { label: "«Hopp til innhold»-tekst", name: "skipToContent", widget: "string", required: false, default: "Skip to content" }
-          - { label: "Lengre informasjonstekst (om huset)", name: "body", widget: "markdown" }
+          - { label: "Lengre informasjonstekst (om eiendommen)", name: "body", widget: "markdown" }
       - name: "no"
         label: "Norsk"
         file: "src/content/sections/no.md"
@@ -92,8 +111,7 @@ collections:
         label: "English"
         file: "src/content/site/en.json"
         fields: &site_fields
-          - { label: "Husnavn", name: "houseName", widget: "string" }
-          - { label: "Airbnb-lenke (annonsen)", name: "airbnbUrl", widget: "string" }
+          - { label: "Husnavn / eiendomsnavn", name: "houseName", widget: "string" }
           - { label: "E-postadresse", name: "email", widget: "string", required: false }
           - label: "Kart"
             name: "map"
@@ -111,6 +129,25 @@ collections:
         label: "Latviešu"
         file: "src/content/site/lv.json"
         fields: *site_fields
+
+  # ---------------------------------------------------------------------------
+  #  De to husene – FELLES (bilde + Airbnb-lenke). Tekst ligger i «Sideinnhold».
+  #  src/data/houses.json. `id` kobler tekst og data sammen (large / small).
+  # ---------------------------------------------------------------------------
+  - name: "houses"
+    label: "Husene (bilde + Airbnb-lenke)"
+    files:
+      - name: "houses"
+        label: "Det store og det lille huset"
+        file: "src/data/houses.json"
+        fields:
+          - label: "Hus"
+            name: "houses"
+            widget: "list"
+            fields:
+              - { label: "ID (large / small – må matche teksten i Sideinnhold)", name: "id", widget: "string" }
+              - { label: "Airbnb-lenke", name: "airbnbUrl", widget: "string" }
+              - { label: "Bilde", name: "image", widget: "image" }
 
   # ---------------------------------------------------------------------------
   #  Bilder – FELLES for alle språk (kun alt-tekst oversettes, se Sideinnhold)

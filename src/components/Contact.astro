@@ -2,8 +2,8 @@
 interface Props {
   title: string;
   text: string;
-  airbnbUrl: string;
-  airbnbLabel: string;
+  airbnbUrl?: string;
+  airbnbLabel?: string;
   email: string;
   emailLabel: string;
 }
@@ -16,13 +16,17 @@ const { title, text, airbnbUrl, airbnbLabel, email, emailLabel } = Astro.props;
     {title && <h2 class="section-title">{title}</h2>}
     {text && <p class="lead">{text}</p>}
     <div class="actions">
-      <a class="btn btn-primary" href={airbnbUrl} target="_blank" rel="noopener noreferrer">
-        {airbnbLabel}
-      </a>
       {
         email && (
           <a class="btn btn-secondary" href={`mailto:${email}`}>
             {emailLabel}
+          </a>
+        )
+      }
+      {
+        airbnbUrl && airbnbLabel && (
+          <a class="btn btn-outline" href={airbnbUrl} target="_blank" rel="noopener noreferrer">
+            {airbnbLabel}
           </a>
         )
       }
@@ -52,9 +56,19 @@ const { title, text, airbnbUrl, airbnbLabel, email, emailLabel } = Astro.props;
     justify-content: center;
     flex-wrap: wrap;
   }
-  /* Sørg for nok kontrast på sekundærknapp mot grønn bakgrunn */
+  /* Hvit fylt knapp = god kontrast mot grønn bakgrunn */
   .contact .btn-secondary {
     background: #fff;
     border-color: #fff;
+    color: var(--brand-dark);
+  }
+  /* Valgfri sekundærknapp (f.eks. Airbnb): hvit ramme, gjennomsiktig */
+  .contact .btn-outline {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.8);
+    color: #fff;
+  }
+  .contact .btn-outline:hover {
+    background: rgba(255, 255, 255, 0.12);
   }
 </style>

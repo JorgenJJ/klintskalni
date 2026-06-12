@@ -14,10 +14,9 @@ const site = defineCollection({
   loader: glob({ pattern: '*.json', base: './src/content/site' }),
   schema: z.object({
     houseName: z.string(),
-    // Lenke til Airbnb-annonsen (primær CTA + kontaktkanal).
-    airbnbUrl: z.string().url(),
     // Dedikert e-post (mailto). Tom string skjuler e-postknappen.
     email: z.string().default(''),
+    // NB: Airbnb-lenkene ligger per hus i src/data/houses.json.
     // NB: Bilder (hero, galleri, og:image) er FELLES for alle språk og ligger i
     // src/data/media.json – kun alt-tekst oversettes (se sections/<lang>.md).
     // Kart (OpenStreetMap) – viser nærområde, ikke nøyaktig adresse (kap. 2.8).
@@ -40,13 +39,33 @@ const sections = defineCollection({
     heroTitle: z.string(),
     heroTagline: z.string(),
     heroAlt: z.string().default(''),
-    bookButtonLabel: z.string(),
-    // Nøkkelpunkter (3–5 stk)
+    // Hero-knappen ruller ned til de to husene (intern anker), ikke Airbnb.
+    heroCtaLabel: z.string(),
+    // Felles nøkkelpunkter for hele eiendommen/området (3–5 stk)
     keyPointsTitle: z.string().default(''),
     keyPoints: z
       .array(z.object({ icon: z.string().default('•'), label: z.string() }))
       .default([]),
-    // Galleri (alt-tekst per bilde, parallelt med site.gallery)
+    // De to husene – tekst per språk. Bilde + Airbnb-lenke ligger felles i
+    // src/data/houses.json og kobles på via `id` (large/small).
+    housesTitle: z.string().default(''),
+    housesIntro: z.string().default(''),
+    houses: z
+      .array(
+        z.object({
+          id: z.string(),
+          name: z.string(),
+          tagline: z.string().default(''),
+          keyPoints: z
+            .array(z.object({ icon: z.string().default('•'), label: z.string() }))
+            .default([]),
+          description: z.string().default(''),
+          bookLabel: z.string(),
+          imageAlt: z.string().default(''),
+        }),
+      )
+      .default([]),
+    // Galleri «Omgivelsene» (alt-tekst per bilde, parallelt med media.gallery)
     galleryTitle: z.string().default(''),
     galleryAlts: z.array(z.string()).default([]),
     // Lengre informasjonsdel (overskrift + markdown-brødtekst i filen)
@@ -62,7 +81,6 @@ const sections = defineCollection({
     // Kontakt
     contactTitle: z.string().default(''),
     contactText: z.string().default(''),
-    airbnbButtonLabel: z.string().default(''),
     emailButtonLabel: z.string().default(''),
     // SEO / deling per språk (kap. 3.1 F10)
     seoTitle: z.string(),

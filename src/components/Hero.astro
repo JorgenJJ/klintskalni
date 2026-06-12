@@ -7,11 +7,13 @@ interface Props {
   alt: string;
   title: string;
   tagline: string;
-  bookUrl: string;
-  bookLabel: string;
+  ctaHref: string;
+  ctaLabel: string;
 }
 
-const { image, alt, title, tagline, bookUrl, bookLabel } = Astro.props;
+const { image, alt, title, tagline, ctaHref, ctaLabel } = Astro.props;
+// Ekstern lenke åpnes i ny fane; interne ankre (#houses) i samme fane.
+const external = ctaHref.startsWith('http');
 ---
 
 <section class="hero" aria-label={title}>
@@ -32,8 +34,12 @@ const { image, alt, title, tagline, bookUrl, bookLabel } = Astro.props;
   <div class="container hero-content">
     <h1>{title}</h1>
     <p class="tagline">{tagline}</p>
-    <a class="btn btn-primary" href={bookUrl} target="_blank" rel="noopener noreferrer">
-      {bookLabel}
+    <a
+      class="btn btn-primary"
+      href={ctaHref}
+      {...external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+    >
+      {ctaLabel}
     </a>
   </div>
 </section>
