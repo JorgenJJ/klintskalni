@@ -1,7 +1,7 @@
 ---
 heroTitle: "Klintskalni — feriehus ved sjøen"
 heroTagline: "Stille, lyst og rett ved de baltiske klippene. Et hjem borte fra hjemme."
-heroAlt: "Feriehuset Klintskalni sett fra hagen i kveldslys"
+heroAlt: "Tømmerhuset Klintskalni med balkong og terrasse, sett fra hagen"
 bookButtonLabel: "Book på Airbnb"
 
 keyPointsTitle: "Derfor vil du like det"
@@ -17,14 +17,15 @@ keyPoints:
   - icon: "🐾"
     label: "Kjæledyr velkommen"
 
-galleryTitle: "Se innenfor"
+galleryTitle: "Huset og omgivelsene"
 galleryAlts:
-  - "Lyst oppholdsrom med sofa og store vinduer"
-  - "Soverom med dobbeltseng og vindu mot sjøen"
-  - "Fullt utstyrt kjøkken med spisebord"
-  - "Terrasse med utemøbler og grill"
-  - "Utsikt over Østersjøen fra eiendommen"
-  - "Furuskogen og kystlinjen rundt huset"
+  - "Husets terrasse og plen med høsttrær og sjøen bak"
+  - "Tømmerhytta i skumringen med sjøen og solnedgangsskjær bak"
+  - "Gresskledd skrent med trær og utsikt over stranden og Østersjøen"
+  - "Bred sandstrand med sollys og rolige bølger"
+  - "Sandstrand omkranset av skog under klar blå himmel"
+  - "Solnedgang over sjøen med et tre i silhuett ved stranden"
+  - "Sandvolleyball-nett på plenen ved huset"
 
 infoTitle: "Om huset"
 

@@ -1,7 +1,7 @@
 ---
 heroTitle: "Klintskalni — a seaside holiday house"
 heroTagline: "Quiet, light and right by the Baltic cliffs. Your home away from home."
-heroAlt: "The holiday house Klintskalni seen from the garden in evening light"
+heroAlt: "The log holiday house Klintskalni with balcony and terrace, seen from the garden"
 bookButtonLabel: "Book on Airbnb"
 
 keyPointsTitle: "Why you'll love it"
@@ -17,14 +17,15 @@ keyPoints:
   - icon: "🐾"
     label: "Pets welcome"
 
-galleryTitle: "A look inside"
+galleryTitle: "The house and its surroundings"
 galleryAlts:
-  - "Bright living room with sofa and large windows"
-  - "Bedroom with double bed and sea-facing window"
-  - "Fully equipped kitchen with dining table"
-  - "Terrace with outdoor seating and grill"
-  - "View of the Baltic Sea from the property"
-  - "The surrounding pine forest and coastline"
+  - "The house terrace and garden lawn with autumn trees and the sea beyond"
+  - "The timber cabin at dusk with the sea and sunset glow behind"
+  - "Grassy bluff with trees overlooking the beach and the Baltic Sea"
+  - "Wide sandy beach with sunlight and gentle waves"
+  - "Sandy beach lined by forest under a clear blue sky"
+  - "Sunset over the sea with a silhouetted tree on the shore"
+  - "Beach-volleyball net on the lawn by the house"
 
 infoTitle: "About the house"
 

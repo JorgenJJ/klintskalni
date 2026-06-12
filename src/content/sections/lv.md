@@ -1,7 +1,7 @@
 ---
 heroTitle: "Klintskalni — brīvdienu māja jūras krastā"
 heroTagline: "Klusa, gaiša un tieši pie Baltijas jūras kraujām. Mājas ārpus mājām."
-heroAlt: "Brīvdienu māja Klintskalni, skats no dārza vakara gaismā"
+heroAlt: "Guļbūves māja Klintskalni ar balkonu un terasi, skats no dārza"
 bookButtonLabel: "Rezervēt Airbnb"
 
 keyPointsTitle: "Kāpēc tev patiks"
@@ -17,14 +17,15 @@ keyPoints:
   - icon: "🐾"
     label: "Mājdzīvnieki ir gaidīti"
 
-galleryTitle: "Ieskaties iekšā"
+galleryTitle: "Māja un apkārtne"
 galleryAlts:
-  - "Gaiša dzīvojamā istaba ar dīvānu un lieliem logiem"
-  - "Guļamistaba ar divguļamo gultu un logu uz jūras pusi"
-  - "Pilnībā aprīkota virtuve ar pusdienu galdu"
-  - "Terase ar āra mēbelēm un grilu"
-  - "Skats uz Baltijas jūru no īpašuma"
-  - "Apkārtējais priežu mežs un jūras krasts"
+  - "Mājas terase un zāliens ar rudens kokiem un jūru tālumā"
+  - "Guļbūves māja krēslā ar jūru un saulrieta atspīdumu aizmugurē"
+  - "Zālains krasta uzkalns ar kokiem un skatu uz pludmali un Baltijas jūru"
+  - "Plaša smilšu pludmale saulē ar viegliem viļņiem"
+  - "Smilšu pludmale meža ielokā zem skaidri zilām debesīm"
+  - "Saulriets virs jūras ar koka siluetu krastā"
+  - "Pludmales volejbola tīkls zālienā pie mājas"
 
 infoTitle: "Par māju"
 
