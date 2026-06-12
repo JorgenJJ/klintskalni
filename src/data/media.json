@@ -1,0 +1,13 @@
+{
+  "heroImage": "hero/house-exterior.jpg",
+  "ogImage": "hero/house-exterior.jpg",
+  "gallery": [
+    "gallery/house-garden.jpg",
+    "gallery/cabin-evening.jpg",
+    "gallery/seaside-bluff.jpg",
+    "gallery/beach.jpg",
+    "gallery/beach-forest.jpg",
+    "gallery/sunset-sea.jpg",
+    "gallery/volleyball-court.jpg"
+  ]
+}

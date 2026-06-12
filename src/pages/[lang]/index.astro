@@ -4,6 +4,8 @@ import { type Lang } from '../../i18n/languages';
 import { getAvailableLangs, getSection, getSite } from '../../i18n/utils';
 import { resolveImage } from '../../lib/images';
 import reviewsData from '../../content/reviews/reviews.json';
+// Bilder er felles for alle språk (kun alt-tekst oversettes – se sections).
+import media from '../../data/media.json';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import KeyPoints from '../../components/KeyPoints.astro';
@@ -34,13 +36,13 @@ const { Content } = await render(sectionEntry);
   houseName={site.houseName}
   title={s.seoTitle}
   description={s.seoDescription}
-  ogImageName={site.ogImage}
+  ogImageName={media.ogImage}
   availableLangs={availableLangs}
   languageLabel={s.languageLabel}
   skipToContentLabel={s.skipToContent}
 >
   <Hero
-    image={resolveImage(site.heroImage)}
+    image={resolveImage(media.heroImage)}
     alt={s.heroAlt}
     title={s.heroTitle}
     tagline={s.heroTagline}
@@ -50,7 +52,7 @@ const { Content } = await render(sectionEntry);
 
   <KeyPoints title={s.keyPointsTitle} points={s.keyPoints} />
 
-  <Gallery title={s.galleryTitle} files={site.gallery} alts={s.galleryAlts} />
+  <Gallery title={s.galleryTitle} files={media.gallery} alts={s.galleryAlts} />
 
   <Info title={s.infoTitle}>
     <Content />

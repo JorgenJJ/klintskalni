@@ -18,10 +18,8 @@ const site = defineCollection({
     airbnbUrl: z.string().url(),
     // Dedikert e-post (mailto). Tom string skjuler e-postknappen.
     email: z.string().default(''),
-    // Bilder (delt på tvers av språk – kun alt-tekst oversettes, se sections).
-    heroImage: z.string(),
-    gallery: z.array(z.string()).default([]),
-    ogImage: z.string().default(''),
+    // NB: Bilder (hero, galleri, og:image) er FELLES for alle språk og ligger i
+    // src/data/media.json – kun alt-tekst oversettes (se sections/<lang>.md).
     // Kart (OpenStreetMap) – viser nærområde, ikke nøyaktig adresse (kap. 2.8).
     map: z.object({
       lat: z.number(),

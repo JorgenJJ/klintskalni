@@ -35,9 +35,9 @@ og kan ikke gjøres for deg:
    - bytt `airbnbUrl` (står nå som `REPLACE-WITH-YOUR-LISTING-ID`) til din ekte annonse-URL.
    - bytt `email` til din dedikerte e-post (eller sett `""` for å skjule e-postknappen til domenet er klart).
 
-2. **Bytt ut bildene.** Plassholderne i `src/images/hero/` og `src/images/gallery/`
-   er bare farger med tekst. Last opp dine egne foto med **samme filnavn**
-   (eller oppdater filnavnene i `site/*.json` + alt-tekst i `sections/*.md`).
+2. **Bytt ut bildene.** Legg dine egne foto i `src/images/hero/` og `src/images/gallery/`,
+   og pek på dem i **`src/data/media.json`** (felles for alle språk). Oppdater
+   alt-tekstene i `sections/*.md` (`heroAlt` / `galleryAlts`, samme rekkefølge).
    Tips: nedskaler til ~2000 px lengste side – Astro lager resten av størrelsene.
 
 3. **Juster kartposisjonen.** I `site/*.json` under `map`: sett `lat`/`lon` til
@@ -83,10 +83,16 @@ under **Custom domains** når du er klar.
 
 | Hva | Fil |
 |-----|-----|
-| Overskrifter, tekster, knappetekster, alt-tekst, SEO | `src/content/sections/<språk>.md` |
-| Airbnb-lenke, e-post, bilder, kartposisjon | `src/content/site/<språk>.json` |
+| Overskrifter, tekster, knappetekster, bilde-/alt-tekst, SEO | `src/content/sections/<språk>.md` |
+| Airbnb-lenke, e-post, kartposisjon | `src/content/site/<språk>.json` |
+| **Bilder (hero, galleri, delingsbilde) – felles for alle språk** | `src/data/media.json` |
 | Lengre «om huset»-tekst | brødteksten nederst i `sections/<språk>.md` |
 | Anmeldelser | `src/content/reviews/reviews.json` (under nøkkelen `reviews`) |
+
+> **Bilder er felles for alle språk.** Du bytter et bilde ett sted (`src/data/media.json`)
+> og det gjelder alle språk. Kun **alt-tekstene** (`heroAlt` / `galleryAlts` i
+> `sections/<språk>.md`) oversettes – og `galleryAlts` må stå i **samme rekkefølge**
+> som `gallery` i `media.json`.
 
 ### Via Sveltia CMS på `/admin` (skjema i nettleser)
 1. Opprett et **fine-grained Personal Access Token (PAT)** på GitHub:

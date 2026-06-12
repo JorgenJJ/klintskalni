@@ -86,7 +86,7 @@ collections:
   #  Global konfig per språk – src/content/site/<lang>.json
   # ---------------------------------------------------------------------------
   - name: "site"
-    label: "Innstillinger og bilder"
+    label: "Innstillinger"
     files:
       - name: "en"
         label: "English"
@@ -95,13 +95,6 @@ collections:
           - { label: "Husnavn", name: "houseName", widget: "string" }
           - { label: "Airbnb-lenke (annonsen)", name: "airbnbUrl", widget: "string" }
           - { label: "E-postadresse", name: "email", widget: "string", required: false }
-          - { label: "Hero-bilde", name: "heroImage", widget: "image" }
-          - { label: "Delingsbilde (Open Graph)", name: "ogImage", widget: "image", required: false }
-          - label: "Galleribilder"
-            name: "gallery"
-            widget: "list"
-            required: false
-            field: { label: "Bilde", name: "image", widget: "image" }
           - label: "Kart"
             name: "map"
             widget: "object"
@@ -118,6 +111,25 @@ collections:
         label: "Latviešu"
         file: "src/content/site/lv.json"
         fields: *site_fields
+
+  # ---------------------------------------------------------------------------
+  #  Bilder – FELLES for alle språk (kun alt-tekst oversettes, se Sideinnhold)
+  #  src/data/media.json
+  # ---------------------------------------------------------------------------
+  - name: "media"
+    label: "Bilder (felles for alle språk)"
+    files:
+      - name: "media"
+        label: "Hero, galleri og delingsbilde"
+        file: "src/data/media.json"
+        fields:
+          - { label: "Hero-bilde", name: "heroImage", widget: "image" }
+          - { label: "Delingsbilde (Open Graph)", name: "ogImage", widget: "image", required: false }
+          - label: "Galleribilder"
+            name: "gallery"
+            widget: "list"
+            required: false
+            field: { label: "Bilde", name: "image", widget: "image" }
 
   # ---------------------------------------------------------------------------
   #  Anmeldelser (manuell kuratering) – src/content/reviews/reviews.json
