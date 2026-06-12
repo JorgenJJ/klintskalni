@@ -1,0 +1,43 @@
+---
+// Rot-URL ("/"): foreslå språk ut fra nettleseren, ellers standardspråk.
+// Siden er statisk, så valget gjøres i nettleseren (med en trygg fallback
+// for besøkende uten JavaScript / søkemotorer).
+import { defaultLang, locales } from '../i18n/languages';
+import { getAvailableLangs } from '../i18n/utils';
+
+const availableLangs = await getAvailableLangs();
+const fallback = `/${defaultLang}/`;
+---
+
+<!doctype html>
+<html lang={defaultLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Klintskalni</title>
+    <link rel="canonical" href={fallback} />
+    <meta http-equiv="refresh" content={`0; url=${fallback}`} />
+    <script
+      is:inline
+      define:vars={{ available: availableLangs, fallback, supported: locales }}
+    >
+      try {
+        const prefs = navigator.languages || [navigator.language || ''];
+        let target = fallback;
+        for (const pref of prefs) {
+          const code = pref.toLowerCase().split('-')[0];
+          if (available.includes(code) && supported.includes(code)) {
+            target = '/' + code + '/';
+            break;
+          }
+        }
+        window.location.replace(target);
+      } catch (e) {
+        window.location.replace(fallback);
+      }
+    </script>
+  </head>
+  <body>
+    <p>Redirecting… <a href={fallback}>Continue</a></p>
+  </body>
+</html>

@@ -1,0 +1,124 @@
+---
+interface Review {
+  text: string;
+  author: string;
+  source?: string;
+  rating?: number;
+  date?: string;
+}
+
+interface Props {
+  title: string;
+  note: string;
+  linkLabel: string;
+  airbnbUrl: string;
+  reviews: Review[];
+}
+
+const { title, note, linkLabel, airbnbUrl, reviews } = Astro.props;
+
+function stars(rating = 5): string {
+  const r = Math.max(0, Math.min(5, Math.round(rating)));
+  return '★'.repeat(r) + '☆'.repeat(5 - r);
+}
+---
+
+{
+  reviews.length > 0 && (
+    <section class="reviews" id="reviews" aria-label={title}>
+      <div class="container">
+        <div class="reviews-head">
+          {title && <h2 class="section-title">{title}</h2>}
+          {note && <p class="note">{note}</p>}
+        </div>
+        <ul class="cards">
+          {reviews.map((r) => (
+            <li class="card">
+              <p class="stars" aria-label={`${r.rating ?? 5} / 5`}>
+                <span aria-hidden="true">{stars(r.rating)}</span>
+              </p>
+              <blockquote>{r.text}</blockquote>
+              <footer>
+                <cite>{r.author}</cite>
+                {(r.source || r.date) && (
+                  <span class="meta">
+                    {[r.source, r.date].filter(Boolean).join(' · ')}
+                  </span>
+                )}
+              </footer>
+            </li>
+          ))}
+        </ul>
+        {linkLabel && (
+          <p class="more">
+            <a href={airbnbUrl} target="_blank" rel="noopener noreferrer">
+              {linkLabel} →
+            </a>
+          </p>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .reviews {
+    background: #f3f1ea;
+  }
+  .reviews-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .note {
+    font-weight: 700;
+    color: var(--brand-dark);
+  }
+  .cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .stars {
+    margin: 0;
+    color: #d8a200;
+    letter-spacing: 0.1em;
+  }
+  blockquote {
+    margin: 0;
+    font-size: 1.05rem;
+  }
+  footer {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+  }
+  cite {
+    font-style: normal;
+    font-weight: 600;
+  }
+  .meta {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .more {
+    margin-top: 1.5rem;
+  }
+  .more a {
+    font-weight: 600;
+  }
+</style>

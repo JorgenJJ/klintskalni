@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<section class="info" id="info">
+  <div class="container narrow">
+    {title && <h2 class="section-title">{title}</h2>}
+    <div class="prose">
+      {/* Lengre informasjonstekst kommer fra markdown-brødteksten i sections/<lang>.md */}
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .narrow {
+    max-width: 70ch;
+  }
+  .prose :global(p) {
+    margin: 0 0 1rem;
+    font-size: 1.1rem;
+  }
+</style>

@@ -1,0 +1,23 @@
+# Avhengigheter
+node_modules/
+
+# Byggeresultat
+dist/
+.astro/
+
+# Hemmeligheter – skal ALDRI committes (fast vane, jf. rapportens kap. 2.7)
+.env
+.env.*
+*.local
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logger
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*

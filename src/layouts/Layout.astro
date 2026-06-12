@@ -1,0 +1,149 @@
+---
+import { getImage } from 'astro:assets';
+import { languages, type Lang } from '../i18n/languages';
+import { localizedPath } from '../i18n/utils';
+import { resolveImage } from '../lib/images';
+import LanguagePicker from '../components/LanguagePicker.astro';
+import '../styles/global.css';
+
+interface Props {
+  lang: Lang;
+  houseName: string;
+  title: string;
+  description: string;
+  ogImageName?: string;
+  availableLangs: Lang[];
+  languageLabel: string;
+  skipToContentLabel: string;
+}
+
+const {
+  lang,
+  houseName,
+  title,
+  description,
+  ogImageName,
+  availableLangs,
+  languageLabel,
+  skipToContentLabel,
+} = Astro.props;
+
+// Absolutt URL til delingsbilde (Open Graph). Tåler manglende bilde.
+let ogUrl: string | undefined;
+const ogSource = resolveImage(ogImageName);
+if (ogSource && Astro.site) {
+  const optimized = await getImage({ src: ogSource, width: 1200, format: 'jpg' });
+  ogUrl = new URL(optimized.src, Astro.site).href;
+}
+
+const canonical = Astro.site ? new URL(localizedPath(lang), Astro.site).href : undefined;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+
+    {/* Alternative språkversjoner for søkemotorer (SEO / i18n) */}
+    {
+      Astro.site &&
+        availableLangs.map((l) => (
+          <link
+            rel="alternate"
+            hreflang={l}
+            href={new URL(localizedPath(l), Astro.site).href}
+          />
+        ))
+    }
+
+    {/* Open Graph / deling */}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={lang} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {ogUrl && <meta property="og:image" content={ogUrl} />}
+    <meta name="twitter:card" content={ogUrl ? 'summary_large_image' : 'summary'} />
+
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{skipToContentLabel}</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href={localizedPath(lang)}>{houseName}</a>
+        <LanguagePicker current={lang} available={availableLangs} label={languageLabel} />
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© {new Date().getFullYear()} {houseName}</p>
+        <p class="footer-langs">
+          {
+            availableLangs.map((l, i) => (
+              <>
+                {i > 0 && <span aria-hidden="true"> · </span>}
+                <a href={localizedPath(l)} lang={l}>
+                  {languages[l]}
+                </a>
+              </>
+            ))
+          }
+        </p>
+      </div>
+    </footer>
+
+    <style>
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(251, 250, 247, 0.9);
+        backdrop-filter: saturate(160%) blur(8px);
+        border-bottom: 1px solid var(--border);
+      }
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-block: 0.75rem;
+        flex-wrap: wrap;
+      }
+      .brand {
+        font-weight: 700;
+        font-size: 1.15rem;
+        text-decoration: none;
+        color: var(--text);
+      }
+      .site-footer {
+        border-top: 1px solid var(--border);
+        padding-block: 2rem;
+        color: var(--muted);
+        text-align: center;
+      }
+      .site-footer p {
+        margin: 0.25rem 0;
+      }
+      .footer-langs a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+      .footer-langs a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+---
+import { render } from 'astro:content';
+import { type Lang } from '../../i18n/languages';
+import { getAvailableLangs, getSection, getSite } from '../../i18n/utils';
+import { resolveImage } from '../../lib/images';
+import reviewsData from '../../content/reviews/reviews.json';
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import KeyPoints from '../../components/KeyPoints.astro';
+import Gallery from '../../components/Gallery.astro';
+import Info from '../../components/Info.astro';
+import Reviews from '../../components/Reviews.astro';
+import Map from '../../components/Map.astro';
+import Contact from '../../components/Contact.astro';
+
+const reviews = reviewsData.reviews;
+
+// Én statisk side per språk – drevet av den sentrale språklisten.
+export async function getStaticPaths() {
+  const langs = await getAvailableLangs();
+  return langs.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const availableLangs = await getAvailableLangs();
+const site = await getSite(lang);
+const sectionEntry = await getSection(lang);
+const s = sectionEntry.data;
+const { Content } = await render(sectionEntry);
+---
+
+<Layout
+  lang={lang}
+  houseName={site.houseName}
+  title={s.seoTitle}
+  description={s.seoDescription}
+  ogImageName={site.ogImage}
+  availableLangs={availableLangs}
+  languageLabel={s.languageLabel}
+  skipToContentLabel={s.skipToContent}
+>
+  <Hero
+    image={resolveImage(site.heroImage)}
+    alt={s.heroAlt}
+    title={s.heroTitle}
+    tagline={s.heroTagline}
+    bookUrl={site.airbnbUrl}
+    bookLabel={s.bookButtonLabel}
+  />
+
+  <KeyPoints title={s.keyPointsTitle} points={s.keyPoints} />
+
+  <Gallery title={s.galleryTitle} files={site.gallery} alts={s.galleryAlts} />
+
+  <Info title={s.infoTitle}>
+    <Content />
+  </Info>
+
+  <Reviews
+    title={s.reviewsTitle}
+    note={s.reviewsNote}
+    linkLabel={s.reviewsLinkLabel}
+    airbnbUrl={site.airbnbUrl}
+    reviews={reviews}
+  />
+
+  <Map
+    title={s.mapTitle}
+    areaLabel={s.mapAreaLabel}
+    linkLabel={s.mapLinkLabel}
+    lat={site.map.lat}
+    lon={site.map.lon}
+    areaSpan={site.map.areaSpan}
+    showMarker={site.map.showMarker}
+  />
+
+  <Contact
+    title={s.contactTitle}
+    text={s.contactText}
+    airbnbUrl={site.airbnbUrl}
+    airbnbLabel={s.airbnbButtonLabel}
+    email={site.email}
+    emailLabel={s.emailButtonLabel}
+  />
+</Layout>
