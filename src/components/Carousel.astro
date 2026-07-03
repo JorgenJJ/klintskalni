@@ -95,21 +95,26 @@ const rows = [
     flex-direction: column;
     gap: 0.7rem;
     margin-top: 1.5rem;
-    /* Karusellen er like bred som innholdet (i .container) og toner ut i kantene */
-    --fade: clamp(20px, 6%, 72px);
+    /* Karusellen er like bred som innholdet (i .container) og toner mykt ut i
+       kantene. Bredere gradient + mellomstopp gir en mykere overgang. */
+    --fade: clamp(48px, 16%, 200px);
     -webkit-mask-image: linear-gradient(
       to right,
-      transparent,
+      transparent 0,
+      rgba(0, 0, 0, 0.5) calc(var(--fade) * 0.5),
       #000 var(--fade),
       #000 calc(100% - var(--fade)),
-      transparent
+      rgba(0, 0, 0, 0.5) calc(100% - var(--fade) * 0.5),
+      transparent 100%
     );
     mask-image: linear-gradient(
       to right,
-      transparent,
+      transparent 0,
+      rgba(0, 0, 0, 0.5) calc(var(--fade) * 0.5),
       #000 var(--fade),
       #000 calc(100% - var(--fade)),
-      transparent
+      rgba(0, 0, 0, 0.5) calc(100% - var(--fade) * 0.5),
+      transparent 100%
     );
   }
   .marquee-row {
