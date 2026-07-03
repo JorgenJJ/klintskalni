@@ -1,7 +1,7 @@
 ---
-heroTitle: "Klintskalni — a house and a cottage by the sea"
+heroTitle: "Klintskalni 1 — a house and a cottage by the sea"
 heroTagline: "Two log homes on one seaside property, with direct access to a long sandy beach. Rent one — or both."
-heroAlt: "The Klintskalni property with the log house and the cottage behind, seen from the garden"
+heroAlt: "The Klintskalni 1 property with the log house and the cottage behind, seen from the garden"
 heroCtaLabel: "See the two homes"
 
 housesTitle: "The house and the cottage"
@@ -50,7 +50,7 @@ galleryAlts:
   - "Sunset over the sea with a silhouetted tree on the shore"
   - "Beach-volleyball net on the lawn"
 
-infoTitle: "About Klintskalni"
+infoTitle: "About Klintskalni 1"
 
 reviewsTitle: "What guests say"
 reviewsNote: "★ 5.0 on Airbnb"
@@ -64,14 +64,14 @@ contactTitle: "Get in touch"
 contactText: "Booking each home is easiest on Airbnb. Want to rent both at the same time, or have a question? Email us directly and we'll help you arrange it."
 emailButtonLabel: "Email us"
 
-seoTitle: "Klintskalni — a seaside house and cottage in Liepupe, Latvia"
+seoTitle: "Klintskalni 1 — a seaside house and cottage in Liepupe, Latvia"
 seoDescription: "Two separate holiday homes on one seaside property in Liepupe, Latvia — a house (sleeps 8) and a cottage (sleeps 7), with direct beach access and a sauna. Book on Airbnb, or rent both together."
 
 languageLabel: "Language"
 skipToContent: "Skip to content"
 ---
 
-Klintskalni is a seaside property in Liepupe parish on the Latvian coast, with
+Klintskalni 1 is a seaside property in Liepupe parish on the Latvian coast, with
 direct access to a sandy beach that runs for kilometres in both directions.
 There are two separate homes on the grounds — a house and a cottage — that can
 be rented individually.

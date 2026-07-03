@@ -1,7 +1,7 @@
 ---
-heroTitle: "Klintskalni — māja un vasarnīca jūras krastā"
+heroTitle: "Klintskalni 1 — māja un vasarnīca jūras krastā"
 heroTagline: "Divas guļbūves vienā piejūras īpašumā, tieši pie garas smilšu pludmales. Īrē vienu – vai abas."
-heroAlt: "Klintskalni īpašums ar guļbūves māju un vasarnīcu aizmugurē, skats no dārza"
+heroAlt: "Klintskalni 1 īpašums ar guļbūves māju un vasarnīcu aizmugurē, skats no dārza"
 heroCtaLabel: "Apskati abas ēkas"
 
 housesTitle: "Māja un vasarnīca"
@@ -50,7 +50,7 @@ galleryAlts:
   - "Saulriets virs jūras ar koka siluetu krastā"
   - "Pludmales volejbola tīkls zālienā"
 
-infoTitle: "Par Klintskalni"
+infoTitle: "Par Klintskalni 1"
 
 reviewsTitle: "Ko saka viesi"
 reviewsNote: "★ 5,0 Airbnb platformā"
@@ -64,14 +64,14 @@ contactTitle: "Sazinies ar mums"
 contactText: "Katru ēku visērtāk rezervēt Airbnb platformā. Vēlies īrēt abas vienlaikus vai ir jautājums? Raksti mums e-pastu tieši, un mēs palīdzēsim to noorganizēt."
 emailButtonLabel: "Rakstīt mums"
 
-seoTitle: "Klintskalni — māja un vasarnīca jūras krastā Liepupē, Latvijā"
+seoTitle: "Klintskalni 1 — māja un vasarnīca jūras krastā Liepupē, Latvijā"
 seoDescription: "Divas atsevišķas brīvdienu ēkas vienā piejūras īpašumā Liepupē, Latvijā — māja (8 viesiem) un vasarnīca (7 viesiem), ar tiešu piekļuvi pludmalei un pirti. Rezervē Airbnb vai abas kopā."
 
 languageLabel: "Valoda"
 skipToContent: "Pāriet uz saturu"
 ---
 
-Klintskalni atrodas Liepupē Latvijas piekrastē, ar tiešu piekļuvi smilšu
+Klintskalni 1 atrodas Liepupē Latvijas piekrastē, ar tiešu piekļuvi smilšu
 pludmalei, kas stiepjas kilometriem abos virzienos. Teritorijā ir divas
 atsevišķas ēkas — māja un vasarnīca — kuras var īrēt katru atsevišķi.
 
