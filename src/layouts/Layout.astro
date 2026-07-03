@@ -77,10 +77,6 @@ const canonical = Astro.site ? new URL(localizedPath(lang), Astro.site).href : u
 
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href={localizedPath(lang)}>
-          <img class="brand-mark" src="/favicon.svg" alt="" width="28" height="28" />
-          <span class="brand-name">{houseName}</span>
-        </a>
         <LanguagePicker current={lang} available={availableLangs} label={languageLabel} />
       </div>
     </header>
@@ -97,7 +93,7 @@ const canonical = Astro.site ? new URL(localizedPath(lang), Astro.site).href : u
             availableLangs.map((l, i) => (
               <>
                 {i > 0 && <span aria-hidden="true"> · </span>}
-                <a href={localizedPath(l)} lang={l}>
+                <a href={localizedPath(l)} lang={l} data-lang={l}>
                   {languages[l]}
                 </a>
               </>
@@ -120,26 +116,8 @@ const canonical = Astro.site ? new URL(localizedPath(lang), Astro.site).href : u
       .header-inner {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        padding-block: 0.7rem;
-      }
-      .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.55rem;
-        text-decoration: none;
-        color: var(--text);
-      }
-      .brand-mark {
-        display: block;
-        border-radius: 7px;
-        box-shadow: var(--shadow);
-      }
-      .brand-name {
-        font-weight: 700;
-        font-size: 1.2rem;
-        letter-spacing: -0.01em;
+        justify-content: center;
+        padding-block: 0.6rem;
       }
       .site-footer {
         border-top: 1px solid var(--border);
@@ -159,5 +137,41 @@ const canonical = Astro.site ? new URL(localizedPath(lang), Astro.site).href : u
         text-decoration: underline;
       }
     </style>
+
+    <script is:inline>
+      // Språkbytte: husk valgt språk lokalt, og behold scroll-posisjonen når
+      // man bytter mellom /en/, /no/ og /lv/ (som er separate sider).
+      (function () {
+        // 1) Gjenopprett scroll-posisjon etter et språkbytte.
+        try {
+          if (sessionStorage.getItem('klRestore') === '1') {
+            sessionStorage.removeItem('klRestore');
+            var y = parseInt(sessionStorage.getItem('klScroll') || '0', 10);
+            var restore = function () {
+              var html = document.documentElement;
+              var prev = html.style.scrollBehavior;
+              html.style.scrollBehavior = 'auto';
+              window.scrollTo(0, y);
+              html.style.scrollBehavior = prev;
+            };
+            restore();
+            document.addEventListener('DOMContentLoaded', restore);
+            window.addEventListener('load', restore);
+          }
+        } catch (e) {}
+
+        // 2) Lagre valg + scroll når man klikker et språk (header eller footer).
+        document.querySelectorAll('a[data-lang]').forEach(function (a) {
+          a.addEventListener('click', function () {
+            try {
+              localStorage.setItem('klLang', a.getAttribute('data-lang'));
+              sessionStorage.setItem('klScroll', String(window.scrollY));
+              sessionStorage.setItem('klRestore', '1');
+            } catch (e) {}
+            // La navigasjonen fortsette som normalt.
+          });
+        });
+      })();
+    </script>
   </body>
 </html>
