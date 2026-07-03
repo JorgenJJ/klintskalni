@@ -1,7 +1,8 @@
 ---
 import { render } from 'astro:content';
+import { getImage } from 'astro:assets';
 import { type Lang } from '../../i18n/languages';
-import { getAvailableLangs, getSection, getSite } from '../../i18n/utils';
+import { getAvailableLangs, getSection, getSite, localizedPath } from '../../i18n/utils';
 import { resolveImage } from '../../lib/images';
 import reviewsData from '../../content/reviews/reviews.json';
 // Bilder er felles for alle språk (kun alt-tekst oversettes – se sections).
@@ -45,6 +46,63 @@ const reviewsUrl =
   housesData.houses.find((h) => h.id === 'house')?.airbnbUrl ??
   housesData.houses[0]?.airbnbUrl ??
   '';
+
+// Strukturerte data (schema.org) – hjelper Google/AI å forstå at dette er to
+// utleieenheter ved stranden i Tūja / Liepupe, Limbaži, Latvia.
+const canonicalUrl = Astro.site ? new URL(localizedPath(lang), Astro.site).href : undefined;
+const heroMeta = resolveImage(media.heroImage);
+let imageUrl: string | undefined;
+if (heroMeta && Astro.site) {
+  const opt = await getImage({ src: heroMeta, width: 1200, format: 'jpg' });
+  imageUrl = new URL(opt.src, Astro.site).href;
+}
+const reviewCount = reviews.length;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LodgingBusiness',
+  name: site.houseName,
+  description: s.seoDescription,
+  ...(canonicalUrl ? { url: canonicalUrl } : {}),
+  ...(imageUrl ? { image: imageUrl } : {}),
+  ...(site.email ? { email: site.email } : {}),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Tūja',
+    addressRegion: 'Limbaži Municipality',
+    addressCountry: 'LV',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: site.map.lat,
+    longitude: site.map.lon,
+  },
+  petsAllowed: true,
+  amenityFeature: [
+    { '@type': 'LocationFeatureSpecification', name: 'Beach access', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Sauna', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Pets allowed', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Free parking', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Playground', value: true },
+  ],
+  containsPlace: houses.map((h) => ({
+    '@type': 'Accommodation',
+    name: h.name,
+    ...(h.guests
+      ? { occupancy: { '@type': 'QuantitativeValue', value: h.guests, unitText: 'guests' } }
+      : {}),
+    ...(h.bedrooms ? { numberOfBedrooms: h.bedrooms } : {}),
+    url: h.airbnbUrl,
+  })),
+  ...(reviewCount > 0
+    ? {
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: '5',
+          reviewCount: String(reviewCount),
+        },
+      }
+    : {}),
+};
 ---
 
 <Layout
@@ -56,6 +114,7 @@ const reviewsUrl =
   availableLangs={availableLangs}
   languageLabel={s.languageLabel}
   skipToContentLabel={s.skipToContent}
+  jsonLd={jsonLd}
 >
   <Hero
     image={resolveImage(media.heroImage)}

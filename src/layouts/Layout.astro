@@ -1,6 +1,6 @@
 ---
 import { getImage } from 'astro:assets';
-import { languages, type Lang } from '../i18n/languages';
+import { languages, defaultLang, type Lang } from '../i18n/languages';
 import { localizedPath } from '../i18n/utils';
 import { resolveImage } from '../lib/images';
 import LanguagePicker from '../components/LanguagePicker.astro';
@@ -15,6 +15,7 @@ interface Props {
   availableLangs: Lang[];
   languageLabel: string;
   skipToContentLabel: string;
+  jsonLd?: unknown;
 }
 
 const {
@@ -26,6 +27,7 @@ const {
   availableLangs,
   languageLabel,
   skipToContentLabel,
+  jsonLd,
 } = Astro.props;
 
 // Absolutt URL til delingsbilde (Open Graph). Tåler manglende bilde.
@@ -63,6 +65,18 @@ const canonical = Astro.site ? new URL(localizedPath(lang), Astro.site).href : u
           />
         ))
     }
+    {
+      Astro.site && (
+        <link
+          rel="alternate"
+          hreflang="x-default"
+          href={new URL(localizedPath(defaultLang), Astro.site).href}
+        />
+      )
+    }
+
+    {/* Strukturerte data (schema.org) for søkemotorer og AI-assistenter */}
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
     {/* Open Graph / deling */}
     <meta property="og:type" content="website" />

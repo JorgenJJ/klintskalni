@@ -57,15 +57,15 @@ reviewsNote: "★ 5,0 på Airbnb"
 reviewsLinkLabel: "Les alle anmeldelser på Airbnb"
 
 mapTitle: "Område"
-mapAreaLabel: "Liepupe, Latvia"
+mapAreaLabel: "Tūja-stranden, Liepupe, Limbaži, Latvia"
 mapLinkLabel: "Åpne større kart"
 
 contactTitle: "Ta kontakt"
 contactText: "Å booke hver enhet er enklest på Airbnb. Vil du leie begge samtidig, eller har du et spørsmål? Send oss en e-post direkte, så hjelper vi deg å ordne det."
 emailButtonLabel: "Send oss e-post"
 
-seoTitle: "Klintskalni 1 — hus og hytte ved sjøen i Liepupe, Latvia"
-seoDescription: "To separate feriehjem på samme tomt i Liepupe, Latvia — et hus (8 gjester) og ei hytte (7 gjester), med direkte strandtilgang og badstue. Book på Airbnb, eller lei begge sammen."
+seoTitle: "Klintskalni 1 — feriehus og hytte ved stranden nær Tūja, Limbaži, Latvia"
+seoDescription: "To feriehjem ved stranden i Liepupe, nær Tūja i Limbaži, Latvia — et hus (8 gjester) og ei hytte (7 gjester), med direkte strandtilgang og badstue. Book på Airbnb, eller lei begge sammen."
 
 languageLabel: "Språk"
 skipToContent: "Hopp til innhold"

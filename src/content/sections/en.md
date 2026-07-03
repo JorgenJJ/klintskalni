@@ -57,15 +57,15 @@ reviewsNote: "★ 5.0 on Airbnb"
 reviewsLinkLabel: "Read all reviews on Airbnb"
 
 mapTitle: "Area"
-mapAreaLabel: "Liepupe parish, Latvia"
+mapAreaLabel: "Tūja beach, Liepupe parish, Limbaži, Latvia"
 mapLinkLabel: "Open larger map"
 
 contactTitle: "Get in touch"
 contactText: "Booking each home is easiest on Airbnb. Want to rent both at the same time, or have a question? Email us directly and we'll help you arrange it."
 emailButtonLabel: "Email us"
 
-seoTitle: "Klintskalni 1 — a seaside house and cottage in Liepupe, Latvia"
-seoDescription: "Two separate holiday homes on one seaside property in Liepupe, Latvia — a house (sleeps 8) and a cottage (sleeps 7), with direct beach access and a sauna. Book on Airbnb, or rent both together."
+seoTitle: "Klintskalni 1 — beach house & cottage near Tūja, Limbaži, Latvia"
+seoDescription: "Two holiday homes by the beach in Liepupe parish near Tūja, Limbaži, Latvia — a house (sleeps 8) and a cottage (sleeps 7), with direct beach access and a sauna. Book on Airbnb, or rent both together."
 
 languageLabel: "Language"
 skipToContent: "Skip to content"

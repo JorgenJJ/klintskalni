@@ -141,6 +141,9 @@ collections:
             fields:
               - { label: "ID (house / cottage – må matche teksten i Sideinnhold)", name: "id", widget: "string" }
               - { label: "Airbnb-lenke", name: "airbnbUrl", widget: "string" }
+              - { label: "Antall gjester (for søkemotorer)", name: "guests", widget: "number", required: false }
+              - { label: "Antall soverom (for søkemotorer)", name: "bedrooms", widget: "number", required: false }
+              - { label: "Antall senger (for søkemotorer)", name: "beds", widget: "number", required: false }
               - { label: "Kort-bilde (vises på forsiden)", name: "image", widget: "image" }
               - label: "Bildegalleri (vises i «Se bilder»-modalen)"
                 name: "gallery"

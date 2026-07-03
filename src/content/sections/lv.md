@@ -57,15 +57,15 @@ reviewsNote: "★ 5,0 Airbnb platformā"
 reviewsLinkLabel: "Lasīt visas atsauksmes Airbnb"
 
 mapTitle: "Atrašanās vieta"
-mapAreaLabel: "Liepupes pagasts, Latvija"
+mapAreaLabel: "Tūjas pludmale, Liepupes pagasts, Limbažu novads, Latvija"
 mapLinkLabel: "Atvērt lielāku karti"
 
 contactTitle: "Sazinies ar mums"
 contactText: "Katru ēku visērtāk rezervēt Airbnb platformā. Vēlies īrēt abas vienlaikus vai ir jautājums? Raksti mums e-pastu tieši, un mēs palīdzēsim to noorganizēt."
 emailButtonLabel: "Rakstīt mums"
 
-seoTitle: "Klintskalni 1 — māja un vasarnīca jūras krastā Liepupē, Latvijā"
-seoDescription: "Divas atsevišķas brīvdienu ēkas vienā piejūras īpašumā Liepupē, Latvijā — māja (8 viesiem) un vasarnīca (7 viesiem), ar tiešu piekļuvi pludmalei un pirti. Rezervē Airbnb vai abas kopā."
+seoTitle: "Klintskalni 1 — brīvdienu māja un vasarnīca pie Tūjas pludmales, Limbažu novadā"
+seoDescription: "Divas brīvdienu ēkas pie jūras Liepupes pagastā, netālu no Tūjas, Limbažu novadā, Latvijā — māja (8 viesiem) un vasarnīca (7 viesiem), ar tiešu piekļuvi pludmalei un pirti. Rezervē Airbnb vai abas kopā."
 
 languageLabel: "Valoda"
 skipToContent: "Pāriet uz saturu"

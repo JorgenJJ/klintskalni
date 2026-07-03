@@ -4,6 +4,9 @@
       "id": "house",
       "airbnbUrl": "https://www.airbnb.no/rooms/1028053261687651967",
       "image": "hero/house-exterior.jpg",
+      "guests": 8,
+      "bedrooms": 3,
+      "beds": 5,
       "gallery": [
         "hero/house-exterior.jpg",
         "gallery/house-garden.jpg",
@@ -17,6 +20,9 @@
       "id": "cottage",
       "airbnbUrl": "https://www.airbnb.no/rooms/1033329284775400298",
       "image": "gallery/cabin-evening.jpg",
+      "guests": 7,
+      "bedrooms": 3,
+      "beds": 4,
       "gallery": [
         "gallery/cabin-evening.jpg",
         "gallery/house-garden.jpg",
