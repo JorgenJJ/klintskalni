@@ -6,6 +6,7 @@ interface House {
   id: string;
   airbnbUrl: string;
   image: string;
+  gallery?: string[];
   name: string;
   tagline: string;
   keyPoints: { icon: string; label: string }[];
@@ -18,9 +19,11 @@ interface Props {
   title: string;
   intro: string;
   houses: House[];
+  photosLabel: string;
+  closeLabel: string;
 }
 
-const { title, intro, houses } = Astro.props;
+const { title, intro, houses, photosLabel, closeLabel } = Astro.props;
 ---
 
 <section class="houses" id="houses" aria-label={title}>
@@ -32,10 +35,20 @@ const { title, intro, houses } = Astro.props;
       {
         houses.map((house) => {
           const img = resolveImage(house.image);
+          const galleryImgs = (house.gallery ?? [])
+            .map((file) => resolveImage(file))
+            .filter(Boolean);
+          const dialogId = `gallery-${house.id}`;
           return (
             <article class="card">
               {img && (
-                <div class="media">
+                <button
+                  class="media"
+                  type="button"
+                  data-open-dialog={galleryImgs.length ? dialogId : undefined}
+                  aria-label={galleryImgs.length ? `${photosLabel} – ${house.name}` : undefined}
+                  disabled={!galleryImgs.length}
+                >
                   <Image
                     src={img}
                     alt={house.imageAlt}
@@ -43,7 +56,22 @@ const { title, intro, houses } = Astro.props;
                     sizes="(max-width: 760px) 100vw, 480px"
                     loading="lazy"
                   />
-                </div>
+                  {galleryImgs.length > 0 && (
+                    <span class="photo-count">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" width="16" height="16">
+                        <path
+                          d="M4 5h16v14H4zM4 15l4-4 4 4 3-3 5 5"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.6"
+                          stroke-linejoin="round"
+                        />
+                        <circle cx="9" cy="9" r="1.5" fill="currentColor" />
+                      </svg>
+                      {galleryImgs.length}
+                    </span>
+                  )}
+                </button>
               )}
               <div class="body">
                 <h3>{house.name}</h3>
@@ -64,15 +92,56 @@ const { title, intro, houses } = Astro.props;
 
                 {house.description && <p class="desc">{house.description}</p>}
 
-                <a
-                  class="btn btn-primary"
-                  href={house.airbnbUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {house.bookLabel}
-                </a>
+                <div class="actions">
+                  <a
+                    class="btn btn-primary"
+                    href={house.airbnbUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {house.bookLabel}
+                  </a>
+                  {galleryImgs.length > 0 && (
+                    <button class="btn btn-secondary" type="button" data-open-dialog={dialogId}>
+                      {photosLabel}
+                    </button>
+                  )}
+                </div>
               </div>
+
+              {galleryImgs.length > 0 && (
+                <dialog class="gallery-modal" id={dialogId} aria-label={`${photosLabel} – ${house.name}`}>
+                  <div class="modal-head">
+                    <strong>{house.name}</strong>
+                    <button class="modal-close" type="button" data-close aria-label={closeLabel}>
+                      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                        <path
+                          d="M6 6l12 12M18 6L6 18"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="modal-grid">
+                      {galleryImgs.map((gi, i) => (
+                        <figure>
+                          <Image
+                            src={gi}
+                            alt={`${house.name} — ${i + 1}`}
+                            widths={[500, 900, 1300]}
+                            sizes="(max-width: 700px) 100vw, 50vw"
+                            loading="lazy"
+                          />
+                        </figure>
+                      ))}
+                    </div>
+                  </div>
+                </dialog>
+              )}
             </article>
           );
         })
@@ -80,6 +149,22 @@ const { title, intro, houses } = Astro.props;
     </div>
   </div>
 </section>
+
+<script is:inline>
+  document.querySelectorAll('[data-open-dialog]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const d = document.getElementById(btn.getAttribute('data-open-dialog'));
+      if (d && typeof d.showModal === 'function') d.showModal();
+    });
+  });
+  document.querySelectorAll('dialog.gallery-modal').forEach((d) => {
+    // Lukk ved klikk på bakgrunnen eller på lukkeknappen (Escape virker automatisk).
+    d.addEventListener('click', (e) => {
+      if (e.target === d) d.close();
+    });
+    d.querySelector('[data-close]')?.addEventListener('click', () => d.close());
+  });
+</script>
 
 <style>
   .intro {
@@ -103,15 +188,43 @@ const { title, intro, houses } = Astro.props;
     overflow: hidden;
     box-shadow: var(--shadow);
   }
+
+  /* Bildeknappen (åpner galleriet) */
   .media {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    margin: 0;
     aspect-ratio: 3 / 2;
     background: var(--border);
+    cursor: pointer;
+  }
+  .media:disabled {
+    cursor: default;
   }
   .media :global(img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
   }
+  .photo-count {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
   .body {
     display: flex;
     flex-direction: column;
@@ -150,9 +263,92 @@ const { title, intro, houses } = Astro.props;
     margin: 0;
     color: var(--text);
   }
-  /* Knappen forankres nederst, så begge kort blir like høye */
-  .body .btn {
+  .actions {
     margin-top: auto;
-    align-self: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  /* Modal (native <dialog>) */
+  .gallery-modal {
+    width: min(1040px, 94vw);
+    max-height: 92vh;
+    padding: 0;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    background: var(--surface);
+    color: var(--text);
+  }
+  .gallery-modal::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+  }
+  .modal-head {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 1.25rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    z-index: 2;
+  }
+  .modal-head strong {
+    font-size: 1.15rem;
+  }
+  .modal-close {
+    display: inline-flex;
+    padding: 0.4rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+  }
+  .modal-close:hover {
+    background: #eef4f3;
+  }
+  .modal-body {
+    overflow-y: auto;
+    max-height: calc(92vh - 3.6rem);
+    padding: 0.75rem;
+  }
+
+  /* Airbnb-lignende oppsett: to kolonner, hvert 3. bilde i full bredde */
+  .modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .modal-grid figure {
+    margin: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--border);
+    aspect-ratio: 3 / 2;
+  }
+  .modal-grid figure:nth-child(3n) {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+  }
+  .modal-grid :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  @media (max-width: 640px) {
+    .modal-grid {
+      grid-template-columns: 1fr;
+    }
+    .modal-grid figure,
+    .modal-grid figure:nth-child(3n) {
+      aspect-ratio: 3 / 2;
+    }
   }
 </style>

@@ -3,12 +3,28 @@
     {
       "id": "house",
       "airbnbUrl": "https://www.airbnb.no/rooms/1028053261687651967",
-      "image": "hero/house-exterior.jpg"
+      "image": "hero/house-exterior.jpg",
+      "gallery": [
+        "hero/house-exterior.jpg",
+        "gallery/house-garden.jpg",
+        "gallery/seaside-bluff.jpg",
+        "gallery/beach.jpg",
+        "gallery/sunset-sea.jpg",
+        "gallery/volleyball-court.jpg"
+      ]
     },
     {
       "id": "cottage",
       "airbnbUrl": "https://www.airbnb.no/rooms/1033329284775400298",
-      "image": "gallery/cabin-evening.jpg"
+      "image": "gallery/cabin-evening.jpg",
+      "gallery": [
+        "gallery/cabin-evening.jpg",
+        "gallery/house-garden.jpg",
+        "gallery/beach-forest.jpg",
+        "gallery/beach.jpg",
+        "gallery/seaside-bluff.jpg",
+        "gallery/volleyball-court.jpg"
+      ]
     }
   ]
 }

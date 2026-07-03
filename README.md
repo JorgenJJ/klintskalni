@@ -40,11 +40,12 @@ og kan ikke gjøres for deg:
    til din dedikerte adresse (eller sett `""` for å skjule e-postknappen).
 
 3. **Bytt ut / suppler bildene.** Legg dine egne foto i `src/images/hero/` og
-   `src/images/gallery/`. Hus-bildene pekes på i `src/data/houses.json`;
-   eiendoms-/omgivelsesbildene (hero + galleri «Omgivelsene») i
-   **`src/data/media.json`** (felles for alle språk). Oppdater alt-tekstene i
-   `sections/*.md` (samme rekkefølge som `gallery`). Tips: nedskaler til
-   ~2000 px lengste side – Astro lager resten av størrelsene.
+   `src/images/gallery/`. I `src/data/houses.json` har hvert hus et `image`
+   (kort-bildet på forsiden) og en `gallery`-liste (bildene i «Se bilder»-modalen).
+   **Last opp de faktiske Airbnb-bildene for hvert hus** og list dem i riktig
+   `gallery` – de foreløpige er delte plassholdere. Eiendoms-/omgivelsesbildene
+   (hero + galleri «Omgivelsene») ligger i **`src/data/media.json`**. Oppdater
+   alt-tekstene i `sections/*.md`. Tips: nedskaler til ~2000 px lengste side.
 
 4. **Finjuster kartet.** `site/*.json` under `map` er satt til Liepupe-/Tūja-kysten
    (`lat 57.5105`, `lon 24.3405`). Juster `lat`/`lon` om nålen/utsnittet bør flyttes.

@@ -38,6 +38,9 @@ houses:
     bookLabel: "Rezervēt vasarnīcu Airbnb"
     imageAlt: "Guļbūves vasarnīca vakara gaismā"
 
+photosButtonLabel: "Skatīt bildes"
+closeLabel: "Aizvērt"
+
 galleryTitle: "Apkārtne"
 galleryAlts:
   - "Teritorija ar terasi, zālienu un jūru aizmugurē"

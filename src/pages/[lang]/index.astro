@@ -70,7 +70,13 @@ const reviewsUrl =
     <Content />
   </Info>
 
-  <Houses title={s.housesTitle} intro={s.housesIntro} houses={houses} />
+  <Houses
+    title={s.housesTitle}
+    intro={s.housesIntro}
+    houses={houses}
+    photosLabel={s.photosButtonLabel}
+    closeLabel={s.closeLabel}
+  />
 
   <Gallery title={s.galleryTitle} files={media.gallery} alts={s.galleryAlts} />
 

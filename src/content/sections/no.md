@@ -38,6 +38,9 @@ houses:
     bookLabel: "Book hytta på Airbnb"
     imageAlt: "Tømmerhytta i kveldslys"
 
+photosButtonLabel: "Se bilder"
+closeLabel: "Lukk"
+
 galleryTitle: "Omgivelsene"
 galleryAlts:
   - "Tomta med terrasse, plen og sjøen bak"

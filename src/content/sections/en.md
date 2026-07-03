@@ -38,6 +38,9 @@ houses:
     bookLabel: "Book the Cottage on Airbnb"
     imageAlt: "The log cottage in evening light"
 
+photosButtonLabel: "See photos"
+closeLabel: "Close"
+
 galleryTitle: "The surroundings"
 galleryAlts:
   - "The grounds with terrace, lawn and the sea beyond"

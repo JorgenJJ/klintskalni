@@ -63,6 +63,8 @@ collections:
               - { label: "Beskrivelse", name: "description", widget: "text", required: false }
               - { label: "Knapp: Book på Airbnb", name: "bookLabel", widget: "string" }
               - { label: "Bildebeskrivelse (alt)", name: "imageAlt", widget: "string", required: false }
+          - { label: "Knapp: Se bilder", name: "photosButtonLabel", widget: "string", required: false, default: "Se bilder" }
+          - { label: "Lukk-knapp (modal)", name: "closeLabel", widget: "string", required: false, default: "Lukk" }
           - { label: "Omgivelsene – tittel", name: "galleryTitle", widget: "string", required: false }
           - label: "Omgivelsene – bildebeskrivelser (alt), i samme rekkefølge som bildene"
             name: "galleryAlts"
@@ -139,7 +141,12 @@ collections:
             fields:
               - { label: "ID (house / cottage – må matche teksten i Sideinnhold)", name: "id", widget: "string" }
               - { label: "Airbnb-lenke", name: "airbnbUrl", widget: "string" }
-              - { label: "Bilde", name: "image", widget: "image" }
+              - { label: "Kort-bilde (vises på forsiden)", name: "image", widget: "image" }
+              - label: "Bildegalleri (vises i «Se bilder»-modalen)"
+                name: "gallery"
+                widget: "list"
+                required: false
+                field: { label: "Bilde", name: "image", widget: "image" }
 
   # ---------------------------------------------------------------------------
   #  Bilder – FELLES for alle språk (kun alt-tekst oversettes, se Sideinnhold)

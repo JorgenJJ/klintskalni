@@ -60,6 +60,9 @@ const sections = defineCollection({
         }),
       )
       .default([]),
+    // Knapp + modal for bildegalleri per hus
+    photosButtonLabel: z.string().default('Se bilder'),
+    closeLabel: z.string().default('Lukk'),
     // Galleri «Omgivelsene» (alt-tekst per bilde, parallelt med media.gallery)
     galleryTitle: z.string().default(''),
     galleryAlts: z.array(z.string()).default([]),
