@@ -53,15 +53,15 @@ collections:
               - { label: "Tekst", name: "label", widget: "string" }
           - { label: "Husene – seksjonstittel", name: "housesTitle", widget: "string", required: false }
           - { label: "Husene – introtekst", name: "housesIntro", widget: "text", required: false }
-          - label: "De to husene (tekst – bilde/Airbnb-lenke ligger i «Husene»)"
+          - label: "Huset og hytta (tekst – bilde/Airbnb-lenke ligger i «Husene»)"
             name: "houses"
             widget: "list"
             required: false
             fields:
-              - { label: "ID (large / small – må matche «Husene»)", name: "id", widget: "string" }
+              - { label: "ID (house / cottage – må matche «Husene»)", name: "id", widget: "string" }
               - { label: "Navn", name: "name", widget: "string" }
               - { label: "Kort undertekst", name: "tagline", widget: "string", required: false }
-              - label: "Nøkkelpunkter for huset"
+              - label: "Nøkkelpunkter for enheten"
                 name: "keyPoints"
                 widget: "list"
                 required: false
@@ -132,20 +132,20 @@ collections:
 
   # ---------------------------------------------------------------------------
   #  De to husene – FELLES (bilde + Airbnb-lenke). Tekst ligger i «Sideinnhold».
-  #  src/data/houses.json. `id` kobler tekst og data sammen (large / small).
+  #  src/data/houses.json. `id` kobler tekst og data sammen (house / cottage).
   # ---------------------------------------------------------------------------
   - name: "houses"
     label: "Husene (bilde + Airbnb-lenke)"
     files:
       - name: "houses"
-        label: "Det store og det lille huset"
+        label: "Huset og hytta"
         file: "src/data/houses.json"
         fields:
           - label: "Hus"
             name: "houses"
             widget: "list"
             fields:
-              - { label: "ID (large / small – må matche teksten i Sideinnhold)", name: "id", widget: "string" }
+              - { label: "ID (house / cottage – må matche teksten i Sideinnhold)", name: "id", widget: "string" }
               - { label: "Airbnb-lenke", name: "airbnbUrl", widget: "string" }
               - { label: "Bilde", name: "image", widget: "image" }
 

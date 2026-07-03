@@ -41,9 +41,9 @@ const houses = housesData.houses
   })
   .filter((h): h is NonNullable<typeof h> => h !== null);
 
-// «Les alle anmeldelser» peker til det store huset (primær annonse).
+// «Les alle anmeldelser» peker til huset (primær annonse).
 const reviewsUrl =
-  housesData.houses.find((h) => h.id === 'large')?.airbnbUrl ??
+  housesData.houses.find((h) => h.id === 'house')?.airbnbUrl ??
   housesData.houses[0]?.airbnbUrl ??
   '';
 ---

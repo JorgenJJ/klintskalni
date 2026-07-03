@@ -31,24 +31,23 @@ Forhåndsvis bygget: `npm run preview`.
 Koden og strukturen er ferdig. Disse stegene krever dine egne kontoer/verdier
 og kan ikke gjøres for deg:
 
-1. **Kontroller de to husene.** Airbnb-lenkene ligger ferdig i
-   **`src/data/houses.json`** (store + lille hus). Sjekk at hver `image` peker til
-   riktig hus-foto. **Detaljene per hus** (antall sengeplasser/soverom osv.) i
-   `sections/*.md` under `houses:` er foreløpig plausible plassholdere – rett dem
-   til de faktiske tallene for hvert hus. `bookLabel`, `name`, `tagline` og
-   `description` oversettes per språk her.
+1. **Anmeldelser.** `src/content/reviews/reviews.json` inneholder foreløpig
+   eksempel-sitater. Bytt dem ut med ekte utvalgte sitater fra Airbnb (fornavn,
+   kilde, dato). `reviewsNote` i `sections/*.md` står på «★ 5,0».
 
 2. **E-post.** I `src/content/site/en.json`, `no.json`, `lv.json`: bytt `email`
    til din dedikerte adresse (eller sett `""` for å skjule e-postknappen).
 
-3. **Bytt ut bildene.** Legg dine egne foto i `src/images/hero/` og `src/images/gallery/`.
-   Hus-bildene pekes på i `src/data/houses.json`; eiendoms-/omgivelsesbildene
-   (hero + galleri «Omgivelsene») i **`src/data/media.json`** (felles for alle språk).
-   Oppdater alt-tekstene i `sections/*.md` (samme rekkefølge som `gallery`).
-   Tips: nedskaler til ~2000 px lengste side – Astro lager resten av størrelsene.
+3. **Bytt ut / suppler bildene.** Legg dine egne foto i `src/images/hero/` og
+   `src/images/gallery/`. Hus-bildene pekes på i `src/data/houses.json`;
+   eiendoms-/omgivelsesbildene (hero + galleri «Omgivelsene») i
+   **`src/data/media.json`** (felles for alle språk). Oppdater alt-tekstene i
+   `sections/*.md` (samme rekkefølge som `gallery`). Tips: nedskaler til
+   ~2000 px lengste side – Astro lager resten av størrelsene.
 
-4. **Juster kartposisjonen.** I `site/*.json` under `map`: sett `lat`/`lon` til
-   ditt nærområde. Standard viser *området*, ikke nøyaktig adresse (`showMarker: false`).
+4. **Finjuster kartet.** `site/*.json` under `map` er satt til Liepupe-/Tūja-kysten
+   (`lat 57.5105`, `lon 24.3405`). Juster `lat`/`lon` om nålen/utsnittet bør flyttes.
+   Standard viser *området*, ikke nøyaktig adresse (`showMarker: false`).
 
 5. **Koble GitHub → Cloudflare Pages** (publisering). Se egen seksjon under.
 

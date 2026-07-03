@@ -2,9 +2,9 @@
   "houseName": "Klintskalni",
   "email": "hello@klintskalni.example",
   "map": {
-    "lat": 56.9215,
-    "lon": 21.3742,
-    "areaSpan": 0.06,
+    "lat": 57.5105,
+    "lon": 24.3405,
+    "areaSpan": 0.05,
     "showMarker": false
   }
 }

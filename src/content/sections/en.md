@@ -1,58 +1,58 @@
 ---
-heroTitle: "Klintskalni — two seaside houses on one property"
-heroTagline: "A large house and a small house by the Baltic cliffs. Rent either one — or both."
-heroAlt: "The Klintskalni property with the large log house and a second house behind, seen from the garden"
-heroCtaLabel: "See the two houses"
+heroTitle: "Klintskalni — a house and a cottage by the sea"
+heroTagline: "Two log homes on one seaside property, with direct access to a long sandy beach. Rent either — or both."
+heroAlt: "The Klintskalni property with the log house and the cottage behind, seen from the garden"
+heroCtaLabel: "See the two homes"
 
 keyPointsTitle: "The setting"
 keyPoints:
-  - icon: "🌊"
-    label: "Sea view"
   - icon: "🏖️"
-    label: "10 min to the beach"
+    label: "Right by the beach"
+  - icon: "🔥"
+    label: "Sauna"
   - icon: "🏐"
-    label: "Beach volleyball"
+    label: "Sports area & playground"
   - icon: "🐾"
     label: "Pets welcome"
 
-housesTitle: "Two separate houses"
-housesIntro: "Klintskalni has two independent holiday houses on the same grounds, each with its own entrance and its own Airbnb listing. Book either one online — or rent both together by contacting us directly."
+housesTitle: "The house and the cottage"
+housesIntro: "Klintskalni has two independent holiday homes on the same grounds — a house and a cottage — each with its own entrance and its own Airbnb listing. Book either one online, or rent both together by contacting us directly."
 houses:
-  - id: "large"
-    name: "The Large House"
-    tagline: "Spacious log house with a balcony and sea views."
+  - id: "house"
+    name: "The House"
+    tagline: "Spacious log house with direct beach access."
     keyPoints:
+      - icon: "👥"
+        label: "Sleeps 8"
       - icon: "🛏️"
-        label: "Sleeps 6"
-      - icon: "🏡"
         label: "3 bedrooms"
-      - icon: "🔥"
-        label: "Wood-fired sauna"
-      - icon: "🍳"
-        label: "Full kitchen"
-    description: "A bright, two-storey log home with a furnished terrace and a balcony facing the sea. It comfortably sleeps six across three bedrooms, with a full kitchen, living room and wood-fired sauna — ideal for families or two couples travelling together."
-    bookLabel: "Book the Large House on Airbnb"
-    imageAlt: "The large log house with balcony and terrace"
-  - id: "small"
-    name: "The Small House"
-    tagline: "A cosy timber cabin, perfect for two."
+      - icon: "🛌"
+        label: "5 beds"
+      - icon: "🛁"
+        label: "1.5 baths"
+    description: "A beautiful log house with direct access to the long sandy beach that stretches for kilometres in both directions. Three spacious bedrooms and a bathroom upstairs; a newly renovated kitchen, a spacious living room and a toilet downstairs. Large covered terrace, with a garden that has a playground, a sports area and its own sauna."
+    bookLabel: "Book the House on Airbnb"
+    imageAlt: "The log house with balcony and terrace"
+  - id: "cottage"
+    name: "The Cottage"
+    tagline: "Cosy log cottage with direct beach access."
     keyPoints:
+      - icon: "👥"
+        label: "Sleeps 7"
       - icon: "🛏️"
-        label: "Sleeps 2"
-      - icon: "🔥"
-        label: "Fireplace"
-      - icon: "🌲"
-        label: "Quiet, by the trees"
-      - icon: "☕"
-        label: "Kitchenette"
-    description: "A charming, traditional timber cabin a few steps from the large house. Snug and private, it is perfect for a couple, with a kitchenette, a fireplace and the same direct access to the beach and grounds."
-    bookLabel: "Book the Small House on Airbnb"
-    imageAlt: "The small timber cabin in evening light"
+        label: "3 bedrooms"
+      - icon: "🛌"
+        label: "4 beds"
+      - icon: "🛁"
+        label: "1 bath"
+    description: "A beautiful log cottage with direct access to the same long sandy beach. Three spacious bedrooms, a kitchen, living room and bathroom. Large, partly covered terrace, with a garden that has a playground, a sports area and a sauna (new in 2023)."
+    bookLabel: "Book the Cottage on Airbnb"
+    imageAlt: "The log cottage in evening light"
 
 galleryTitle: "The surroundings"
 galleryAlts:
   - "The grounds with terrace, lawn and the sea beyond"
-  - "Grassy bluff with trees overlooking the beach and the Baltic Sea"
+  - "Grassy shore with trees looking out over the beach and the sea"
   - "Wide sandy beach with sunlight and gentle waves"
   - "Sandy beach lined by forest under a clear blue sky"
   - "Sunset over the sea with a silhouetted tree on the shore"
@@ -61,32 +61,33 @@ galleryAlts:
 infoTitle: "About Klintskalni"
 
 reviewsTitle: "What guests say"
-reviewsNote: "★ 4.9 on Airbnb"
+reviewsNote: "★ 5.0 on Airbnb"
 reviewsLinkLabel: "Read all reviews on Airbnb"
 
 mapTitle: "Where you'll be"
-mapAreaLabel: "Jūrkalne coast, Latvia"
+mapAreaLabel: "Liepupe parish, Latvia"
 mapLinkLabel: "Open larger map"
 
 contactTitle: "Get in touch"
-contactText: "Booking each house is easiest on Airbnb. Want to rent both houses at the same time, or have a question? Email us directly and we'll help you arrange it."
+contactText: "Booking each home is easiest on Airbnb. Want to rent both at the same time, or have a question? Email us directly and we'll help you arrange it."
 emailButtonLabel: "Email us"
 
-seoTitle: "Klintskalni — two seaside holiday houses on the Baltic coast"
-seoDescription: "Two separate holiday houses on one seaside property by the Baltic cliffs — a large house and a small house. Book on Airbnb, or rent both via direct contact."
+seoTitle: "Klintskalni — a seaside house and cottage in Liepupe, Latvia"
+seoDescription: "Two separate holiday homes on one seaside property in Liepupe, Latvia — a house (sleeps 8) and a cottage (sleeps 7), with direct beach access and a sauna. Book on Airbnb, or rent both together."
 
 languageLabel: "Language"
 skipToContent: "Skip to content"
 ---
 
-Klintskalni is a quiet seaside property on the cliffs of the Baltic coast, a
-short walk from a long sandy beach. There are two separate holiday houses on the
-grounds — a larger log house and a smaller timber cabin — which you can rent
-individually.
+Klintskalni is a quiet seaside property in Liepupe parish on the Latvian coast,
+with direct access to a sandy beach that stretches for kilometres in both
+directions. On the grounds are two separate holiday homes — a house and a
+cottage — which you can rent individually.
 
-Both share the same calm setting: pine trees, sea views, a beach-volleyball
-court and direct access to the coastline. Travelling as a larger group? You can
-book both houses together — just get in touch and we'll arrange it.
+Both share the same garden, with a playground, a sports area and a sauna, and
+both welcome pets. Travelling as a larger group, or want the whole place to
+yourselves? You can rent both homes together — just get in touch and we'll
+arrange it.
 
-Each house has its own listing on Airbnb, where you can check availability and
+Each home has its own listing on Airbnb, where you can check availability and
 book in a few clicks.

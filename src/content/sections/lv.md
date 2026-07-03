@@ -1,58 +1,58 @@
 ---
-heroTitle: "Klintskalni — divas brīvdienu mājas vienā īpašumā"
-heroTagline: "Lielā māja un mazā māja pie Baltijas jūras kraujām. Īrē vienu — vai abas."
-heroAlt: "Klintskalni īpašums ar lielo guļbūves māju un otru māju aizmugurē, skats no dārza"
-heroCtaLabel: "Apskati abas mājas"
+heroTitle: "Klintskalni — māja un vasarnīca jūras krastā"
+heroTagline: "Divas guļbūves vienā piejūras īpašumā, ar tiešu piekļuvi garai smilšu pludmalei. Īrē vienu — vai abas."
+heroAlt: "Klintskalni īpašums ar guļbūves māju un vasarnīcu aizmugurē, skats no dārza"
+heroCtaLabel: "Apskati abas ēkas"
 
 keyPointsTitle: "Vieta"
 keyPoints:
-  - icon: "🌊"
-    label: "Skats uz jūru"
   - icon: "🏖️"
-    label: "10 min līdz pludmalei"
+    label: "Tieši pie pludmales"
+  - icon: "🔥"
+    label: "Pirts"
   - icon: "🏐"
-    label: "Pludmales volejbols"
+    label: "Sporta un rotaļu laukums"
   - icon: "🐾"
     label: "Mājdzīvnieki ir gaidīti"
 
-housesTitle: "Divas atsevišķas mājas"
-housesIntro: "Klintskalni ir divas patstāvīgas brīvdienu mājas vienā teritorijā, katrai sava ieeja un savs Airbnb sludinājums. Īrē vienu no tām tiešsaistē — vai īrē abas kopā, sazinoties ar mums tieši."
+housesTitle: "Māja un vasarnīca"
+housesIntro: "Klintskalni ir divas patstāvīgas brīvdienu ēkas vienā teritorijā — māja un vasarnīca — katrai sava ieeja un savs Airbnb sludinājums. Īrē vienu no tām tiešsaistē vai abas kopā, sazinoties ar mums tieši."
 houses:
-  - id: "large"
-    name: "Lielā māja"
-    tagline: "Plaša guļbūves māja ar balkonu un skatu uz jūru."
+  - id: "house"
+    name: "Māja"
+    tagline: "Plaša guļbūves māja ar tiešu piekļuvi pludmalei."
     keyPoints:
+      - icon: "👥"
+        label: "8 viesi"
       - icon: "🛏️"
-        label: "6 guļasvietas"
-      - icon: "🏡"
         label: "3 guļamistabas"
-      - icon: "🔥"
-        label: "Malkas pirts"
-      - icon: "🍳"
-        label: "Pilna virtuve"
-    description: "Gaiša divstāvu guļbūves māja ar mēbelētu terasi un balkonu pret jūru. Tajā ērti izvietojas seši viesi trijās guļamistabās, ar pilnu virtuvi, dzīvojamo istabu un malkas pirti — ideāli ģimenēm vai diviem pāriem, kas ceļo kopā."
-    bookLabel: "Rezervēt Lielo māju Airbnb"
-    imageAlt: "Lielā guļbūves māja ar balkonu un terasi"
-  - id: "small"
-    name: "Mazā māja"
-    tagline: "Mājīga koka māja, ideāla diviem."
+      - icon: "🛌"
+        label: "5 gultas"
+      - icon: "🛁"
+        label: "1,5 vannasistabas"
+    description: "Skaista guļbūves māja ar tiešu piekļuvi garajai smilšu pludmalei, kas stiepjas kilometriem abos virzienos. Trīs plašas guļamistabas un vannasistaba otrajā stāvā; nesen atjaunota virtuve, plaša dzīvojamā istaba un tualete pirmajā stāvā. Liela, nojumēta terase un dārzs ar rotaļu laukumu, sporta laukumu un savu pirti."
+    bookLabel: "Rezervēt māju Airbnb"
+    imageAlt: "Guļbūves māja ar balkonu un terasi"
+  - id: "cottage"
+    name: "Vasarnīca"
+    tagline: "Mājīga guļbūves vasarnīca ar tiešu piekļuvi pludmalei."
     keyPoints:
+      - icon: "👥"
+        label: "7 viesi"
       - icon: "🛏️"
-        label: "2 guļasvietas"
-      - icon: "🔥"
-        label: "Kamīns"
-      - icon: "🌲"
-        label: "Klusa, pie kokiem"
-      - icon: "☕"
-        label: "Virtuves stūrītis"
-    description: "Burvīga, tradicionāla koka māja dažu soļu attālumā no lielās mājas. Mājīga un privāta, ideāla pārim, ar virtuves stūrīti, kamīnu un tādu pašu tiešu piekļuvi pludmalei un teritorijai."
-    bookLabel: "Rezervēt Mazo māju Airbnb"
-    imageAlt: "Mazā koka māja vakara gaismā"
+        label: "3 guļamistabas"
+      - icon: "🛌"
+        label: "4 gultas"
+      - icon: "🛁"
+        label: "1 vannasistaba"
+    description: "Skaista guļbūves vasarnīca ar tiešu piekļuvi tai pašai garajai smilšu pludmalei. Trīs plašas guļamistabas, virtuve, dzīvojamā istaba un vannasistaba. Liela, daļēji nojumēta terase un dārzs ar rotaļu laukumu, sporta laukumu un pirti (jauna 2023. gadā)."
+    bookLabel: "Rezervēt vasarnīcu Airbnb"
+    imageAlt: "Guļbūves vasarnīca vakara gaismā"
 
 galleryTitle: "Apkārtne"
 galleryAlts:
   - "Teritorija ar terasi, zālienu un jūru aizmugurē"
-  - "Zālains krasta uzkalns ar kokiem un skatu uz pludmali un Baltijas jūru"
+  - "Zālains krasts ar kokiem un skatu uz pludmali un jūru"
   - "Plaša smilšu pludmale saulē ar viegliem viļņiem"
   - "Smilšu pludmale meža ielokā zem skaidri zilām debesīm"
   - "Saulriets virs jūras ar koka siluetu krastā"
@@ -61,31 +61,32 @@ galleryAlts:
 infoTitle: "Par Klintskalni"
 
 reviewsTitle: "Ko saka viesi"
-reviewsNote: "★ 4,9 Airbnb platformā"
+reviewsNote: "★ 5,0 Airbnb platformā"
 reviewsLinkLabel: "Lasīt visas atsauksmes Airbnb"
 
 mapTitle: "Kur tu atradīsies"
-mapAreaLabel: "Jūrkalnes piekraste, Latvija"
+mapAreaLabel: "Liepupes pagasts, Latvija"
 mapLinkLabel: "Atvērt lielāku karti"
 
 contactTitle: "Sazinies ar mums"
-contactText: "Katru māju visērtāk rezervēt Airbnb platformā. Vēlies īrēt abas mājas vienlaikus vai ir jautājums? Raksti mums e-pastu tieši, un mēs palīdzēsim to noorganizēt."
+contactText: "Katru ēku visērtāk rezervēt Airbnb platformā. Vēlies īrēt abas vienlaikus vai ir jautājums? Raksti mums e-pastu tieši, un mēs palīdzēsim to noorganizēt."
 emailButtonLabel: "Rakstīt mums"
 
-seoTitle: "Klintskalni — divas brīvdienu mājas Baltijas jūras krastā"
-seoDescription: "Divas atsevišķas brīvdienu mājas vienā piejūras īpašumā pie Baltijas jūras kraujām — lielā un mazā māja. Rezervē Airbnb vai abas, sazinoties tieši."
+seoTitle: "Klintskalni — māja un vasarnīca jūras krastā Liepupē, Latvijā"
+seoDescription: "Divas atsevišķas brīvdienu ēkas vienā piejūras īpašumā Liepupē, Latvijā — māja (8 viesiem) un vasarnīca (7 viesiem), ar tiešu piekļuvi pludmalei un pirti. Rezervē Airbnb vai abas kopā."
 
 languageLabel: "Valoda"
 skipToContent: "Pāriet uz saturu"
 ---
 
-Klintskalni ir kluss piejūras īpašums uz Baltijas jūras kraujām, neilga pastaiga
-no garas smilšu pludmales. Teritorijā ir divas atsevišķas brīvdienu mājas —
-lielāka guļbūves māja un mazāka koka māja — kuras vari īrēt katru atsevišķi.
+Klintskalni ir kluss piejūras īpašums Liepupes pagastā Latvijas piekrastē, ar
+tiešu piekļuvi smilšu pludmalei, kas stiepjas kilometriem abos virzienos.
+Teritorijā ir divas atsevišķas brīvdienu ēkas — māja un vasarnīca — kuras vari
+īrēt katru atsevišķi.
 
-Abas mājas vieno tā pati mierīgā vide: priedes, skats uz jūru, pludmales
-volejbola laukums un tieša piekļuve jūras krastam. Ceļo lielākā grupā? Vari
-rezervēt abas mājas kopā — vienkārši sazinies, un mēs to noorganizēsim.
+Abas ēkas vieno viens dārzs ar rotaļu laukumu, sporta laukumu un pirti, un abās
+ir gaidīti mājdzīvnieki. Ceļo lielākā grupā vai vēlies visu vietu tikai sev? Vari
+īrēt abas ēkas kopā — vienkārši sazinies, un mēs to noorganizēsim.
 
-Katrai mājai ir savs sludinājums Airbnb, kur dažu klikšķu laikā vari pārbaudīt
+Katrai ēkai ir savs sludinājums Airbnb, kur dažu klikšķu laikā vari pārbaudīt
 pieejamību un rezervēt.

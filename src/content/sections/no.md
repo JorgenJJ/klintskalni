@@ -1,58 +1,58 @@
 ---
-heroTitle: "Klintskalni — to feriehus på samme tomt"
-heroTagline: "Et stort hus og et lite hus ved de baltiske klippene. Lei ett — eller begge."
-heroAlt: "Klintskalni-eiendommen med det store tømmerhuset og et hus til bak, sett fra hagen"
-heroCtaLabel: "Se de to husene"
+heroTitle: "Klintskalni — hus og hytte ved sjøen"
+heroTagline: "To tømmerhus på samme tomt, med direkte tilgang til en lang sandstrand. Lei ett — eller begge."
+heroAlt: "Klintskalni-eiendommen med tømmerhuset og hytta bak, sett fra hagen"
+heroCtaLabel: "Se de to enhetene"
 
 keyPointsTitle: "Stedet"
 keyPoints:
-  - icon: "🌊"
-    label: "Sjøutsikt"
   - icon: "🏖️"
-    label: "10 min til stranden"
+    label: "Rett ved stranden"
+  - icon: "🔥"
+    label: "Badstue"
   - icon: "🏐"
-    label: "Sandvolleyball"
+    label: "Sportsområde og lekeplass"
   - icon: "🐾"
     label: "Kjæledyr velkommen"
 
-housesTitle: "To separate hus"
-housesIntro: "Klintskalni har to selvstendige feriehus på samme tomt, hvert med egen inngang og egen Airbnb-annonse. Lei ett av dem på nett — eller lei begge sammen ved å ta direkte kontakt med oss."
+housesTitle: "Huset og hytta"
+housesIntro: "Klintskalni har to selvstendige feriehus på samme tomt — et hus og ei hytte — hver med egen inngang og egen Airbnb-annonse. Lei én av dem på nett, eller lei begge sammen ved å ta direkte kontakt med oss."
 houses:
-  - id: "large"
-    name: "Det store huset"
-    tagline: "Romslig tømmerhus med balkong og sjøutsikt."
+  - id: "house"
+    name: "Huset"
+    tagline: "Romslig tømmerhus med direkte tilgang til stranden."
     keyPoints:
+      - icon: "👥"
+        label: "8 gjester"
       - icon: "🛏️"
-        label: "6 sengeplasser"
-      - icon: "🏡"
         label: "3 soverom"
-      - icon: "🔥"
-        label: "Vedfyrt badstue"
-      - icon: "🍳"
-        label: "Fullt kjøkken"
-    description: "Et lyst tømmerhus i to etasjer med møblert terrasse og balkong mot sjøen. Det har god plass til seks gjester fordelt på tre soverom, med fullt kjøkken, stue og vedfyrt badstue — perfekt for familier eller to par som reiser sammen."
-    bookLabel: "Book det store huset på Airbnb"
-    imageAlt: "Det store tømmerhuset med balkong og terrasse"
-  - id: "small"
-    name: "Det lille huset"
-    tagline: "En koselig tømmerhytte, perfekt for to."
+      - icon: "🛌"
+        label: "5 senger"
+      - icon: "🛁"
+        label: "1,5 bad"
+    description: "Vakkert tømmerhus med direkte tilgang til den lange sandstranden som strekker seg flere kilometer i begge retninger. Tre romslige soverom og bad i andre etasje; nyoppusset kjøkken, romslig stue og toalett i første. Stor overbygd terrasse, og hage med lekeplass, sportsområde og egen badstue."
+    bookLabel: "Book huset på Airbnb"
+    imageAlt: "Tømmerhuset med balkong og terrasse"
+  - id: "cottage"
+    name: "Hytta"
+    tagline: "Koselig tømmerhytte med direkte tilgang til stranden."
     keyPoints:
+      - icon: "👥"
+        label: "7 gjester"
       - icon: "🛏️"
-        label: "2 sengeplasser"
-      - icon: "🔥"
-        label: "Peis"
-      - icon: "🌲"
-        label: "Stille, ved trærne"
-      - icon: "☕"
-        label: "Tekjøkken"
-    description: "En sjarmerende, tradisjonell tømmerhytte noen skritt fra det store huset. Lun og privat, perfekt for et par, med tekjøkken, peis og samme direkte tilgang til stranden og tomta."
-    bookLabel: "Book det lille huset på Airbnb"
-    imageAlt: "Den lille tømmerhytta i kveldslys"
+        label: "3 soverom"
+      - icon: "🛌"
+        label: "4 senger"
+      - icon: "🛁"
+        label: "1 bad"
+    description: "Vakker tømmerhytte med direkte tilgang til den samme lange sandstranden. Tre romslige soverom, kjøkken, stue og bad. Stor, delvis overbygd terrasse, og hage med lekeplass, sportsområde og badstue (ny i 2023)."
+    bookLabel: "Book hytta på Airbnb"
+    imageAlt: "Tømmerhytta i kveldslys"
 
 galleryTitle: "Omgivelsene"
 galleryAlts:
   - "Tomta med terrasse, plen og sjøen bak"
-  - "Gresskledd skrent med trær og utsikt over stranden og Østersjøen"
+  - "Gresskledd strandkant med trær og utsikt mot stranden og sjøen"
   - "Bred sandstrand med sollys og rolige bølger"
   - "Sandstrand omkranset av skog under klar blå himmel"
   - "Solnedgang over sjøen med et tre i silhuett ved stranden"
@@ -61,31 +61,33 @@ galleryAlts:
 infoTitle: "Om Klintskalni"
 
 reviewsTitle: "Hva gjestene sier"
-reviewsNote: "★ 4,9 på Airbnb"
+reviewsNote: "★ 5,0 på Airbnb"
 reviewsLinkLabel: "Les alle anmeldelser på Airbnb"
 
 mapTitle: "Her bor du"
-mapAreaLabel: "Jūrkalne-kysten, Latvia"
+mapAreaLabel: "Liepupe, Latvia"
 mapLinkLabel: "Åpne større kart"
 
 contactTitle: "Ta kontakt"
-contactText: "Å booke hvert hus er enklest på Airbnb. Vil du leie begge husene samtidig, eller har du et spørsmål? Send oss en e-post direkte, så hjelper vi deg å ordne det."
+contactText: "Å booke hver enhet er enklest på Airbnb. Vil du leie begge samtidig, eller har du et spørsmål? Send oss en e-post direkte, så hjelper vi deg å ordne det."
 emailButtonLabel: "Send oss e-post"
 
-seoTitle: "Klintskalni — to feriehus ved Østersjøen"
-seoDescription: "To separate feriehus på samme tomt ved de baltiske klippene — et stort og et lite hus. Book på Airbnb, eller lei begge ved direkte kontakt."
+seoTitle: "Klintskalni — hus og hytte ved sjøen i Liepupe, Latvia"
+seoDescription: "To separate feriehjem på samme tomt i Liepupe, Latvia — et hus (8 gjester) og ei hytte (7 gjester), med direkte strandtilgang og badstue. Book på Airbnb, eller lei begge sammen."
 
 languageLabel: "Språk"
 skipToContent: "Hopp til innhold"
 ---
 
-Klintskalni er en stille eiendom ved sjøen på klippene ved Østersjøen, en kort
-spasertur fra en lang sandstrand. På tomta står det to separate feriehus — et
-større tømmerhus og en mindre tømmerhytte — som du kan leie hver for seg.
+Klintskalni er en stille eiendom ved sjøen i Liepupe sogn på den latviske kysten,
+med direkte tilgang til en sandstrand som strekker seg flere kilometer i begge
+retninger. På tomta står det to separate feriehus — et hus og ei hytte — som du
+kan leie hver for seg.
 
-Begge deler de samme rolige omgivelsene: furutrær, sjøutsikt, en
-sandvolleyballbane og direkte tilgang til kysten. Reiser dere som en større
-gruppe? Dere kan booke begge husene sammen — bare ta kontakt, så ordner vi det.
+Begge deler den samme hagen, med lekeplass, sportsområde og badstue, og begge
+tar imot kjæledyr. Reiser dere som en større gruppe, eller vil dere ha hele
+stedet for dere selv? Dere kan leie begge enhetene sammen — bare ta kontakt, så
+ordner vi det.
 
-Hvert hus har sin egen annonse på Airbnb, der du kan sjekke tilgjengelighet og
+Hver enhet har sin egen annonse på Airbnb, der du kan sjekke tilgjengelighet og
 booke på få klikk.
