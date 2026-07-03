@@ -13,8 +13,8 @@
 
 export const languages = {
   en: 'English',
-  no: 'Norsk',
   lv: 'Latviešu',
+  no: 'Norsk',
 } as const;
 
 // Standardspråk for ukjente besøkende (rot-URL foreslår dette / nettleserspråk).
