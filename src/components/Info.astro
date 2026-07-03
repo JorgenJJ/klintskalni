@@ -7,7 +7,7 @@ const { title } = Astro.props;
 ---
 
 <section class="info" id="info">
-  <div class="container narrow">
+  <div class="container">
     {title && <h2 class="section-title">{title}</h2>}
     <div class="prose">
       {/* Lengre informasjonstekst kommer fra markdown-brødteksten i sections/<lang>.md */}
@@ -17,11 +17,14 @@ const { title } = Astro.props;
 </section>
 
 <style>
-  .narrow {
-    max-width: 70ch;
+  /* Venstrejustert lesekolonne – flukter med de andre seksjonene */
+  .prose {
+    max-width: 65ch;
   }
   .prose :global(p) {
     margin: 0 0 1rem;
-    font-size: 1.1rem;
+    font-size: 1.12rem;
   }
-</style>
+  .prose :global(p:last-child) {
+    margin-bottom: 0;
+  }
