@@ -1,22 +1,11 @@
 ---
 heroTitle: "Klintskalni — hus og hytte ved sjøen"
-heroTagline: "To tømmerhus på samme tomt, med direkte tilgang til en lang sandstrand. Lei ett — eller begge."
+heroTagline: "To tømmerhus på samme tomt, rett ved en lang sandstrand. Lei ett – eller begge."
 heroAlt: "Klintskalni-eiendommen med tømmerhuset og hytta bak, sett fra hagen"
 heroCtaLabel: "Se de to enhetene"
 
-keyPointsTitle: "Stedet"
-keyPoints:
-  - icon: "🏖️"
-    label: "Rett ved stranden"
-  - icon: "🔥"
-    label: "Badstue"
-  - icon: "🏐"
-    label: "Sportsområde og lekeplass"
-  - icon: "🐾"
-    label: "Kjæledyr velkommen"
-
 housesTitle: "Huset og hytta"
-housesIntro: "Klintskalni har to selvstendige feriehus på samme tomt — et hus og ei hytte — hver med egen inngang og egen Airbnb-annonse. Lei én av dem på nett, eller lei begge sammen ved å ta direkte kontakt med oss."
+housesIntro: "De to enhetene kan leies hver for seg – eller begge sammen ved direkte kontakt."
 houses:
   - id: "house"
     name: "Huset"
@@ -64,7 +53,7 @@ reviewsTitle: "Hva gjestene sier"
 reviewsNote: "★ 5,0 på Airbnb"
 reviewsLinkLabel: "Les alle anmeldelser på Airbnb"
 
-mapTitle: "Her bor du"
+mapTitle: "Område"
 mapAreaLabel: "Liepupe, Latvia"
 mapLinkLabel: "Åpne større kart"
 
@@ -79,15 +68,12 @@ languageLabel: "Språk"
 skipToContent: "Hopp til innhold"
 ---
 
-Klintskalni er en stille eiendom ved sjøen i Liepupe sogn på den latviske kysten,
-med direkte tilgang til en sandstrand som strekker seg flere kilometer i begge
-retninger. På tomta står det to separate feriehus — et hus og ei hytte — som du
-kan leie hver for seg.
+Klintskalni ligger i Liepupe på den latviske kysten, med direkte tilgang til en
+sandstrand som strekker seg flere kilometer i begge retninger. På tomta står det
+to separate enheter — et hus og ei hytte — som leies hver for seg.
 
-Begge deler den samme hagen, med lekeplass, sportsområde og badstue, og begge
-tar imot kjæledyr. Reiser dere som en større gruppe, eller vil dere ha hele
-stedet for dere selv? Dere kan leie begge enhetene sammen — bare ta kontakt, så
-ordner vi det.
+Begge deler samme hage med lekeplass, sportsområde og badstue, og begge tar imot
+kjæledyr. De to enhetene kan også leies sammen for større grupper — ta kontakt.
 
 Hver enhet har sin egen annonse på Airbnb, der du kan sjekke tilgjengelighet og
-booke på få klikk.
+booke.

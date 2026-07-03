@@ -41,11 +41,6 @@ const sections = defineCollection({
     heroAlt: z.string().default(''),
     // Hero-knappen ruller ned til de to husene (intern anker), ikke Airbnb.
     heroCtaLabel: z.string(),
-    // Felles nøkkelpunkter for hele eiendommen/området (3–5 stk)
-    keyPointsTitle: z.string().default(''),
-    keyPoints: z
-      .array(z.object({ icon: z.string().default('•'), label: z.string() }))
-      .default([]),
     // De to husene – tekst per språk. Bilde + Airbnb-lenke ligger felles i
     // src/data/houses.json og kobles på via `id` (large/small).
     housesTitle: z.string().default(''),

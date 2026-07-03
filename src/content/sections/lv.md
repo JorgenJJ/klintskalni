@@ -1,22 +1,11 @@
 ---
 heroTitle: "Klintskalni — māja un vasarnīca jūras krastā"
-heroTagline: "Divas guļbūves vienā piejūras īpašumā, ar tiešu piekļuvi garai smilšu pludmalei. Īrē vienu — vai abas."
+heroTagline: "Divas guļbūves vienā piejūras īpašumā, tieši pie garas smilšu pludmales. Īrē vienu – vai abas."
 heroAlt: "Klintskalni īpašums ar guļbūves māju un vasarnīcu aizmugurē, skats no dārza"
 heroCtaLabel: "Apskati abas ēkas"
 
-keyPointsTitle: "Vieta"
-keyPoints:
-  - icon: "🏖️"
-    label: "Tieši pie pludmales"
-  - icon: "🔥"
-    label: "Pirts"
-  - icon: "🏐"
-    label: "Sporta un rotaļu laukums"
-  - icon: "🐾"
-    label: "Mājdzīvnieki ir gaidīti"
-
 housesTitle: "Māja un vasarnīca"
-housesIntro: "Klintskalni ir divas patstāvīgas brīvdienu ēkas vienā teritorijā — māja un vasarnīca — katrai sava ieeja un savs Airbnb sludinājums. Īrē vienu no tām tiešsaistē vai abas kopā, sazinoties ar mums tieši."
+housesIntro: "Abas ēkas var īrēt atsevišķi – vai abas kopā, sazinoties ar mums tieši."
 houses:
   - id: "house"
     name: "Māja"
@@ -64,7 +53,7 @@ reviewsTitle: "Ko saka viesi"
 reviewsNote: "★ 5,0 Airbnb platformā"
 reviewsLinkLabel: "Lasīt visas atsauksmes Airbnb"
 
-mapTitle: "Kur tu atradīsies"
+mapTitle: "Atrašanās vieta"
 mapAreaLabel: "Liepupes pagasts, Latvija"
 mapLinkLabel: "Atvērt lielāku karti"
 
@@ -79,14 +68,13 @@ languageLabel: "Valoda"
 skipToContent: "Pāriet uz saturu"
 ---
 
-Klintskalni ir kluss piejūras īpašums Liepupes pagastā Latvijas piekrastē, ar
-tiešu piekļuvi smilšu pludmalei, kas stiepjas kilometriem abos virzienos.
-Teritorijā ir divas atsevišķas brīvdienu ēkas — māja un vasarnīca — kuras vari
-īrēt katru atsevišķi.
+Klintskalni atrodas Liepupē Latvijas piekrastē, ar tiešu piekļuvi smilšu
+pludmalei, kas stiepjas kilometriem abos virzienos. Teritorijā ir divas
+atsevišķas ēkas — māja un vasarnīca — kuras var īrēt katru atsevišķi.
 
 Abas ēkas vieno viens dārzs ar rotaļu laukumu, sporta laukumu un pirti, un abās
-ir gaidīti mājdzīvnieki. Ceļo lielākā grupā vai vēlies visu vietu tikai sev? Vari
-īrēt abas ēkas kopā — vienkārši sazinies, un mēs to noorganizēsim.
+ir atļauti mājdzīvnieki. Abas ēkas var īrēt arī kopā lielākām grupām — vienkārši
+sazinies ar mums.
 
-Katrai ēkai ir savs sludinājums Airbnb, kur dažu klikšķu laikā vari pārbaudīt
-pieejamību un rezervēt.
+Katrai ēkai ir savs sludinājums Airbnb, kur vari pārbaudīt pieejamību un
+rezervēt.

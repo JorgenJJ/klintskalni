@@ -1,32 +1,18 @@
 {
   "reviews": [
     {
-      "text": "A beautiful, peaceful place right by the sea. Spotlessly clean and the sauna was a highlight.",
-      "author": "Maria",
+      "text": "Fantastic place, the sea is so close and the beach is empty. We should come back there.",
+      "author": "Adam",
       "source": "Airbnb",
       "rating": 5,
       "date": "2025-08"
     },
     {
-      "text": "Exactly as pictured — bright, calm and a short walk to a gorgeous beach. We'll be back.",
-      "author": "Anders",
+      "text": "Ved havet – privat sauna, vedlikeholdt eiendom.",
+      "author": "Knut",
       "source": "Airbnb",
       "rating": 5,
-      "date": "2025-07"
-    },
-    {
-      "text": "Wonderful hosts and a lovely house. The terrace at sunset is something special.",
-      "author": "Līga",
-      "source": "Airbnb",
-      "rating": 5,
-      "date": "2025-06"
-    },
-    {
-      "text": "Great for a family of four. Quiet, comfortable and well equipped. Highly recommended.",
-      "author": "Thomas",
-      "source": "Google",
-      "rating": 5,
-      "date": "2024-09"
+      "date": "2024-07"
     }
   ]
 }

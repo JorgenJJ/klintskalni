@@ -31,9 +31,10 @@ Forhåndsvis bygget: `npm run preview`.
 Koden og strukturen er ferdig. Disse stegene krever dine egne kontoer/verdier
 og kan ikke gjøres for deg:
 
-1. **Anmeldelser.** `src/content/reviews/reviews.json` inneholder foreløpig
-   eksempel-sitater. Bytt dem ut med ekte utvalgte sitater fra Airbnb (fornavn,
-   kilde, dato). `reviewsNote` i `sections/*.md` står på «★ 5,0».
+1. **Anmeldelser.** `src/content/reviews/reviews.json` inneholder de ekte,
+   utvalgte anmeldelsene fra Airbnb (Adam og Knut). Legg til eller fjern
+   sitater ved behov (fornavn, kilde, dato). `reviewsNote` i `sections/*.md`
+   står på «★ 5,0».
 
 2. **E-post.** I `src/content/site/en.json`, `no.json`, `lv.json`: bytt `email`
    til din dedikerte adresse (eller sett `""` for å skjule e-postknappen).

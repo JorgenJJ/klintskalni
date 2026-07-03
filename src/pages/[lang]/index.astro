@@ -10,7 +10,6 @@ import media from '../../data/media.json';
 import housesData from '../../data/houses.json';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
-import KeyPoints from '../../components/KeyPoints.astro';
 import Houses from '../../components/Houses.astro';
 import Gallery from '../../components/Gallery.astro';
 import Info from '../../components/Info.astro';
@@ -67,15 +66,13 @@ const reviewsUrl =
     ctaLabel={s.heroCtaLabel}
   />
 
-  <KeyPoints title={s.keyPointsTitle} points={s.keyPoints} />
+  <Info title={s.infoTitle}>
+    <Content />
+  </Info>
 
   <Houses title={s.housesTitle} intro={s.housesIntro} houses={houses} />
 
   <Gallery title={s.galleryTitle} files={media.gallery} alts={s.galleryAlts} />
-
-  <Info title={s.infoTitle}>
-    <Content />
-  </Info>
 
   <Reviews
     title={s.reviewsTitle}

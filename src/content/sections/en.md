@@ -1,22 +1,11 @@
 ---
 heroTitle: "Klintskalni — a house and a cottage by the sea"
-heroTagline: "Two log homes on one seaside property, with direct access to a long sandy beach. Rent either — or both."
+heroTagline: "Two log homes on one seaside property, with direct access to a long sandy beach. Rent one — or both."
 heroAlt: "The Klintskalni property with the log house and the cottage behind, seen from the garden"
 heroCtaLabel: "See the two homes"
 
-keyPointsTitle: "The setting"
-keyPoints:
-  - icon: "🏖️"
-    label: "Right by the beach"
-  - icon: "🔥"
-    label: "Sauna"
-  - icon: "🏐"
-    label: "Sports area & playground"
-  - icon: "🐾"
-    label: "Pets welcome"
-
 housesTitle: "The house and the cottage"
-housesIntro: "Klintskalni has two independent holiday homes on the same grounds — a house and a cottage — each with its own entrance and its own Airbnb listing. Book either one online, or rent both together by contacting us directly."
+housesIntro: "The two homes can be rented separately — or both together by contacting us directly."
 houses:
   - id: "house"
     name: "The House"
@@ -64,7 +53,7 @@ reviewsTitle: "What guests say"
 reviewsNote: "★ 5.0 on Airbnb"
 reviewsLinkLabel: "Read all reviews on Airbnb"
 
-mapTitle: "Where you'll be"
+mapTitle: "Area"
 mapAreaLabel: "Liepupe parish, Latvia"
 mapLinkLabel: "Open larger map"
 
@@ -79,15 +68,14 @@ languageLabel: "Language"
 skipToContent: "Skip to content"
 ---
 
-Klintskalni is a quiet seaside property in Liepupe parish on the Latvian coast,
-with direct access to a sandy beach that stretches for kilometres in both
-directions. On the grounds are two separate holiday homes — a house and a
-cottage — which you can rent individually.
+Klintskalni is a seaside property in Liepupe parish on the Latvian coast, with
+direct access to a sandy beach that runs for kilometres in both directions.
+There are two separate homes on the grounds — a house and a cottage — that can
+be rented individually.
 
 Both share the same garden, with a playground, a sports area and a sauna, and
-both welcome pets. Travelling as a larger group, or want the whole place to
-yourselves? You can rent both homes together — just get in touch and we'll
-arrange it.
+both allow pets. The two homes can also be rented together for larger groups —
+just get in touch.
 
 Each home has its own listing on Airbnb, where you can check availability and
-book in a few clicks.
+book.
