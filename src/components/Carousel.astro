@@ -20,25 +20,28 @@ for (let i = 0; i < files.length; i++) {
 }
 
 const n = base.length;
-// Antall ganger vi gjentar settet per «gruppe», så én gruppe alltid er bredere
-// enn skjermen (så karusellen aldri får hull). To grupper => sømløs -50%-loop.
 const TILE = 240; // px, omtrentlig flisbredde på desktop
-const per = n ? Math.max(2, Math.ceil(2400 / (n * TILE))) : 0;
+const SEC_PER_TILE = 7; // sakte fart; lik for begge rader (samme px/sek)
 
-// Bygg fliser: to identiske grupper etter hverandre.
-const oneGroup = [];
-for (let r = 0; r < per; r++) oneGroup.push(...base);
-const tiles = [...oneGroup, ...oneGroup];
-const spanTiles = oneGroup.length; // fliser i én -50%-passering
+// Bygg fliser for én rad: gjenta settet nok til å fylle skjermen, deretter to
+// like grupper etter hverandre => sømløs -50%-loop.
+function buildRow(items: typeof base) {
+  const per = items.length ? Math.max(2, Math.ceil(2400 / (items.length * TILE))) : 0;
+  const group = [];
+  for (let r = 0; r < per; r++) group.push(...items);
+  const tiles = [...group, ...group];
+  const duration = group.length * SEC_PER_TILE;
+  return { tiles, duration };
+}
 
-// Sakte fart: ca. 7 sek per flis som passerer et punkt.
-const duration = spanTiles * 7;
-// Forskyv rad 2 en halv flis i fase (så radene ikke står rett over hverandre).
-const halfTileDelay = spanTiles ? -(duration / spanTiles / 2) : 0;
+// Fordel bildene på tvers av radene: 1 oppe, 2 nede, 3 oppe, 4 nede …
+const topBase = base.filter((_, i) => i % 2 === 0);
+const bottomBase = base.filter((_, i) => i % 2 === 1);
 
+// Rad 2 forskyves en halv flis i fase (brick-mønster). Halv flis = SEC_PER_TILE/2.
 const rows = [
-  { tiles, delay: 0 },
-  { tiles, delay: halfTileDelay },
+  { ...buildRow(topBase), uniques: topBase.length, delay: 0 },
+  { ...buildRow(bottomBase), uniques: bottomBase.length, delay: -SEC_PER_TILE / 2 },
 ];
 ---
 
@@ -49,11 +52,11 @@ const rows = [
         <h2 class="section-title">{title}</h2>
       </div>
       <div class="marquee">
-        {rows.map((row, ri) => (
+        {rows.map((row) => (
           <div class="marquee-row">
-            <ul class="marquee-track" style={`--dur:${duration}s; animation-delay:${row.delay}s`}>
+            <ul class="marquee-track" style={`--dur:${row.duration}s; animation-delay:${row.delay}s`}>
               {row.tiles.map((t, i) => {
-                const exposed = ri === 0 && i < n;
+                const exposed = i < row.uniques;
                 return (
                   <li aria-hidden={exposed ? undefined : 'true'}>
                     <button
@@ -92,6 +95,22 @@ const rows = [
     flex-direction: column;
     gap: 0.7rem;
     margin-top: 1.5rem;
+    /* Ton bildene ut/inn i kantene i stedet for hard kant mot skjermkanten */
+    --fade: clamp(24px, 9vw, 200px);
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 var(--fade),
+      #000 calc(100% - var(--fade)),
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 var(--fade),
+      #000 calc(100% - var(--fade)),
+      transparent
+    );
   }
   .marquee-row {
     overflow: hidden;
