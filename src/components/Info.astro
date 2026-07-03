@@ -1,9 +1,11 @@
 ---
 interface Props {
   title: string;
+  emailNote?: string;
+  email?: string;
 }
 
-const { title } = Astro.props;
+const { title, emailNote, email } = Astro.props;
 ---
 
 <section class="info" id="info">
@@ -13,6 +15,13 @@ const { title } = Astro.props;
       {/* Lengre informasjonstekst kommer fra markdown-brødteksten i sections/<lang>.md */}
       <slot />
     </div>
+    {
+      emailNote && email && (
+        <p class="book-email">
+          {emailNote} <a href={`mailto:${email}`}>{email}</a>
+        </p>
+      )
+    }
   </div>
 </section>
 
@@ -25,3 +34,12 @@ const { title } = Astro.props;
   .prose :global(p:last-child) {
     margin-bottom: 0;
   }
+  .book-email {
+    margin: 1.25rem 0 0;
+    font-size: 1.12rem;
+  }
+  .book-email a {
+    color: var(--brand-dark);
+    font-weight: 600;
+  }
+</style>

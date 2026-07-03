@@ -1,0 +1,156 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { resolveImage } from '../lib/images';
+
+interface Props {
+  title: string;
+  files: string[];
+  alts: string[];
+}
+
+const { title, files, alts } = Astro.props;
+
+// Løs opp bildene og lag en stor versjon (for «forstørr»-visning).
+const base = [];
+for (let i = 0; i < files.length; i++) {
+  const im = resolveImage(files[i]);
+  if (!im) continue;
+  const full = await getImage({ src: im, width: 1600, format: 'webp' });
+  base.push({ im, alt: alts[i] ?? '', full: full.src });
+}
+
+const n = base.length;
+// Antall ganger vi gjentar settet per «gruppe», så én gruppe alltid er bredere
+// enn skjermen (så karusellen aldri får hull). To grupper => sømløs -50%-loop.
+const TILE = 240; // px, omtrentlig flisbredde på desktop
+const per = n ? Math.max(2, Math.ceil(2400 / (n * TILE))) : 0;
+
+// Bygg fliser: to identiske grupper etter hverandre.
+const oneGroup = [];
+for (let r = 0; r < per; r++) oneGroup.push(...base);
+const tiles = [...oneGroup, ...oneGroup];
+const spanTiles = oneGroup.length; // fliser i én -50%-passering
+
+// Sakte fart: ca. 7 sek per flis som passerer et punkt.
+const duration = spanTiles * 7;
+// Forskyv rad 2 en halv flis i fase (så radene ikke står rett over hverandre).
+const halfTileDelay = spanTiles ? -(duration / spanTiles / 2) : 0;
+
+const rows = [
+  { tiles, delay: 0 },
+  { tiles, delay: halfTileDelay },
+];
+---
+
+{
+  n > 0 && (
+    <section class="carousel-sec" aria-label={title}>
+      <div class="container">
+        <h2 class="section-title">{title}</h2>
+      </div>
+      <div class="marquee">
+        {rows.map((row, ri) => (
+          <div class="marquee-row">
+            <ul class="marquee-track" style={`--dur:${duration}s; animation-delay:${row.delay}s`}>
+              {row.tiles.map((t, i) => {
+                const exposed = ri === 0 && i < n;
+                return (
+                  <li aria-hidden={exposed ? undefined : 'true'}>
+                    <button
+                      class="zoomable"
+                      type="button"
+                      data-full={t.full}
+                      data-full-alt={t.alt}
+                      aria-label={exposed ? t.alt : undefined}
+                      tabindex={exposed ? 0 : -1}
+                    >
+                      <Image
+                        src={t.im}
+                        alt={exposed ? t.alt : ''}
+                        widths={[240, 480]}
+                        sizes="260px"
+                        loading="lazy"
+                      />
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .carousel-sec {
+    overflow: hidden;
+  }
+  .marquee {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-top: 1.5rem;
+  }
+  .marquee-row {
+    overflow: hidden;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 0.7rem;
+    width: max-content;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    animation: marquee var(--dur, 80s) linear infinite;
+  }
+  /* Stopp når pekeren holdes over karusellen */
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+  .marquee-track > li {
+    flex: 0 0 auto;
+  }
+  .zoomable {
+    display: block;
+    width: clamp(170px, 24vw, 260px);
+    aspect-ratio: 3 / 2;
+    padding: 0;
+    border: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--border);
+    box-shadow: var(--shadow);
+    cursor: zoom-in;
+  }
+  .zoomable :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  .zoomable:hover :global(img) {
+    transform: scale(1.05);
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+    .marquee-row {
+      overflow-x: auto;
+    }
+    .zoomable:hover :global(img) {
+      transform: none;
+    }
+  }
+</style>

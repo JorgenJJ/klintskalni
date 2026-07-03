@@ -5,7 +5,6 @@ heroAlt: "The Klintskalni 1 property with the log house and the cottage behind, 
 heroCtaLabel: "See the two homes"
 
 housesTitle: "The house and the cottage"
-housesIntro: "The two homes can be rented separately — or both together by contacting us directly."
 houses:
   - id: "house"
     name: "The House"
@@ -51,6 +50,7 @@ galleryAlts:
   - "Beach-volleyball net on the lawn"
 
 infoTitle: "About Klintskalni 1"
+infoEmailNote: "You can also book directly by email:"
 
 reviewsTitle: "What guests say"
 reviewsNote: "★ 5.0 on Airbnb"

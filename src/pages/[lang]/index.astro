@@ -9,16 +9,20 @@ import reviewsData from '../../content/reviews/reviews.json';
 import media from '../../data/media.json';
 // De to husene: felles data (bilde + Airbnb-lenke), koblet med tekst per språk.
 import housesData from '../../data/houses.json';
+// E-post er felles for alle språk.
+import contact from '../../data/contact.json';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Houses from '../../components/Houses.astro';
-import Gallery from '../../components/Gallery.astro';
+import Carousel from '../../components/Carousel.astro';
 import Info from '../../components/Info.astro';
 import Reviews from '../../components/Reviews.astro';
 import Map from '../../components/Map.astro';
 import Contact from '../../components/Contact.astro';
+import Lightbox from '../../components/Lightbox.astro';
 
 const reviews = reviewsData.reviews;
+const email = contact.email;
 
 // Én statisk side per språk – drevet av den sentrale språklisten.
 export async function getStaticPaths() {
@@ -64,7 +68,7 @@ const jsonLd = {
   description: s.seoDescription,
   ...(canonicalUrl ? { url: canonicalUrl } : {}),
   ...(imageUrl ? { image: imageUrl } : {}),
-  ...(site.email ? { email: site.email } : {}),
+  ...(email ? { email } : {}),
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Tūja',
@@ -125,19 +129,18 @@ const jsonLd = {
     ctaLabel={s.heroCtaLabel}
   />
 
-  <Info title={s.infoTitle}>
+  <Info title={s.infoTitle} emailNote={s.infoEmailNote} email={email}>
     <Content />
   </Info>
 
   <Houses
     title={s.housesTitle}
-    intro={s.housesIntro}
     houses={houses}
     photosLabel={s.photosButtonLabel}
     closeLabel={s.closeLabel}
   />
 
-  <Gallery title={s.galleryTitle} files={media.gallery} alts={s.galleryAlts} />
+  <Carousel title={s.galleryTitle} files={media.gallery} alts={s.galleryAlts} />
 
   <Reviews
     title={s.reviewsTitle}
@@ -160,7 +163,9 @@ const jsonLd = {
   <Contact
     title={s.contactTitle}
     text={s.contactText}
-    email={site.email}
+    email={email}
     emailLabel={s.emailButtonLabel}
   />
+
+  <Lightbox closeLabel={s.closeLabel} />
 </Layout>

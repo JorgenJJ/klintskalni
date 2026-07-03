@@ -5,7 +5,6 @@ heroAlt: "Klintskalni 1-eiendommen med tømmerhuset og hytta bak, sett fra hagen
 heroCtaLabel: "Se de to enhetene"
 
 housesTitle: "Huset og hytta"
-housesIntro: "De to enhetene kan leies hver for seg – eller begge sammen ved direkte kontakt."
 houses:
   - id: "house"
     name: "Huset"
@@ -51,6 +50,7 @@ galleryAlts:
   - "Sandvolleyball-nett på plenen"
 
 infoTitle: "Om Klintskalni 1"
+infoEmailNote: "Du kan også booke direkte på e-post:"
 
 reviewsTitle: "Hva gjestene sier"
 reviewsNote: "★ 5,0 på Airbnb"

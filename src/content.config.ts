@@ -14,8 +14,7 @@ const site = defineCollection({
   loader: glob({ pattern: '*.json', base: './src/content/site' }),
   schema: z.object({
     houseName: z.string(),
-    // Dedikert e-post (mailto). Tom string skjuler e-postknappen.
-    email: z.string().default(''),
+    // NB: E-post er FELLES for alle språk og ligger i src/data/contact.json.
     // NB: Airbnb-lenkene ligger per hus i src/data/houses.json.
     // NB: Bilder (hero, galleri, og:image) er FELLES for alle språk og ligger i
     // src/data/media.json – kun alt-tekst oversettes (se sections/<lang>.md).
@@ -42,9 +41,9 @@ const sections = defineCollection({
     // Hero-knappen ruller ned til de to husene (intern anker), ikke Airbnb.
     heroCtaLabel: z.string(),
     // De to husene – tekst per språk. Bilde + Airbnb-lenke ligger felles i
-    // src/data/houses.json og kobles på via `id` (large/small).
+    // src/data/houses.json og kobles på via `id` (house/cottage).
+    // housesTitle brukes kun som skjult seksjonsetikett (skjermlesere).
     housesTitle: z.string().default(''),
-    housesIntro: z.string().default(''),
     houses: z
       .array(
         z.object({
@@ -68,6 +67,8 @@ const sections = defineCollection({
     galleryAlts: z.array(z.string()).default([]),
     // Lengre informasjonsdel (overskrift + markdown-brødtekst i filen)
     infoTitle: z.string().default(''),
+    // Linje nederst i «Om»: «du kan også booke på e-post:» (e-post lenkes på)
+    infoEmailNote: z.string().default(''),
     // Anmeldelser
     reviewsTitle: z.string().default(''),
     reviewsNote: z.string().default(''),

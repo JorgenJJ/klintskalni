@@ -1,5 +1,6 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { resolveImage } from '../lib/images';
 
 interface House {
@@ -17,27 +18,35 @@ interface House {
 
 interface Props {
   title: string;
-  intro: string;
   houses: House[];
   photosLabel: string;
   closeLabel: string;
 }
 
-const { title, intro, houses, photosLabel, closeLabel } = Astro.props;
+const { title, houses, photosLabel, closeLabel } = Astro.props;
+
+// Forhåndsberegn galleribilder per hus med en stor versjon (for «forstørr»).
+const houseGalleries: Record<string, { im: ImageMetadata; full: string; alt: string }[]> = {};
+for (const house of houses) {
+  const arr = [];
+  const files = house.gallery ?? [];
+  for (let i = 0; i < files.length; i++) {
+    const im = resolveImage(files[i]);
+    if (!im) continue;
+    const full = await getImage({ src: im, width: 1600, format: 'webp' });
+    arr.push({ im, full: full.src, alt: `${house.name} — ${i + 1}` });
+  }
+  houseGalleries[house.id] = arr;
+}
 ---
 
 <section class="houses" id="houses" aria-label={title}>
   <div class="container">
-    {title && <h2 class="section-title">{title}</h2>}
-    {intro && <p class="intro">{intro}</p>}
-
     <div class="grid">
       {
         houses.map((house) => {
           const img = resolveImage(house.image);
-          const galleryImgs = (house.gallery ?? [])
-            .map((file) => resolveImage(file))
-            .filter(Boolean);
+          const galleryImgs = houseGalleries[house.id] ?? [];
           const dialogId = `gallery-${house.id}`;
           return (
             <article class="card">
@@ -127,15 +136,23 @@ const { title, intro, houses, photosLabel, closeLabel } = Astro.props;
                   </div>
                   <div class="modal-body">
                     <div class="modal-grid">
-                      {galleryImgs.map((gi, i) => (
+                      {galleryImgs.map((gi) => (
                         <figure>
-                          <Image
-                            src={gi}
-                            alt={`${house.name} — ${i + 1}`}
-                            widths={[500, 900, 1300]}
-                            sizes="(max-width: 700px) 100vw, 50vw"
-                            loading="lazy"
-                          />
+                          <button
+                            class="zoomable"
+                            type="button"
+                            data-full={gi.full}
+                            data-full-alt={gi.alt}
+                            aria-label={gi.alt}
+                          >
+                            <Image
+                              src={gi.im}
+                              alt={gi.alt}
+                              widths={[500, 900, 1300]}
+                              sizes="(max-width: 700px) 100vw, 50vw"
+                              loading="lazy"
+                            />
+                          </button>
                         </figure>
                       ))}
                     </div>
@@ -336,11 +353,30 @@ const { title, intro, houses, photosLabel, closeLabel } = Astro.props;
     grid-column: 1 / -1;
     aspect-ratio: 16 / 9;
   }
+  /* Hvert galleribilde er en knapp som åpner stor visning */
+  .modal-grid .zoomable {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+  }
   .modal-grid :global(img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.3s ease;
+  }
+  .modal-grid .zoomable:hover :global(img) {
+    transform: scale(1.04);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .modal-grid .zoomable:hover :global(img) {
+      transform: none;
+    }
   }
   @media (max-width: 640px) {
     .modal-grid {

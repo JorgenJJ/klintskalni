@@ -43,8 +43,7 @@ collections:
           - { label: "Hero – undertekst", name: "heroTagline", widget: "string" }
           - { label: "Hero – bildebeskrivelse (alt)", name: "heroAlt", widget: "string", required: false }
           - { label: "Hero-knapp (ruller til husene)", name: "heroCtaLabel", widget: "string" }
-          - { label: "Husene – seksjonstittel", name: "housesTitle", widget: "string", required: false }
-          - { label: "Husene – introtekst", name: "housesIntro", widget: "text", required: false }
+          - { label: "Husene – skjult seksjonsetikett (kun for skjermlesere)", name: "housesTitle", widget: "string", required: false }
           - label: "Huset og hytta (tekst – bilde/Airbnb-lenke ligger i «Husene»)"
             name: "houses"
             widget: "list"
@@ -72,6 +71,7 @@ collections:
             required: false
             field: { label: "Bildebeskrivelse", name: "alt", widget: "string" }
           - { label: "Info – tittel", name: "infoTitle", widget: "string", required: false }
+          - { label: "Info – e-postlinje (nederst, «du kan også booke på e-post:»)", name: "infoEmailNote", widget: "string", required: false }
           - { label: "Anmeldelser – tittel", name: "reviewsTitle", widget: "string", required: false }
           - { label: "Anmeldelser – merknad (f.eks. ★ 4,9 på Airbnb)", name: "reviewsNote", widget: "string", required: false }
           - { label: "Anmeldelser – lenketekst", name: "reviewsLinkLabel", widget: "string", required: false }
@@ -106,7 +106,6 @@ collections:
         file: "src/content/site/en.json"
         fields: &site_fields
           - { label: "Husnavn / eiendomsnavn", name: "houseName", widget: "string" }
-          - { label: "E-postadresse", name: "email", widget: "string", required: false }
           - label: "Kart"
             name: "map"
             widget: "object"
@@ -159,16 +158,28 @@ collections:
     label: "Bilder (felles for alle språk)"
     files:
       - name: "media"
-        label: "Hero, galleri og delingsbilde"
+        label: "Hero, karusell og delingsbilde"
         file: "src/data/media.json"
         fields:
           - { label: "Hero-bilde", name: "heroImage", widget: "image" }
           - { label: "Delingsbilde (Open Graph)", name: "ogImage", widget: "image", required: false }
-          - label: "Galleribilder"
+          - label: "Karusellbilder («Omgivelsene» – ruller over skjermen)"
             name: "gallery"
             widget: "list"
             required: false
             field: { label: "Bilde", name: "image", widget: "image" }
+
+  # ---------------------------------------------------------------------------
+  #  Kontakt – FELLES for alle språk. src/data/contact.json
+  # ---------------------------------------------------------------------------
+  - name: "contact"
+    label: "Kontakt (e-post)"
+    files:
+      - name: "contact"
+        label: "E-postadresse"
+        file: "src/data/contact.json"
+        fields:
+          - { label: "E-postadresse (felles for alle språk)", name: "email", widget: "string", required: false }
 
   # ---------------------------------------------------------------------------
   #  Anmeldelser (manuell kuratering) – src/content/reviews/reviews.json

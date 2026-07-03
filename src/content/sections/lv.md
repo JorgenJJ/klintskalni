@@ -5,7 +5,6 @@ heroAlt: "Klintskalni 1 īpašums ar guļbūves māju un vasarnīcu aizmugurē, 
 heroCtaLabel: "Apskati abas ēkas"
 
 housesTitle: "Māja un vasarnīca"
-housesIntro: "Abas ēkas var īrēt atsevišķi – vai abas kopā, sazinoties ar mums tieši."
 houses:
   - id: "house"
     name: "Māja"
@@ -51,6 +50,7 @@ galleryAlts:
   - "Pludmales volejbola tīkls zālienā"
 
 infoTitle: "Par Klintskalni 1"
+infoEmailNote: "Vari arī rezervēt tieši pa e-pastu:"
 
 reviewsTitle: "Ko saka viesi"
 reviewsNote: "★ 5,0 Airbnb platformā"
