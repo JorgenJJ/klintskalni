@@ -166,11 +166,13 @@ const rows = [
       transform: translateX(-50%);
     }
   }
-  /* Uttoningen vises kun på brede skjermer – droppes på mobil */
+  /* På mobil: ingen uttoning, og karusellen strekkes helt til skjermkanten
+     (bryter ut av container-paddingen). */
   @media (max-width: 768px) {
     .marquee {
       -webkit-mask-image: none;
       mask-image: none;
+      margin-inline: -1.25rem;
     }
   }
   @media (prefers-reduced-motion: reduce) {
