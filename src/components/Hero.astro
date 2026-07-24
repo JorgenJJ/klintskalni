@@ -32,15 +32,17 @@ const external = ctaHref.startsWith('http');
   }
   <div class="hero-overlay"></div>
   <div class="container hero-content">
-    <h1>{title}</h1>
-    <p class="tagline">{tagline}</p>
-    <a
-      class="btn btn-primary"
-      href={ctaHref}
-      {...external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
-    >
-      {ctaLabel}
-    </a>
+    <div class="hero-panel">
+      <h1>{title}</h1>
+      <p class="tagline">{tagline}</p>
+      <a
+        class="btn btn-primary"
+        href={ctaHref}
+        {...external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+      >
+        {ctaLabel}
+      </a>
+    </div>
   </div>
 </section>
 
@@ -73,6 +75,16 @@ const external = ctaHref.startsWith('http');
   .hero-content {
     position: relative;
     padding-block: 2.5rem 3rem;
+  }
+  /* Mørk, gjennomsiktig plate bak teksten for lesbarhet over bildet.
+     width: fit-content lar platen hugge teksten i stedet for å fylle hele
+     bredden; max-width holder linjelengden lesbar. */
+  .hero-panel {
+    width: fit-content;
+    max-width: min(100%, 48ch);
+    padding: 1.4rem 1.6rem;
+    border-radius: var(--radius);
+    background: rgba(0, 0, 0, 0.45);
   }
   h1 {
     font-size: clamp(2rem, 6vw, 3.5rem);

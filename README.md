@@ -15,14 +15,24 @@ etter kravspesifikasjonen i prosjektrapporten.
 
 ## Kom i gang lokalt
 
+Krever [Node.js](https://nodejs.org) **20.3 eller nyere** (LTS anbefales, f.eks.
+22 eller 24). Alle bilder ligger i repoet, så siden kjører rett ut av boksen:
+
 ```bash
 npm install
-npm run placeholders   # lager midlertidige plassholder-bilder (kjør én gang)
 npm run dev            # start utviklingsserver på http://localhost:4321
 ```
 
 Bygg for produksjon: `npm run build` (resultatet havner i `dist/`).
 Forhåndsvis bygget: `npm run preview`.
+
+### Teste CMS-et lokalt (uten PAT eller nett-oppsett)
+
+1. Kjør `npm run dev` og åpne `http://localhost:4321/admin` i **Chrome eller
+   Edge** (bruker File System Access API – Firefox/Safari støttes ikke).
+2. Velg **«Work with Local Repository»** og pek på prosjektmappen.
+3. Rediger i skjemaene. Endringene skrives rett til filene i arbeidskopien,
+   så du ser dem umiddelbart i dev-serveren – og committer med git som vanlig.
 
 ---
 
@@ -36,8 +46,9 @@ og kan ikke gjøres for deg:
    sitater ved behov (fornavn, kilde, dato). `reviewsNote` i `sections/*.md`
    står på «★ 5,0».
 
-2. **E-post.** I `src/content/site/en.json`, `no.json`, `lv.json`: bytt `email`
-   til din dedikerte adresse (eller sett `""` for å skjule e-postknappen).
+2. **E-post.** I `src/data/contact.json`: bytt `email` til din dedikerte
+   adresse – ett sted, felles for alle språk (sett `""` for å skjule
+   e-postknappen).
 
 3. **Bytt ut / suppler bildene.** Legg dine egne foto i `src/images/hero/` og
    `src/images/gallery/`. I `src/data/houses.json` har hvert hus et `image`
@@ -47,9 +58,10 @@ og kan ikke gjøres for deg:
    (hero + galleri «Omgivelsene») ligger i **`src/data/media.json`**. Oppdater
    alt-tekstene i `sections/*.md`. Tips: nedskaler til ~2000 px lengste side.
 
-4. **Finjuster kartet.** `site/*.json` under `map` er satt til Liepupe-/Tūja-kysten
-   (`lat 57.5105`, `lon 24.3405`). Juster `lat`/`lon` om nålen/utsnittet bør flyttes.
-   Standard viser *området*, ikke nøyaktig adresse (`showMarker: false`).
+4. **Finjuster kartet.** `src/data/site.json` under `map` er satt til
+   Liepupe-/Tūja-kysten (`lat 57.514`, `lon 24.381`). Juster `lat`/`lon` om
+   nålen/utsnittet bør flyttes – ett sted, gjelder alle språk. Standard viser
+   *området*, ikke nøyaktig adresse (`showMarker: false`).
 
 5. **Koble GitHub → Cloudflare Pages** (publisering). Se egen seksjon under.
 
@@ -79,8 +91,8 @@ Etterpå trigger hver `git push` til den grenen automatisk nytt bygg. Pull
 requests får egne forhåndsvisnings-URLer. Eget domene kobles på med få klikk
 under **Custom domains** når du er klar.
 
-> Merk: plassholder-bildene er committet slik at det første bygget i Cloudflare
-> lykkes. `npm run placeholders` trengs bare lokalt.
+> Merk: alle bildene ligger i repoet, så bygget i Cloudflare fungerer uten
+> ekstra steg.
 
 ---
 
@@ -94,7 +106,8 @@ under **Custom domains** når du er klar.
 | All tekst (hero, husene, omgivelser, kontakt, SEO, alt-tekst) | `src/content/sections/<språk>.md` |
 | **Husenes Airbnb-lenke + bilde** (felles, store/lille) | `src/data/houses.json` |
 | **Eiendoms-/omgivelsesbilder** (hero, galleri) – felles | `src/data/media.json` |
-| Eiendomsnavn, e-post, kartposisjon | `src/content/site/<språk>.json` |
+| Eiendomsnavn + kartposisjon (felles for alle språk) | `src/data/site.json` |
+| E-postadresse (felles for alle språk) | `src/data/contact.json` |
 | Lengre «om eiendommen»-tekst | brødteksten nederst i `sections/<språk>.md` |
 | Anmeldelser | `src/content/reviews/reviews.json` (under nøkkelen `reviews`) |
 
@@ -107,6 +120,13 @@ under **Custom domains** når du er klar.
 > oversettes. `galleryAlts` må stå i **samme rekkefølge** som `gallery` i `media.json`.
 
 ### Via Sveltia CMS på `/admin` (skjema i nettleser)
+
+«Sideinnhold» er **ett skjema med alle språkene side om side** – du redigerer
+engelsk, norsk og latvisk i samme bilde, og felt som skal være like på alle
+språk (f.eks. hvilken enhet en tekst hører til) holdes synkronisert automatisk.
+Vil du bare prøve CMS-et, kan du kjøre det **lokalt uten innlogging** – se
+«Teste CMS-et lokalt» over. For redigering på nett:
+
 1. Opprett et **fine-grained Personal Access Token (PAT)** på GitHub:
    *Settings → Developer settings → Fine-grained tokens.*
    - Begrens til **kun dette repoet**.
@@ -122,10 +142,10 @@ under **Custom domains** når du er klar.
 ## Legge til et nytt språk (uten kodeendring i komponentene)
 
 1. Legg språket til i den sentrale lista i `src/i18n/languages.ts`, f.eks. `de: 'Deutsch'`.
-2. Kopier `src/content/site/en.json` → `de.json` og oversett.
-3. Kopier `src/content/sections/en.md` → `de.md` og oversett.
-4. (Valgfritt) legg språket til i `public/admin/config.yml` for Sveltia.
-5. Push. Ruting `/de/` og språkvelger kommer automatisk.
+2. Kopier `src/content/sections/en.md` → `de.md` og oversett (gjerne i CMS-et,
+   som viser språkene side om side).
+3. Legg til `de` i `locales:` i `public/admin/config.yml` (én linje).
+4. Push. Ruting `/de/` og språkvelger kommer automatisk.
 
 ---
 
@@ -134,19 +154,21 @@ under **Custom domains** når du er klar.
 ```
 src/
 ├── content/
-│   ├── site/        # global konfig per språk (Airbnb-lenke, e-post, bilder, kart)
 │   ├── sections/    # all synlig tekst per språk (+ "om huset"-brødtekst)
 │   └── reviews/     # kuraterte anmeldelser
+├── data/            # FELLES innhold, ett sted per ting: site.json (navn + kart),
+│                    # houses.json (Airbnb-lenker + bilder), media.json, contact.json
 ├── images/          # bilder (optimaliseres ved bygg av Astro)
 ├── components/      # gjenbrukbare seksjoner (Hero, Galleri, Kart, Kontakt …)
 ├── i18n/            # språkliste (languages.ts) + hjelpefunksjoner
 ├── layouts/         # sidemal med SEO/Open Graph/hreflang
+├── lib/             # små hjelpere (bildeoppslag, felles innstillinger)
 └── pages/           # ruting (rot-redirect + /[lang]/)
 public/
 ├── admin/           # Sveltia CMS (index.html + config.yml) → /admin
-├── favicon.svg, robots.txt
-scripts/
-└── generate-placeholders.mjs   # lager midlertidige bilder
+├── favicon.ico, robots.txt, llms.txt
+docs/
+└── nearby-plan.md   # plan for ny «I nærheten»-seksjon (ikke implementert ennå)
 ```
 
 ## Vedlikehold

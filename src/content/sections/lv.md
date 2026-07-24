@@ -1,6 +1,6 @@
 ---
-heroTitle: "Klintskalni 1 — māja un vasarnīca jūras krastā"
-heroTagline: "Divas guļbūves vienā piejūras īpašumā, tieši pie garas smilšu pludmales. Īrē vienu – vai abas."
+heroTitle: "Klintskalni 1"
+heroTagline: "Divas guļbūves vienā piejūras īpašumā, tieši pie garas smilšu pludmales. Īrē vienu vai abas."
 heroAlt: "Klintskalni 1 īpašums ar guļbūves māju un vasarnīcu aizmugurē, skats no dārza"
 heroCtaLabel: "Apskati abas ēkas"
 
@@ -64,8 +64,8 @@ contactTitle: "Sazinies ar mums"
 contactText: "Katru ēku visērtāk rezervēt Airbnb platformā. Vēlies īrēt abas vienlaikus vai ir jautājums? Raksti mums e-pastu tieši, un mēs palīdzēsim to noorganizēt."
 emailButtonLabel: "Rakstīt mums"
 
-seoTitle: "Klintskalni 1 — brīvdienu māja un vasarnīca pie Tūjas pludmales, Limbažu novadā"
-seoDescription: "Divas brīvdienu ēkas pie jūras Liepupes pagastā, netālu no Tūjas, Limbažu novadā, Latvijā — māja (8 viesiem) un vasarnīca (7 viesiem), ar tiešu piekļuvi pludmalei un pirti. Rezervē Airbnb vai abas kopā."
+seoTitle: "Klintskalni 1: brīvdienu māja un vasarnīca pie Tūjas pludmales, Limbažu novadā"
+seoDescription: "Divas brīvdienu ēkas pie jūras Liepupes pagastā, netālu no Tūjas, Limbažu novadā, Latvijā: māja (8 viesiem) un vasarnīca (7 viesiem), ar tiešu piekļuvi pludmalei un pirti. Rezervē Airbnb vai abas kopā."
 
 languageLabel: "Valoda"
 skipToContent: "Pāriet uz saturu"
@@ -73,10 +73,10 @@ skipToContent: "Pāriet uz saturu"
 
 Klintskalni 1 atrodas Liepupē Latvijas piekrastē, ar tiešu piekļuvi smilšu
 pludmalei, kas stiepjas kilometriem abos virzienos. Teritorijā ir divas
-atsevišķas ēkas — māja un vasarnīca — kuras var īrēt katru atsevišķi.
+atsevišķas ēkas, māja un vasarnīca, kuras var īrēt katru atsevišķi.
 
 Abas ēkas vieno viens dārzs ar rotaļu laukumu, sporta laukumu un pirti, un abās
-ir atļauti mājdzīvnieki. Abas ēkas var īrēt arī kopā lielākām grupām — vienkārši
+ir atļauti mājdzīvnieki. Abas ēkas var īrēt arī kopā lielākām grupām. Vienkārši
 sazinies ar mums.
 
 Katrai ēkai ir savs sludinājums Airbnb, kur vari pārbaudīt pieejamību un

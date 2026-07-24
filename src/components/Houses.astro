@@ -34,7 +34,7 @@ for (const house of houses) {
     const im = resolveImage(files[i]);
     if (!im) continue;
     const full = await getImage({ src: im, width: 1600, format: 'webp' });
-    arr.push({ im, full: full.src, alt: `${house.name} — ${i + 1}` });
+    arr.push({ im, full: full.src, alt: `${house.name}, ${i + 1}` });
   }
   houseGalleries[house.id] = arr;
 }

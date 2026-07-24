@@ -4,12 +4,16 @@
 #  Skjema-grensesnitt for å redigere tekst, bilder og anmeldelser i nettleseren.
 #  Endringer lagres som vanlige Git-commits, som trigger Cloudflare-bygget.
 #
-#  VIKTIG, gjør dette selv:
+#  VIKTIG, gjør dette selv (for redigering på nett):
 #   1. Bytt `repo:` under til ditt GitHub-bruker/repo hvis det avviker.
 #   2. Sett `branch:` til den grenen Cloudflare Pages bygger fra (oftest `main`).
 #   3. Logg inn på /admin med et fine-grained Personal Access Token (PAT) som
 #      KUN har tilgang til dette repoet, med "Contents: Read and write".
 #      Tokenet lagres lokalt i nettleseren – det committes ALDRI til repoet.
+#
+#  TESTE LOKALT (uten PAT): kjør `npm run dev`, åpne http://localhost:4321/admin
+#  i Chrome/Edge og velg «Work with Local Repository» → pek på prosjektmappen.
+#  Endringer skrives da rett til filene i arbeidskopien din.
 # =============================================================================
 
 backend:
@@ -21,7 +25,17 @@ backend:
 media_folder: "src/images"
 public_folder: "/src/images"
 
-# Flerspråk-oppsett for redigeringsgrensesnittet.
+# -----------------------------------------------------------------------------
+#  Flerspråk: «Sideinnhold» er ETT skjema der språkene redigeres side om side
+#  (Sveltia kan også kopiere/oversette mellom dem). Felt merket `i18n: true`
+#  oversettes per språk; felt merket `i18n: duplicate` redigeres kun i
+#  standardspråket og holdes automatisk identiske i alle språk (f.eks. hus-ID).
+#  NB: hvert felt MÅ ha et i18n-flagg – felt uten flagg skjules og lagres ikke
+#  for andre språk enn standardspråket.
+#
+#  NYTT SPRÅK: legg koden til i `locales` under (og i src/i18n/languages.ts),
+#  og kopier src/content/sections/en.md til <kode>.md som utgangspunkt.
+# -----------------------------------------------------------------------------
 i18n:
   structure: multiple_files
   locales: [en, no, lv]
@@ -29,82 +43,81 @@ i18n:
 
 collections:
   # ---------------------------------------------------------------------------
-  #  Sideinnhold (tekst) per språk – src/content/sections/<lang>.md
+  #  Sideinnhold (tekst) – src/content/sections/<lang>.md
+  #  Én oppføring for alle språk ({{locale}} i filstien).
   # ---------------------------------------------------------------------------
   - name: "sections"
     label: "Sideinnhold (tekst)"
-    label_singular: "språkversjon"
+    i18n: true
     files:
-      - name: "en"
-        label: "English"
-        file: "src/content/sections/en.md"
-        fields: &section_fields
-          - { label: "Hero – tittel", name: "heroTitle", widget: "string" }
-          - { label: "Hero – undertekst", name: "heroTagline", widget: "string" }
-          - { label: "Hero – bildebeskrivelse (alt)", name: "heroAlt", widget: "string", required: false }
-          - { label: "Hero-knapp (ruller til husene)", name: "heroCtaLabel", widget: "string" }
-          - { label: "Husene – skjult seksjonsetikett (kun for skjermlesere)", name: "housesTitle", widget: "string", required: false }
+      - name: "sections"
+        label: "Alle seksjoner (alle språk)"
+        file: "src/content/sections/{{locale}}.md"
+        i18n: true
+        fields:
+          - { label: "Hero – tittel", name: "heroTitle", widget: "string", i18n: true }
+          - { label: "Hero – undertekst", name: "heroTagline", widget: "string", i18n: true }
+          - { label: "Hero – bildebeskrivelse (alt)", name: "heroAlt", widget: "string", required: false, i18n: true }
+          - { label: "Hero-knapp (ruller til husene)", name: "heroCtaLabel", widget: "string", i18n: true }
+          - { label: "Husene – skjult seksjonsetikett (kun for skjermlesere)", name: "housesTitle", widget: "string", required: false, i18n: true }
           - label: "Huset og hytta (tekst – bilde/Airbnb-lenke ligger i «Husene»)"
             name: "houses"
             widget: "list"
             required: false
+            i18n: true
             fields:
-              - { label: "ID (house / cottage – må matche «Husene»)", name: "id", widget: "string" }
-              - { label: "Navn", name: "name", widget: "string" }
-              - { label: "Kort undertekst", name: "tagline", widget: "string", required: false }
+              # ID-en holdes automatisk lik i alle språk (i18n: duplicate).
+              - { label: "Enhet (må matche «Husene»)", name: "id", widget: "select", options: ["house", "cottage"], i18n: duplicate }
+              - { label: "Navn", name: "name", widget: "string", i18n: true }
+              - { label: "Kort undertekst", name: "tagline", widget: "string", required: false, i18n: true }
               - label: "Nøkkelpunkter for enheten"
                 name: "keyPoints"
                 widget: "list"
                 required: false
+                i18n: true
                 fields:
-                  - { label: "Ikon (emoji)", name: "icon", widget: "string", default: "•" }
-                  - { label: "Tekst", name: "label", widget: "string" }
-              - { label: "Beskrivelse", name: "description", widget: "text", required: false }
-              - { label: "Knapp: Book på Airbnb", name: "bookLabel", widget: "string" }
-              - { label: "Bildebeskrivelse (alt)", name: "imageAlt", widget: "string", required: false }
-          - { label: "Knapp: Se bilder", name: "photosButtonLabel", widget: "string", required: false, default: "Se bilder" }
-          - { label: "Lukk-knapp (modal)", name: "closeLabel", widget: "string", required: false, default: "Lukk" }
-          - { label: "Omgivelsene – tittel", name: "galleryTitle", widget: "string", required: false }
+                  - { label: "Ikon (emoji)", name: "icon", widget: "string", default: "•", i18n: true }
+                  - { label: "Tekst", name: "label", widget: "string", i18n: true }
+              - { label: "Beskrivelse", name: "description", widget: "text", required: false, i18n: true }
+              - { label: "Knapp: Book på Airbnb", name: "bookLabel", widget: "string", i18n: true }
+              - { label: "Bildebeskrivelse (alt)", name: "imageAlt", widget: "string", required: false, i18n: true }
+          - { label: "Knapp: Se bilder", name: "photosButtonLabel", widget: "string", required: false, default: "Se bilder", i18n: true }
+          - { label: "Lukk-knapp (modal)", name: "closeLabel", widget: "string", required: false, default: "Lukk", i18n: true }
+          - { label: "Omgivelsene – tittel", name: "galleryTitle", widget: "string", required: false, i18n: true }
           - label: "Omgivelsene – bildebeskrivelser (alt), i samme rekkefølge som bildene"
             name: "galleryAlts"
             widget: "list"
             required: false
+            i18n: true
             field: { label: "Bildebeskrivelse", name: "alt", widget: "string" }
-          - { label: "Info – tittel", name: "infoTitle", widget: "string", required: false }
-          - { label: "Info – e-postlinje (nederst, «du kan også booke på e-post:»)", name: "infoEmailNote", widget: "string", required: false }
-          - { label: "Anmeldelser – tittel", name: "reviewsTitle", widget: "string", required: false }
-          - { label: "Anmeldelser – merknad (f.eks. ★ 4,9 på Airbnb)", name: "reviewsNote", widget: "string", required: false }
-          - { label: "Anmeldelser – lenketekst", name: "reviewsLinkLabel", widget: "string", required: false }
-          - { label: "Kart – tittel", name: "mapTitle", widget: "string", required: false }
-          - { label: "Kart – områdenavn", name: "mapAreaLabel", widget: "string", required: false }
-          - { label: "Kart – lenketekst", name: "mapLinkLabel", widget: "string", required: false }
-          - { label: "Kontakt – tittel", name: "contactTitle", widget: "string", required: false }
-          - { label: "Kontakt – tekst", name: "contactText", widget: "text", required: false }
-          - { label: "Knapp: Send e-post", name: "emailButtonLabel", widget: "string", required: false }
-          - { label: "SEO – sidetittel", name: "seoTitle", widget: "string" }
-          - { label: "SEO – beskrivelse", name: "seoDescription", widget: "text" }
-          - { label: "Språkvelger-etikett", name: "languageLabel", widget: "string", required: false, default: "Language" }
-          - { label: "«Hopp til innhold»-tekst", name: "skipToContent", widget: "string", required: false, default: "Skip to content" }
-          - { label: "Lengre informasjonstekst (om eiendommen)", name: "body", widget: "markdown" }
-      - name: "no"
-        label: "Norsk"
-        file: "src/content/sections/no.md"
-        fields: *section_fields
-      - name: "lv"
-        label: "Latviešu"
-        file: "src/content/sections/lv.md"
-        fields: *section_fields
+          - { label: "Info – tittel", name: "infoTitle", widget: "string", required: false, i18n: true }
+          - { label: "Info – e-postlinje (nederst, «du kan også booke på e-post:»)", name: "infoEmailNote", widget: "string", required: false, i18n: true }
+          - { label: "Anmeldelser – tittel", name: "reviewsTitle", widget: "string", required: false, i18n: true }
+          - { label: "Anmeldelser – merknad (f.eks. ★ 5,0 på Airbnb)", name: "reviewsNote", widget: "string", required: false, i18n: true }
+          - { label: "Anmeldelser – lenketekst", name: "reviewsLinkLabel", widget: "string", required: false, i18n: true }
+          - { label: "Kart – tittel", name: "mapTitle", widget: "string", required: false, i18n: true }
+          - { label: "Kart – områdenavn", name: "mapAreaLabel", widget: "string", required: false, i18n: true }
+          - { label: "Kart – lenketekst", name: "mapLinkLabel", widget: "string", required: false, i18n: true }
+          - { label: "Kontakt – tittel", name: "contactTitle", widget: "string", required: false, i18n: true }
+          - { label: "Kontakt – tekst", name: "contactText", widget: "text", required: false, i18n: true }
+          - { label: "Knapp: Send e-post", name: "emailButtonLabel", widget: "string", required: false, i18n: true }
+          - { label: "SEO – sidetittel", name: "seoTitle", widget: "string", i18n: true }
+          - { label: "SEO – beskrivelse", name: "seoDescription", widget: "text", i18n: true }
+          - { label: "Språkvelger-etikett", name: "languageLabel", widget: "string", required: false, default: "Language", i18n: true }
+          - { label: "«Hopp til innhold»-tekst", name: "skipToContent", widget: "string", required: false, default: "Skip to content", i18n: true }
+          - { label: "Lengre informasjonstekst (om eiendommen)", name: "body", widget: "markdown", i18n: true }
 
   # ---------------------------------------------------------------------------
-  #  Global konfig per språk – src/content/site/<lang>.json
+  #  Innstillinger – FELLES for alle språk. src/data/site.json
+  #  (Eiendomsnavnet er et egennavn og oversettes ikke.)
   # ---------------------------------------------------------------------------
   - name: "site"
-    label: "Innstillinger"
+    label: "Innstillinger (felles)"
     files:
-      - name: "en"
-        label: "English"
-        file: "src/content/site/en.json"
-        fields: &site_fields
+      - name: "site"
+        label: "Eiendomsnavn og kart"
+        file: "src/data/site.json"
+        fields:
           - { label: "Husnavn / eiendomsnavn", name: "houseName", widget: "string" }
           - label: "Kart"
             name: "map"
@@ -114,14 +127,6 @@ collections:
               - { label: "Lengdegrad (lon)", name: "lon", widget: "number", value_type: "float" }
               - { label: "Områdestørrelse (grader)", name: "areaSpan", widget: "number", value_type: "float", default: 0.06 }
               - { label: "Vis nøyaktig nål?", name: "showMarker", widget: "boolean", default: false }
-      - name: "no"
-        label: "Norsk"
-        file: "src/content/site/no.json"
-        fields: *site_fields
-      - name: "lv"
-        label: "Latviešu"
-        file: "src/content/site/lv.json"
-        fields: *site_fields
 
   # ---------------------------------------------------------------------------
   #  De to husene – FELLES (bilde + Airbnb-lenke). Tekst ligger i «Sideinnhold».
@@ -138,7 +143,7 @@ collections:
             name: "houses"
             widget: "list"
             fields:
-              - { label: "ID (house / cottage – må matche teksten i Sideinnhold)", name: "id", widget: "string" }
+              - { label: "Enhet (må matche teksten i Sideinnhold)", name: "id", widget: "select", options: ["house", "cottage"] }
               - { label: "Airbnb-lenke", name: "airbnbUrl", widget: "string" }
               - { label: "Antall gjester (for søkemotorer)", name: "guests", widget: "number", required: false }
               - { label: "Antall soverom (for søkemotorer)", name: "bedrooms", widget: "number", required: false }
@@ -183,6 +188,7 @@ collections:
 
   # ---------------------------------------------------------------------------
   #  Anmeldelser (manuell kuratering) – src/content/reviews/reviews.json
+  #  Filen er et objekt med én nøkkel: `reviews` (liste).
   # ---------------------------------------------------------------------------
   - name: "reviews"
     label: "Anmeldelser"
@@ -194,7 +200,6 @@ collections:
           - label: "Anmeldelser"
             name: "reviews"
             widget: "list"
-            # Filen er en ren liste (JSON-array på toppnivå).
             allow_add: true
             fields:
               - { label: "Sitat", name: "text", widget: "text" }

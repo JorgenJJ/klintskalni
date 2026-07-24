@@ -1,34 +1,18 @@
 // =============================================================================
 //  Innholdsmodell (Astro Content Collections) – jf. rapportens kap. 2.3
 // =============================================================================
-//  Innholdet er fysisk skilt fra koden. All redigerbar tekst, alle
-//  bildereferanser og all kontaktinfo bor i src/content/* – ikke i komponentene.
-//  Skjemaene under validerer innholdet ved bygg, så feil oppdages tidlig.
+//  Innholdet er fysisk skilt fra koden. All oversatt tekst bor i
+//  src/content/sections/<lang>.md og valideres her ved bygg.
+//
+//  FELLES (språkuavhengig) innhold bor i src/data/*.json – ett sted per ting:
+//    site.json    – eiendomsnavn + kart (valideres i src/lib/site.ts)
+//    houses.json  – Airbnb-lenke, bilder og fakta per hus
+//    media.json   – hero-, delings- og karusellbilder
+//    contact.json – felles e-postadresse
 // =============================================================================
 
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
-
-// --- Global konfig per språk: src/content/site/<lang>.json -------------------
-const site = defineCollection({
-  loader: glob({ pattern: '*.json', base: './src/content/site' }),
-  schema: z.object({
-    houseName: z.string(),
-    // NB: E-post er FELLES for alle språk og ligger i src/data/contact.json.
-    // NB: Airbnb-lenkene ligger per hus i src/data/houses.json.
-    // NB: Bilder (hero, galleri, og:image) er FELLES for alle språk og ligger i
-    // src/data/media.json – kun alt-tekst oversettes (se sections/<lang>.md).
-    // Kart (OpenStreetMap) – viser nærområde, ikke nøyaktig adresse (kap. 2.8).
-    map: z.object({
-      lat: z.number(),
-      lon: z.number(),
-      // Hvor stort utsnitt som vises (grader). Større = mer "nærområde".
-      areaSpan: z.number().default(0.06),
-      // Vis nål på nøyaktig punkt? Standard false = personvern (vis område).
-      showMarker: z.boolean().default(false),
-    }),
-  }),
-});
 
 // --- Selve innholdsteksten per språk: src/content/sections/<lang>.md ---------
 const sections = defineCollection({
@@ -90,4 +74,4 @@ const sections = defineCollection({
   }),
 });
 
-export const collections = { site, sections };
+export const collections = { sections };

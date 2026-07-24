@@ -2,8 +2,10 @@
 import { render } from 'astro:content';
 import { getImage } from 'astro:assets';
 import { type Lang } from '../../i18n/languages';
-import { getAvailableLangs, getSection, getSite, localizedPath } from '../../i18n/utils';
+import { getAvailableLangs, getSection, localizedPath } from '../../i18n/utils';
 import { resolveImage } from '../../lib/images';
+// Felles innstillinger (eiendomsnavn + kart) – samme for alle språk.
+import { site } from '../../lib/site';
 import reviewsData from '../../content/reviews/reviews.json';
 // Bilder er felles for alle språk (kun alt-tekst oversettes – se sections).
 import media from '../../data/media.json';
@@ -32,7 +34,6 @@ export async function getStaticPaths() {
 
 const lang = Astro.params.lang as Lang;
 const availableLangs = await getAvailableLangs();
-const site = await getSite(lang);
 const sectionEntry = await getSection(lang);
 const s = sectionEntry.data;
 const { Content } = await render(sectionEntry);

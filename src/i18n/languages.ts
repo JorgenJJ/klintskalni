@@ -5,10 +5,9 @@
 //
 //  Slik legger du til f.eks. tysk:
 //    1. Legg til en linje under:  de: 'Deutsch',
-//    2. Kopier src/content/site/en.json  ->  de.json   og oversett
-//    3. Kopier src/content/sections/en.md -> de.md      og oversett
-//    4. (Valgfritt) legg språket til i admin/config.yml for Sveltia CMS
-//    5. Push. Ruting (/de/) og språkvelger kommer automatisk.
+//    2. Kopier src/content/sections/en.md -> de.md      og oversett
+//    3. Legg til 'de' i `locales` i public/admin/config.yml (Sveltia CMS)
+//    4. Push. Ruting (/de/) og språkvelger kommer automatisk.
 // =============================================================================
 
 export const languages = {

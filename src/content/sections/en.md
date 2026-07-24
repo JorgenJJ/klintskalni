@@ -1,6 +1,6 @@
 ---
-heroTitle: "Klintskalni 1 — a house and a cottage by the sea"
-heroTagline: "Two log homes on one seaside property, with direct access to a long sandy beach. Rent one — or both."
+heroTitle: "Klintskalni 1"
+heroTagline: "Two log homes on one seaside property, with direct access to a long sandy beach. Rent one, or both."
 heroAlt: "The Klintskalni 1 property with the log house and the cottage behind, seen from the garden"
 heroCtaLabel: "See the two homes"
 
@@ -64,8 +64,8 @@ contactTitle: "Get in touch"
 contactText: "Booking each home is easiest on Airbnb. Want to rent both at the same time, or have a question? Email us directly and we'll help you arrange it."
 emailButtonLabel: "Email us"
 
-seoTitle: "Klintskalni 1 — beach house & cottage near Tūja, Limbaži, Latvia"
-seoDescription: "Two holiday homes by the beach in Liepupe parish near Tūja, Limbaži, Latvia — a house (sleeps 8) and a cottage (sleeps 7), with direct beach access and a sauna. Book on Airbnb, or rent both together."
+seoTitle: "Klintskalni 1: beach house & cottage near Tūja, Limbaži, Latvia"
+seoDescription: "Two holiday homes by the beach in Liepupe parish near Tūja, Limbaži, Latvia: a house (sleeps 8) and a cottage (sleeps 7), with direct beach access and a sauna. Book on Airbnb, or rent both together."
 
 languageLabel: "Language"
 skipToContent: "Skip to content"
@@ -73,12 +73,12 @@ skipToContent: "Skip to content"
 
 Klintskalni 1 is a seaside property in Liepupe parish on the Latvian coast, with
 direct access to a sandy beach that runs for kilometres in both directions.
-There are two separate homes on the grounds — a house and a cottage — that can
+There are two separate homes on the grounds, a house and a cottage, that can
 be rented individually.
 
 Both share the same garden, with a playground, a sports area and a sauna, and
-both allow pets. The two homes can also be rented together for larger groups —
-just get in touch.
+both allow pets. The two homes can also be rented together for larger groups.
+Just get in touch.
 
 Each home has its own listing on Airbnb, where you can check availability and
 book.
