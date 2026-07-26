@@ -137,13 +137,32 @@ Vil du bare prøve CMS-et, kan du kjøre det **lokalt uten innlogging** – se
 3. Gå til `https://dittdomene/admin`, lim inn tokenet ved innlogging.
    Tokenet lagres **kun lokalt i nettleseren** – det committes aldri.
 
+#### AI-oversetting (norsk → engelsk/latvisk)
+
+Norsk er **kildespråket**. Du trenger ikke oversette for hånd – Sveltia kan fylle
+engelsk og latvisk automatisk:
+
+1. **Skaff en gratis API-nøkkel** (én gang). Enklest er
+   [Mistral](https://console.mistral.ai) (krever ikke betalingskort). Alternativt
+   Google Cloud Translation (krever et GCP-prosjekt med fakturering).
+2. Rediger den **norske** teksten i «Sideinnhold».
+3. Klikk **«Translate»** på engelsk- og latvisk-fanen (eller på et enkelt felt).
+   Første gang velger du tjeneste og limer inn nøkkelen. Toppknappen fyller kun
+   **tomme** felt; for tekst du har *endret*, bruk felt-knappen som overskriver.
+4. **Se over** resultatet (særlig latvisk) og **lagre**. Alle språk havner i én
+   commit, og Cloudflare bygger siden på nytt.
+
+> Nøkkelen lagres **kun i nettleseren** og committes aldri – den brukes bare i
+> redigeringsverktøyet. Den **publiserte siden forblir uten sporing og uten
+> API-nøkler**.
+
 ---
 
 ## Legge til et nytt språk (uten kodeendring i komponentene)
 
 1. Legg språket til i den sentrale lista i `src/i18n/languages.ts`, f.eks. `de: 'Deutsch'`.
-2. Kopier `src/content/sections/en.md` → `de.md` og oversett (gjerne i CMS-et,
-   som viser språkene side om side).
+2. Kopier `src/content/sections/no.md` → `de.md` og oversett (gjerne med
+   «Translate»-knappen i CMS-et – se «AI-oversetting» over).
 3. Legg til `de` i `locales:` i `public/admin/config.yml` (én linje).
 4. Push. Ruting `/de/` og språkvelger kommer automatisk.
 

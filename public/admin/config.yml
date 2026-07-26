@@ -26,20 +26,28 @@ media_folder: "src/images"
 public_folder: "/src/images"
 
 # -----------------------------------------------------------------------------
-#  Flerspråk: «Sideinnhold» er ETT skjema der språkene redigeres side om side
-#  (Sveltia kan også kopiere/oversette mellom dem). Felt merket `i18n: true`
-#  oversettes per språk; felt merket `i18n: duplicate` redigeres kun i
-#  standardspråket og holdes automatisk identiske i alle språk (f.eks. hus-ID).
-#  NB: hvert felt MÅ ha et i18n-flagg – felt uten flagg skjules og lagres ikke
-#  for andre språk enn standardspråket.
+#  Flerspråk: «Sideinnhold» er ETT skjema der språkene redigeres side om side.
+#  Norsk (`no`) er KILDESPRÅKET (se `default_locale` under): du redigerer norsk
+#  og fyller engelsk + latvisk med Sveltias «Translate»-knapp (AI-oversetting).
+#  Felt merket `i18n: true` oversettes per språk; felt merket `i18n: duplicate`
+#  redigeres kun i kildespråket og holdes automatisk identiske i alle språk
+#  (f.eks. hus-ID). NB: hvert felt MÅ ha et i18n-flagg – felt uten flagg skjules
+#  og lagres ikke for andre språk enn kildespråket.
+#
+#  AI-OVERSETTING: «Translate»-knappen (i skjematoppen eller per felt) krever en
+#  gratis API-nøkkel (f.eks. Mistral) som limes inn ÉN gang og lagres kun i
+#  nettleseren – den committes aldri, og den publiserte siden forblir nøkkel- og
+#  sporingsfri. Toppknappen fyller kun TOMME felt; bruk felt-knappen for å
+#  overskrive tekst du har endret. Mer i README.
 #
 #  NYTT SPRÅK: legg koden til i `locales` under (og i src/i18n/languages.ts),
-#  og kopier src/content/sections/en.md til <kode>.md som utgangspunkt.
+#  og kopier src/content/sections/no.md til <kode>.md som utgangspunkt.
 # -----------------------------------------------------------------------------
 i18n:
   structure: multiple_files
   locales: [en, no, lv]
-  default_locale: en
+  default_locale: "no"      # norsk er kildespråket (var: en); «Translate» oversetter FRA norsk.
+                            # NB: sitér "no" – bar `no` tolkes som boolsk false i YAML 1.1.
 
 collections:
   # ---------------------------------------------------------------------------

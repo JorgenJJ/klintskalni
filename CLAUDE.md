@@ -65,6 +65,15 @@ locales are edited side by side. Fields marked `i18n: duplicate` (e.g. house
 carry an `i18n` flag**: an unflagged field is hidden in non-default locales and
 its translations get dropped on save.
 
+**AI translation (source = Norwegian).** `default_locale` is `no`, so Norwegian
+is the source: edit Norwegian, then fill English and Latvian with Sveltia's
+**Translate** button (the pane-header button fills empty fields; the per-field
+button overrides text you changed). It needs a free translation API key (e.g.
+Mistral) entered once in the browser and never committed, so the published site
+stays key-free and tracking-free. Review machine output (especially Latvian)
+before saving. This is independent of the site's URL default (`defaultLang:
+'en'` in `languages.ts`), so `/` still serves English.
+
 ## Commands
 
 - `npm run dev`: dev server at http://localhost:4321 (Node 20.3+; 22/24 OK)
@@ -75,7 +84,8 @@ its translations get dropped on save.
 ## Making changes
 
 - **New language:** add to `languages.ts`, add the code to `locales:` in
-  `config.yml`, copy `sections/en.md` to `<code>.md`, translate.
+  `config.yml`, copy `sections/no.md` (the source locale) to `<code>.md`,
+  translate (e.g. with the CMS Translate button).
 - **New page section:** extend the zod schema in `src/content.config.ts`, add the
   keys to all three `sections/*.md`, add the fields (with i18n flags) to
   `config.yml`, create the component in `src/components/`, mount it in
