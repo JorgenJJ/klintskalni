@@ -1,0 +1,36 @@
+{
+  "places": [
+    {
+      "id": "butikk-verdins",
+      "name": "Vērdiņš",
+      "area": "Tūja",
+      "category": "shop",
+      "distanceKm": 2.8,
+      "url": "https://maps.app.goo.gl/YQB5MnyeAho1ywyMA"
+    },
+    {
+      "id": "butikk-elvi",
+      "name": "Elvi",
+      "area": "Tūja",
+      "category": "shop",
+      "distanceKm": 2.9,
+      "url": "https://maps.app.goo.gl/x7P94TDrkyqYPPPs8"
+    },
+    {
+      "id": "liedags",
+      "name": "Liedags",
+      "area": "Tūja",
+      "category": "restaurant",
+      "distanceKm": 2.9,
+      "url": "https://maps.app.goo.gl/mr9jj1pg8F4vxW4B8"
+    },
+    {
+      "id": "veczemju-klintis",
+      "name": "Veczemju klintis",
+      "area": "",
+      "category": "activity",
+      "distanceKm": 8,
+      "url": ""
+    }
+  ]
+}

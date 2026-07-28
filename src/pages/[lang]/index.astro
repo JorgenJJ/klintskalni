@@ -13,6 +13,8 @@ import media from '../../data/media.json';
 import housesData from '../../data/houses.json';
 // E-post er felles for alle språk.
 import contact from '../../data/contact.json';
+// «I nærheten»: felles stedsdata. Navnene er egennavn og oversettes aldri.
+import { assertProperNounsIntact, buildNearbyGroups, protectedNames } from '../../lib/nearby';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Houses from '../../components/Houses.astro';
@@ -20,6 +22,8 @@ import Carousel from '../../components/Carousel.astro';
 import Info from '../../components/Info.astro';
 import Reviews from '../../components/Reviews.astro';
 import Map from '../../components/Map.astro';
+import Nearby from '../../components/Nearby.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
 import Contact from '../../components/Contact.astro';
 import Lightbox from '../../components/Lightbox.astro';
 
@@ -41,10 +45,49 @@ const { Content } = await render(sectionEntry);
 // Slå sammen felles husdata (houses.json) med oversatt tekst (sections) via id.
 const houses = housesData.houses
   .map((h) => {
-    const t = s.houses.find((x) => x.id === h.id);
+    const t = s.houses.items.find((x) => x.id === h.id);
     return t ? { ...h, ...t } : null;
   })
   .filter((h): h is NonNullable<typeof h> => h !== null);
+
+// Slå sammen felles stedsdata (nearby.json) med oversatt tekst (sections) via id.
+const nearbyGroups = buildNearbyGroups(s.nearby.categoryLabels, s.nearby.items);
+
+// Sveltia lagrer bare feltene den kjenner fra config.yml. Har man /admin åpen i
+// en fane som ble lastet FØR et nytt felt kom til, blir feltet stille strøket
+// ved neste lagring. Det skjedde med lenketeksten under, som da forsvant uten
+// spor. Nå stopper bygget i stedet, med beskjed om hva som må gjøres.
+if (!s.nearby.linkLabel && nearbyGroups.some((g) => g.items.some((i) => i.url))) {
+  throw new Error(
+    `nearby.linkLabel mangler i src/content/sections/${lang}.md, men det finnes ` +
+      'steder med lenke. Last /admin på nytt (Ctrl+F5) slik at CMS-et henter ' +
+      'oppdatert config.yml, og fyll inn lenketeksten igjen.',
+  );
+}
+
+// Stedsnavn ligger i nearby.json og kan derfor ikke maskinoversettes. Feltene
+// under MÅ være oversatt og nevner likevel stedsnavn, så de sjekkes ved bygg
+// for at diakritiske tegn ikke har falt bort (Tūja → Tuja).
+assertProperNounsIntact(protectedNames, [
+  s.nearby.intro,
+  s.general.mapAreaLabel,
+  s.general.seoTitle,
+  s.general.seoDescription,
+  ...s.nearby.items.map((item) => item.description),
+]);
+
+// Innholdsmenyen gjenbruker seksjonstitlene, så den har ingen egne tekster å
+// oversette. Rekkefølgen må matche seksjonene på siden.
+const tocItems = [
+  { href: '#info', label: s.about.title },
+  { href: '#houses', label: s.houses.title },
+  // Karusellen står bevisst ikke i menyen: den har ingen synlig overskrift,
+  // så et punkt dit ville pekt på noe leseren ikke ser navnet på.
+  { href: '#nearby', label: s.nearby.title },
+  { href: '#reviews', label: s.general.reviewsTitle },
+  { href: '#map', label: s.general.mapTitle },
+  { href: '#contact', label: s.general.contactTitle },
+];
 
 // «Les alle anmeldelser» peker til huset (primær annonse).
 const reviewsUrl =
@@ -66,7 +109,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LodgingBusiness',
   name: site.houseName,
-  description: s.seoDescription,
+  description: s.general.seoDescription,
   ...(canonicalUrl ? { url: canonicalUrl } : {}),
   ...(imageUrl ? { image: imageUrl } : {}),
   ...(email ? { email } : {}),
@@ -113,48 +156,62 @@ const jsonLd = {
 <Layout
   lang={lang}
   houseName={site.houseName}
-  title={s.seoTitle}
-  description={s.seoDescription}
+  title={s.general.seoTitle}
+  description={s.general.seoDescription}
   ogImageName={media.ogImage}
   availableLangs={availableLangs}
-  languageLabel={s.languageLabel}
-  skipToContentLabel={s.skipToContent}
+  languageLabel={s.general.languageLabel}
+  skipToContentLabel={s.general.skipToContent}
   jsonLd={jsonLd}
 >
   <Hero
     image={resolveImage(media.heroImage)}
-    alt={s.heroAlt}
-    title={s.heroTitle}
-    tagline={s.heroTagline}
+    alt={s.hero.alt}
+    title={s.hero.title}
+    tagline={s.hero.tagline}
     ctaHref="#houses"
-    ctaLabel={s.heroCtaLabel}
+    ctaLabel={s.hero.ctaLabel}
   />
 
-  <Info title={s.infoTitle} emailNote={s.infoEmailNote} email={email}>
+  <TableOfContents label={s.general.tocLabel} items={tocItems} />
+
+  <Info title={s.about.title} emailNote={s.about.emailNote} email={email}>
     <Content />
   </Info>
 
   <Houses
-    title={s.housesTitle}
+    title={s.houses.title}
     houses={houses}
-    photosLabel={s.photosButtonLabel}
-    closeLabel={s.closeLabel}
+    photosLabel={s.houses.photosButtonLabel}
+    closeLabel={s.houses.closeLabel}
   />
 
-  <Carousel title={s.galleryTitle} files={media.gallery} alts={s.galleryAlts} />
+  <Carousel
+    title={s.general.galleryTitle}
+    files={media.gallery}
+    alts={s.general.galleryAlts}
+  />
+
+  <Nearby
+    title={s.nearby.title}
+    intro={s.nearby.intro}
+    linkLabel={s.nearby.linkLabel}
+    groups={nearbyGroups}
+    lang={lang}
+  />
 
   <Reviews
-    title={s.reviewsTitle}
-    note={s.reviewsNote}
-    linkLabel={s.reviewsLinkLabel}
+    title={s.general.reviewsTitle}
+    note={s.general.reviewsNote}
+    linkLabel={s.general.reviewsLinkLabel}
     airbnbUrl={reviewsUrl}
     reviews={reviews}
   />
 
   <Map
-    title={s.mapTitle}
-    areaLabel={s.mapAreaLabel}
-    linkLabel={s.mapLinkLabel}
+    title={s.general.mapTitle}
+    areaLabel={s.general.mapAreaLabel}
+    linkLabel={s.general.mapLinkLabel}
     lat={site.map.lat}
     lon={site.map.lon}
     areaSpan={site.map.areaSpan}
@@ -162,11 +219,11 @@ const jsonLd = {
   />
 
   <Contact
-    title={s.contactTitle}
-    text={s.contactText}
+    title={s.general.contactTitle}
+    text={s.general.contactText}
     email={email}
-    emailLabel={s.emailButtonLabel}
+    emailLabel={s.general.emailButtonLabel}
   />
 
-  <Lightbox closeLabel={s.closeLabel} />
+  <Lightbox closeLabel={s.houses.closeLabel} />
 </Layout>

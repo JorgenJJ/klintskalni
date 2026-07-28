@@ -1,0 +1,161 @@
+---
+import type { Lang } from '../i18n/languages';
+import type { NearbyGroup } from '../lib/nearby';
+
+interface Props {
+  title: string;
+  intro: string;
+  linkLabel: string;
+  groups: NearbyGroup[];
+  lang: Lang;
+}
+
+const { title, intro, linkLabel, groups, lang } = Astro.props;
+
+// Avstand formateres per språk: 2,1 km på norsk og latvisk, 2.1 km på engelsk.
+const km = (n: number) => n.toLocaleString(lang, { maximumFractionDigits: 1 });
+---
+
+{
+  groups.length > 0 && (
+    <section class="nearby" id="nearby" aria-label={title}>
+      <div class="container">
+        {title && <h2 class="section-title">{title}</h2>}
+        {intro && <p class="intro">{intro}</p>}
+
+        {groups.map((group) => (
+          <div class="group">
+            {group.label && <h3 class="group-title">{group.label}</h3>}
+            <ul class="places">
+              {group.items.map((place) => (
+                <li class:list={['place', { linked: Boolean(place.url) }]}>
+                  <div class="head">
+                    <h4 class="name">
+                      {place.url ? (
+                        /* Lenka dekker hele kortet via ::after under. */
+                        <a href={place.url} target="_blank" rel="noopener noreferrer">
+                          {place.name}
+                        </a>
+                      ) : (
+                        place.name
+                      )}
+                    </h4>
+                    <span class="dist">
+                      <span aria-hidden="true">~</span>
+                      {km(place.distanceKm)} km
+                    </span>
+                  </div>
+                  {place.area && <p class="area">{place.area}</p>}
+                  {place.description && <p class="desc">{place.description}</p>}
+                  {place.url && linkLabel && (
+                    /* Rent visuelt: selve lenka er navnet over, så skjermlesere
+                       slipper å høre «Åpne i Google Maps» én gang per sted. */
+                    <span class="maplink" aria-hidden="true">
+                      {linkLabel}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  /* Seksjonen hører tett sammen med karusellen over, så toppluften kuttes ned
+     fra den globale seksjonsavstanden. Bunnen står urørt. */
+  .nearby {
+    padding-block-start: clamp(0.75rem, 2vw, 1.5rem);
+  }
+  .intro {
+    color: var(--muted);
+    margin: -0.75rem 0 2rem;
+    max-width: 60ch;
+  }
+  .group + .group {
+    margin-top: 2.25rem;
+  }
+  .group-title {
+    font-size: 1.15rem;
+    margin: 0 0 1rem;
+  }
+  .places {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .place {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .place.linked:hover {
+    border-color: var(--brand);
+  }
+  .head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+  .name {
+    margin: 0;
+    font-size: 1.05rem;
+  }
+  .name a {
+    text-decoration: none;
+    font-weight: 700;
+  }
+  /* Strekker lenka over hele kortet, slik at alt er klikkbart. Lenketeksten
+     står fortsatt på navnet, så skjermlesere leser opp stedsnavnet. */
+  .name a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+  }
+  .dist {
+    flex: 0 0 auto;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--brand-dark);
+    background: #eef4f3;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .area {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .desc {
+    margin: 0.15rem 0 0;
+    font-size: 0.95rem;
+  }
+  .maplink {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--brand-dark);
+  }
+  /* Understrekes når markøren er hvor som helst over kortet, og når lenka har
+     tastaturfokus. */
+  .place.linked:hover .maplink,
+  .place.linked:focus-within .maplink {
+    text-decoration: underline;
+  }
+</style>

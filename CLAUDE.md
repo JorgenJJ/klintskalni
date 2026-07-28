@@ -31,11 +31,17 @@ never lives in components:
 
 - `src/content/sections/<lang>.md`: ALL translated text (frontmatter per section
   plus a markdown body for the "about" text). Schema-validated at build by
-  `src/content.config.ts`.
+  `src/content.config.ts`. The frontmatter is grouped into exactly four keys,
+  `hero`, `about`, `houses` and `general`, which map one-to-one to the
+  collapsible `object` groups in the CMS (Sveltia has no UI-only grouping, so
+  the group *is* the data shape). The "about" body text stays the markdown body:
+  the CMS only supports `body` at the top level, so it cannot move into `about`.
 - `src/data/*.json`: language-INDEPENDENT data, exactly one file per concern.
   `site.json` (property name plus map, validated in `src/lib/site.ts`),
   `houses.json` (per-home Airbnb URL, facts, card image, gallery),
-  `media.json` (hero/OG image plus surroundings carousel), `contact.json` (email).
+  `media.json` (hero/OG image plus surroundings carousel), `contact.json` (email),
+  `nearby.json` (nearby places: name, area, category, distance, link; validated
+  in `src/lib/nearby.ts`).
 - `src/content/reviews/reviews.json`: curated Airbnb quotes (not translated).
 - `src/i18n/languages.ts`: THE single language list; routing, pickers, sitemap
   and hreflang all derive from it.
@@ -43,10 +49,22 @@ never lives in components:
 Invariants to preserve:
 
 - Images are shared across languages; only **alt texts** are translated.
-  `galleryAlts` in `sections/<lang>.md` must stay in the same order as `gallery`
-  in `media.json`.
-- House text (sections) joins house data (houses.json) on `id`
+  `general.galleryAlts` in `sections/<lang>.md` must stay in the same order as
+  `gallery` in `media.json`.
+- House text (`sections.houses.items`) joins house data (houses.json) on `id`
   (`house` or `cottage`); the CMS constrains this with a select widget.
+- **Proper nouns never live in `src/content/sections/*.md`.** The CMS Translate
+  button rewrites every `i18n: true` field, and Sveltia has no per-field opt-out,
+  so anything that must survive verbatim goes in `src/data/*.json`, whose
+  collections declare no `i18n` key and are therefore unreachable by the
+  translator. That is why place names sit in `nearby.json` and why `hero.title`
+  (the property name) is `i18n: duplicate`. The deliberate exceptions are
+  `general.mapAreaLabel`, `general.seoTitle`, `general.seoDescription` and the
+  "about" body: they genuinely differ per language yet mention place names, so
+  `assertProperNounsIntact` in `src/lib/nearby.ts` fails the build if a name
+  loses its diacritics (Tūja to Tuja).
+- Nearby text (`sections.nearby.items`) joins place data (nearby.json) on `id`;
+  a place with no matching text renders without a description.
 - Images are referenced by path relative to `src/images/`
   (`gallery/beach.jpg`); `src/lib/images.ts` also accepts Sveltia's
   `/src/images/...` form. Missing images render as nothing, never crash.
@@ -86,10 +104,17 @@ before saving. This is independent of the site's URL default (`defaultLang:
 - **New language:** add to `languages.ts`, add the code to `locales:` in
   `config.yml`, copy `sections/no.md` (the source locale) to `<code>.md`,
   translate (e.g. with the CMS Translate button).
-- **New page section:** extend the zod schema in `src/content.config.ts`, add the
-  keys to all three `sections/*.md`, add the fields (with i18n flags) to
+- **New page section:** pick the group it belongs in (`general` for a plain
+  title-and-labels section, otherwise a new top-level group), extend the zod
+  schema in `src/content.config.ts`, add the keys to all three `sections/*.md`,
+  add the fields (with i18n flags) to the matching `object` group in
   `config.yml`, create the component in `src/components/`, mount it in
   `src/pages/[lang]/index.astro`. Language-independent data goes in a new
   `src/data/*.json` with its own CMS collection.
-- Planned next section: "Nearby" (shops, restaurants, activities). See
-  `docs/nearby-plan.md` before implementing.
+- The "Nearby" section (shops, restaurants, activities) is implemented as a
+  section on the one-pager, mounted between `<Carousel/>` and `<Reviews/>` with
+  a stable `#nearby` anchor, not as its own route: four things in `Layout.astro`
+  and `LanguagePicker.astro` assume one page per language, and there is no
+  navigation to reach a second page with. `docs/nearby-plan.md` records the
+  rationale and the trigger for revisiting (more than ~15 places, or per-place
+  photos).

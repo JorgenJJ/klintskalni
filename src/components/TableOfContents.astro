@@ -1,0 +1,161 @@
+---
+interface Item {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  label: string;
+  items: Item[];
+}
+
+const { label, items } = Astro.props;
+
+// Seksjoner uten tittel hoppes over, slik at menyen aldri får tomme punkter.
+const entries = items.filter((item) => item.label);
+---
+
+{
+  entries.length > 1 && (
+    <nav class="toc" aria-label={label} data-toc>
+      <ul>
+        {entries.map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+<style>
+  /* Ligger i venstremargen ved siden av .container (maks 1080px). Vises bare
+     når det faktisk finnes marg å stå i, ellers ville den lagt seg over
+     innholdet. */
+  .toc {
+    display: none;
+  }
+
+  /* 1540px er der margen faktisk blir bred nok: (100vw - 1080px) / 2 må ha
+     plass til menyens 11rem pluss luft på begge sider. Under det ville den
+     lagt seg oppå innholdet, så da vises den ikke i det hele tatt. */
+  @media (min-width: 1540px) {
+    .toc {
+      display: block;
+      position: fixed;
+      /* `top` settes i piksler av skriptet (midtstilt, men aldri over hero).
+         50% er bare et fornuftig utgangspunkt før skriptet kjører. */
+      top: 50%;
+      left: calc((100vw - var(--maxw)) / 2 - 13rem);
+      width: 11rem;
+      z-index: 40;
+      /* Egen bakgrunn fordi menyen svever over seksjoner med ulik farge
+         (anmeldelsene er beige). Sidens egen bakgrunnsfarge, uten ramme eller
+         skygge: nok til å holde den lesbar, lite nok til å ikke ta fokus. */
+      background: var(--bg);
+      border-radius: var(--radius);
+      padding: 0.85rem 1rem;
+    }
+    .toc ul {
+      list-style: none;
+      margin: 0;
+      padding: 0 0 0 0.9rem;
+      border-left: 2px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .toc a {
+      display: block;
+      font-size: 0.85rem;
+      line-height: 1.3;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .toc a:hover {
+      color: var(--text);
+      text-decoration: underline;
+    }
+    .toc a[aria-current='true'] {
+      color: var(--brand-dark);
+      font-weight: 700;
+    }
+  }
+</style>
+
+<script>
+  // Én scroll-lytter gjør to ting: holder menyen midtstilt (men aldri oppå
+  // hero-bildet), og markerer seksjonen man leser. rAF-strupet, så den koster
+  // ingenting.
+  const toc = document.querySelector<HTMLElement>('[data-toc]');
+  if (toc) {
+    const hero = document.querySelector<HTMLElement>('.hero');
+    const links = [...toc.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')];
+    const sections = links
+      .map((link) => document.getElementById(link.hash.slice(1)))
+      .filter((el): el is HTMLElement => el !== null);
+
+    const GAP = 24;
+    let queued = false;
+
+    const update = () => {
+      queued = false;
+      const viewport = window.innerHeight;
+      const height = toc.offsetHeight;
+
+      // Midtstilt som utgangspunkt, men dyttes ned slik at den aldri legger seg
+      // oppå hero-bildet. Når hero er scrollet forbi blir grensa negativ, og
+      // menyen står midt på skjermen som normalt.
+      const centered = (viewport - height) / 2;
+      const belowHero = hero ? hero.getBoundingClientRect().bottom + GAP : 0;
+      // Siste skanse på lave skjermer: hold hele menyen innenfor viewporten.
+      const maxTop = viewport - height - GAP;
+      toc.style.top = `${Math.min(Math.max(centered, belowHero), Math.max(maxTop, 0))}px`;
+
+      // Referanselinja ligger nær toppen, ikke på midten. Klikker man seg til en
+      // kort seksjon, havner den øverst i viewporten, og en midtlinje ville da
+      // pekt på seksjonen ETTER den (f.eks. «Område» i stedet for anmeldelsene).
+      const line = viewport * 0.25;
+      let current: HTMLElement | undefined;
+
+      // Førstevalg: seksjonen som faktisk dekker linja.
+      for (const section of sections) {
+        const box = section.getBoundingClientRect();
+        if (box.top <= line && box.bottom > line) {
+          current = section;
+          break;
+        }
+      }
+      // Ellers: siste seksjon som har begynt (dekker mellomrom mellom seksjoner).
+      if (!current) {
+        for (const section of sections) {
+          if (section.getBoundingClientRect().top <= line) current = section;
+        }
+      }
+      // Nederst på siden vinner alltid siste punkt, ellers ville det aldri
+      // kunne markeres på en høy skjerm.
+      const atBottom =
+        window.scrollY + viewport >= document.documentElement.scrollHeight - 2;
+      if (atBottom) current = sections[sections.length - 1];
+
+      for (const link of links) {
+        if (current && link.hash.slice(1) === current.id) {
+          link.setAttribute('aria-current', 'true');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      }
+    };
+
+    const onScroll = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    };
+
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll, { passive: true });
+    update();
+  }
+</script>

@@ -53,6 +53,13 @@ collections:
   # ---------------------------------------------------------------------------
   #  Sideinnhold (tekst) – src/content/sections/<lang>.md
   #  Én oppføring for alle språk ({{locale}} i filstien).
+  #
+  #  GRUPPER: feltene er samlet i fem sammenleggbare `object`-grupper (hero,
+  #  about, houses, nearby, general). Sveltia har ingen rent visuell gruppering, så
+  #  gruppa ER datastrukturen: nøklene ligger nøstet under gruppenavnet i
+  #  frontmatteret, og src/content.config.ts speiler den samme strukturen.
+  #  Unntak: «Om»-brødteksten (`body`) er markdown-body-en i filen, og body
+  #  støttes bare på toppnivå – derfor står den utenfor `about`-gruppa.
   # ---------------------------------------------------------------------------
   - name: "sections"
     label: "Sideinnhold (tekst)"
@@ -63,57 +70,123 @@ collections:
         file: "src/content/sections/{{locale}}.md"
         i18n: true
         fields:
-          - { label: "Hero – tittel", name: "heroTitle", widget: "string", i18n: true }
-          - { label: "Hero – undertekst", name: "heroTagline", widget: "string", i18n: true }
-          - { label: "Hero – bildebeskrivelse (alt)", name: "heroAlt", widget: "string", required: false, i18n: true }
-          - { label: "Hero-knapp (ruller til husene)", name: "heroCtaLabel", widget: "string", i18n: true }
-          - { label: "Husene – skjult seksjonsetikett (kun for skjermlesere)", name: "housesTitle", widget: "string", required: false, i18n: true }
-          - label: "Huset og hytta (tekst – bilde/Airbnb-lenke ligger i «Husene»)"
-            name: "houses"
-            widget: "list"
-            required: false
+          # --- Gruppe 1: Overskrift og introduksjon (øverst på siden) ---------
+          - label: "Overskrift og introduksjon"
+            name: "hero"
+            widget: "object"
             i18n: true
             fields:
-              # ID-en holdes automatisk lik i alle språk (i18n: duplicate).
-              - { label: "Enhet (må matche «Husene»)", name: "id", widget: "select", options: ["house", "cottage"], i18n: duplicate }
-              - { label: "Navn", name: "name", widget: "string", i18n: true }
-              - { label: "Kort undertekst", name: "tagline", widget: "string", required: false, i18n: true }
-              - label: "Nøkkelpunkter for enheten"
-                name: "keyPoints"
+              # Tittelen ER eiendomsnavnet, et egennavn. `i18n: duplicate` gjør
+              # at den redigeres kun på norsk og holdes lik overalt – da kan
+              # ikke «Translate»-knappen skrive den om.
+              - { label: "Tittel (eiendomsnavn, likt på alle språk)", name: "title", widget: "string", i18n: duplicate }
+              - { label: "Undertekst", name: "tagline", widget: "string", i18n: true }
+              - { label: "Bildebeskrivelse (alt)", name: "alt", widget: "string", required: false, i18n: true }
+              - { label: "Knapp (ruller ned til husene)", name: "ctaLabel", widget: "string", i18n: true }
+
+          # --- Gruppe 2: Om Klintskalni --------------------------------------
+          #  NB: selve brødteksten er markdown-body-en i filen og kan derfor
+          #  ikke ligge inne i gruppa – den står som eget felt rett under.
+          - label: "Om Klintskalni"
+            name: "about"
+            widget: "object"
+            i18n: true
+            fields:
+              - { label: "Tittel", name: "title", widget: "string", required: false, i18n: true }
+              - { label: "E-postlinje (nederst, «du kan også booke på e-post:»)", name: "emailNote", widget: "string", required: false, i18n: true }
+          - { label: "Om Klintskalni – brødtekst", name: "body", widget: "markdown", i18n: true }
+
+          # --- Gruppe 3: Husbeskrivelser -------------------------------------
+          - label: "Husbeskrivelser"
+            name: "houses"
+            widget: "object"
+            i18n: true
+            fields:
+              - { label: "Skjult seksjonsetikett (kun for skjermlesere)", name: "title", widget: "string", required: false, i18n: true }
+              - label: "Huset og hytta (tekst – bilde/Airbnb-lenke ligger i «Husene»)"
+                name: "items"
                 widget: "list"
                 required: false
                 i18n: true
                 fields:
-                  - { label: "Ikon (emoji)", name: "icon", widget: "string", default: "•", i18n: true }
-                  - { label: "Tekst", name: "label", widget: "string", i18n: true }
-              - { label: "Beskrivelse", name: "description", widget: "text", required: false, i18n: true }
-              - { label: "Knapp: Book på Airbnb", name: "bookLabel", widget: "string", i18n: true }
-              - { label: "Bildebeskrivelse (alt)", name: "imageAlt", widget: "string", required: false, i18n: true }
-          - { label: "Knapp: Se bilder", name: "photosButtonLabel", widget: "string", required: false, default: "Se bilder", i18n: true }
-          - { label: "Lukk-knapp (modal)", name: "closeLabel", widget: "string", required: false, default: "Lukk", i18n: true }
-          - { label: "Omgivelsene – tittel", name: "galleryTitle", widget: "string", required: false, i18n: true }
-          - label: "Omgivelsene – bildebeskrivelser (alt), i samme rekkefølge som bildene"
-            name: "galleryAlts"
-            widget: "list"
-            required: false
+                  # ID-en holdes automatisk lik i alle språk (i18n: duplicate).
+                  - { label: "Enhet (må matche «Husene»)", name: "id", widget: "select", options: ["house", "cottage"], i18n: duplicate }
+                  - { label: "Navn", name: "name", widget: "string", i18n: true }
+                  - { label: "Kort undertekst", name: "tagline", widget: "string", required: false, i18n: true }
+                  - label: "Nøkkelpunkter for enheten"
+                    name: "keyPoints"
+                    widget: "list"
+                    required: false
+                    i18n: true
+                    fields:
+                      - { label: "Ikon (emoji)", name: "icon", widget: "string", default: "•", i18n: true }
+                      - { label: "Tekst", name: "label", widget: "string", i18n: true }
+                  - { label: "Beskrivelse", name: "description", widget: "text", required: false, i18n: true }
+                  - { label: "Knapp: Book på Airbnb", name: "bookLabel", widget: "string", i18n: true }
+                  - { label: "Bildebeskrivelse (alt)", name: "imageAlt", widget: "string", required: false, i18n: true }
+              - { label: "Knapp: Se bilder", name: "photosButtonLabel", widget: "string", required: false, default: "Se bilder", i18n: true }
+              - { label: "Lukk-knapp (bildevisning)", name: "closeLabel", widget: "string", required: false, default: "Lukk", i18n: true }
+
+          # --- Gruppe 4: I nærheten ------------------------------------------
+          #  NB: stedsNAVN ligger IKKE her. De ligger i «Nærområdet»
+          #  (src/data/nearby.json), en collection UTEN i18n, som «Translate»-
+          #  knappen derfor aldri ser. Her ligger kun oversettbar tekst, koblet
+          #  til stedet via `id`.
+          - label: "I nærheten"
+            name: "nearby"
+            widget: "object"
             i18n: true
-            field: { label: "Bildebeskrivelse", name: "alt", widget: "string" }
-          - { label: "Info – tittel", name: "infoTitle", widget: "string", required: false, i18n: true }
-          - { label: "Info – e-postlinje (nederst, «du kan også booke på e-post:»)", name: "infoEmailNote", widget: "string", required: false, i18n: true }
-          - { label: "Anmeldelser – tittel", name: "reviewsTitle", widget: "string", required: false, i18n: true }
-          - { label: "Anmeldelser – merknad (f.eks. ★ 5,0 på Airbnb)", name: "reviewsNote", widget: "string", required: false, i18n: true }
-          - { label: "Anmeldelser – lenketekst", name: "reviewsLinkLabel", widget: "string", required: false, i18n: true }
-          - { label: "Kart – tittel", name: "mapTitle", widget: "string", required: false, i18n: true }
-          - { label: "Kart – områdenavn", name: "mapAreaLabel", widget: "string", required: false, i18n: true }
-          - { label: "Kart – lenketekst", name: "mapLinkLabel", widget: "string", required: false, i18n: true }
-          - { label: "Kontakt – tittel", name: "contactTitle", widget: "string", required: false, i18n: true }
-          - { label: "Kontakt – tekst", name: "contactText", widget: "text", required: false, i18n: true }
-          - { label: "Knapp: Send e-post", name: "emailButtonLabel", widget: "string", required: false, i18n: true }
-          - { label: "SEO – sidetittel", name: "seoTitle", widget: "string", i18n: true }
-          - { label: "SEO – beskrivelse", name: "seoDescription", widget: "text", i18n: true }
-          - { label: "Språkvelger-etikett", name: "languageLabel", widget: "string", required: false, default: "Language", i18n: true }
-          - { label: "«Hopp til innhold»-tekst", name: "skipToContent", widget: "string", required: false, default: "Skip to content", i18n: true }
-          - { label: "Lengre informasjonstekst (om eiendommen)", name: "body", widget: "markdown", i18n: true }
+            fields:
+              - { label: "Tittel", name: "title", widget: "string", required: false, i18n: true }
+              - { label: "Introtekst (valgfri)", name: "intro", widget: "text", required: false, i18n: true }
+              - { label: "Lenketekst nederst i hvert kort (f.eks. «Åpne i Google Maps»)", name: "linkLabel", widget: "string", required: false, i18n: true, hint: "Skrives ÉN gang og gjelder alle steder. Vises kun på steder som har en lenke." }
+              - label: "Kategorinavn"
+                name: "categoryLabels"
+                widget: "object"
+                i18n: true
+                fields:
+                  - { label: "Butikker", name: "shop", widget: "string", required: false, i18n: true }
+                  - { label: "Mat og drikke", name: "restaurant", widget: "string", required: false, i18n: true }
+                  - { label: "Aktiviteter og severdigheter", name: "activity", widget: "string", required: false, i18n: true }
+              - label: "Valgfrie beskrivelser (navn, avstand og lenke ligger i «Nærområdet»)"
+                name: "items"
+                widget: "list"
+                required: false
+                i18n: true
+                hint: "Skriv IKKE stedsnavn her – de ligger i «Nærområdet» og oversettes aldri. Én kort setning holder. Legg til, fjern og omorganiser steder i NORSK-fanen."
+                fields:
+                  # ID-en holdes automatisk lik i alle språk (i18n: duplicate).
+                  - { label: "ID (må matche «Nærområdet»)", name: "id", widget: "string", pattern: ["^[a-z0-9-]+$", "Kun små bokstaver, tall og bindestrek"], i18n: duplicate }
+                  - { label: "Kort beskrivelse", name: "description", widget: "string", required: false, i18n: true }
+
+          # --- Gruppe 5: Titler og annen tekst (resten av siden) -------------
+          - label: "Titler og annen tekst"
+            name: "general"
+            widget: "object"
+            collapsed: true
+            i18n: true
+            fields:
+              - { label: "Omgivelsene – skjult seksjonsetikett (kun for skjermlesere)", name: "galleryTitle", widget: "string", required: false, i18n: true }
+              - label: "Omgivelsene – bildebeskrivelser (alt), i samme rekkefølge som bildene"
+                name: "galleryAlts"
+                widget: "list"
+                required: false
+                i18n: true
+                field: { label: "Bildebeskrivelse", name: "alt", widget: "string" }
+              - { label: "Anmeldelser – tittel", name: "reviewsTitle", widget: "string", required: false, i18n: true }
+              - { label: "Anmeldelser – merknad (f.eks. ★ 5,0 på Airbnb)", name: "reviewsNote", widget: "string", required: false, i18n: true }
+              - { label: "Anmeldelser – lenketekst", name: "reviewsLinkLabel", widget: "string", required: false, i18n: true }
+              - { label: "Kart – tittel", name: "mapTitle", widget: "string", required: false, i18n: true }
+              - { label: "Kart – områdenavn", name: "mapAreaLabel", widget: "string", required: false, i18n: true }
+              - { label: "Kart – lenketekst", name: "mapLinkLabel", widget: "string", required: false, i18n: true }
+              - { label: "Kontakt – tittel", name: "contactTitle", widget: "string", required: false, i18n: true }
+              - { label: "Kontakt – tekst", name: "contactText", widget: "text", required: false, i18n: true }
+              - { label: "Knapp: Send e-post", name: "emailButtonLabel", widget: "string", required: false, i18n: true }
+              - { label: "SEO – sidetittel", name: "seoTitle", widget: "string", i18n: true }
+              - { label: "SEO – beskrivelse", name: "seoDescription", widget: "text", i18n: true }
+              - { label: "Språkvelger-etikett", name: "languageLabel", widget: "string", required: false, default: "Language", i18n: true }
+              - { label: "«Hopp til innhold»-tekst", name: "skipToContent", widget: "string", required: false, default: "Skip to content", i18n: true }
+              - { label: "Innholdsmeny – skjult etikett (kun for skjermlesere)", name: "tocLabel", widget: "string", required: false, default: "Contents", i18n: true, hint: "Punktene i menyen henter navn fra seksjonstitlene, så de trenger ingen egne felt." }
 
   # ---------------------------------------------------------------------------
   #  Innstillinger – FELLES for alle språk. src/data/site.json
@@ -162,6 +235,33 @@ collections:
                 widget: "list"
                 required: false
                 field: { label: "Bilde", name: "image", widget: "image" }
+
+  # ---------------------------------------------------------------------------
+  #  Nærområdet – FELLES for alle språk. src/data/nearby.json
+  #  Stedsnavnene er EGENNAVN (Tūja, Veczemju klintis, Salacgrīva …) og ligger
+  #  her BEVISST: denne collectionen har ingen `i18n`, så «Translate»-knappen
+  #  ser den aldri og kan verken oversette navnene, fjerne diakritiske tegn
+  #  eller bøye dem. Kun kategorinavn og en valgfri beskrivelse oversettes –
+  #  de ligger under «I nærheten» i «Sideinnhold» og kobles hit via `id`.
+  # ---------------------------------------------------------------------------
+  - name: "nearby"
+    label: "Nærområdet (steder, avstand og lenker)"
+    files:
+      - name: "nearby"
+        label: "Butikker, spisesteder og aktiviteter"
+        file: "src/data/nearby.json"
+        fields:
+          - label: "Steder"
+            name: "places"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "ID (må matche beskrivelsen i Sideinnhold)", name: "id", widget: "string", pattern: ["^[a-z0-9-]+$", "Kun små bokstaver, tall og bindestrek"] }
+              - { label: "Navn (egennavn – skrives ÉN gang, oversettes aldri)", name: "name", widget: "string", hint: "Bruk stedets faktiske navn med riktige tegn, f.eks. «Veczemju klintis», «Tūja», «Salacgrīva»." }
+              - { label: "Sted/område (valgfritt, f.eks. Salacgrīva)", name: "area", widget: "string", required: false }
+              - { label: "Kategori", name: "category", widget: "select", options: ["shop", "restaurant", "activity"], default: "activity" }
+              - { label: "Avstand i km (langs vei fra eiendommen)", name: "distanceKm", widget: "number", value_type: "float", min: 0, step: 0.1 }
+              - { label: "Lenke til Google Maps (valgfri)", name: "url", widget: "string", required: false, hint: "Må starte med http:// eller https://. Lenk til selve stedet, ikke en kjørerute fra Klintskalni 1 – det ville røpe nøyaktig adresse." }
 
   # ---------------------------------------------------------------------------
   #  Bilder – FELLES for alle språk (kun alt-tekst oversettes, se Sideinnhold)

@@ -47,9 +47,10 @@ const rows = [
 
 {
   n > 0 && (
-    <section class="carousel-sec" aria-label={title}>
+    <section class="carousel-sec" id="gallery" aria-label={title}>
       <div class="container">
-        <h2 class="section-title">{title}</h2>
+        {/* Ingen synlig overskrift: bildene taler for seg. `title` lever videre
+            som skjult seksjonsetikett for skjermlesere, som i «Husene». */}
         <div class="marquee">
           {rows.map((row) => (
           <div class="marquee-row">

@@ -1,8 +1,9 @@
 # Plan: «I nærheten»-seksjon (butikker, restauranter og aktiviteter)
 
-> **Status: KUN PLAN – ikke implementert.** Dokumentet beskriver hvordan
-> seksjonen skal bygges slik at den følger arkitekturen i resten av siden:
-> felles data ett sted, oversettbar tekst per språk, alt redigerbart i CMS-et.
+> **Status: IMPLEMENTERT.** Dokumentet beskriver hvorfor seksjonen ser ut som
+> den gjør: felles data ett sted, oversettbar tekst per språk, alt redigerbart i
+> CMS-et. Se «Avvik fra planen» nederst for de stedene den ferdige løsningen
+> bevisst gjør noe annet enn skissen under, og hvorfor.
 
 ## Mål
 
@@ -54,22 +55,30 @@ Strukturell data og oversatt tekst kobles på `id`, akkurat som
 
 ### 2. Oversatt tekst – nye nøkler i `src/content/sections/<lang>.md`
 
+Frontmatteret er gruppert (`hero:`, `about:`, `houses:`, `general:`), og hver
+gruppe tilsvarer én sammenleggbar `object`-gruppe i CMS-et. «I nærheten» er en
+egen seksjon med sin egen liste, så den bør bli en femte toppnøkkel `nearby:`
+(plassert etter `houses:`) framfor å blandes inn i `general:`:
+
 ```yaml
-nearbyTitle: "I nærheten"
-nearbyIntro: "Kort intro (valgfri)."
-nearbyCategoryLabels:
-  shop: "Butikker"
-  restaurant: "Mat og drikke"
-  activity: "Aktiviteter og severdigheter"
-nearbyPlaces:
-  - id: "tuja-shop"
-    name: "Matbutikk i Tūja"
-    description: "Dagligvarer, åpent hele uka." # valgfri
+nearby:
+  title: "I nærheten"
+  intro: "Kort intro (valgfri)."
+  categoryLabels:
+    shop: "Butikker"
+    restaurant: "Mat og drikke"
+    activity: "Aktiviteter og severdigheter"
+  items:
+    - id: "tuja-shop"
+      description: "Dagligvarer, åpent hele uka." # valgfri
 ```
 
 - Kategorietikettene oversettes ÉN gang per språk – ikke per sted.
-- Stedsnavn er ofte egennavn; med Sveltias side-om-side-redigering og
-  kopier/oversett-knapper er det ett klikk å gjenbruke dem på tvers av språk.
+- **Stedsnavnet ligger IKKE her.** Det var opprinnelig planlagt her, men et felt
+  med `i18n: true` blir skrevet om av «Translate»-knappen, og Sveltia har ingen
+  måte å unnta ett felt fra AI-oversetting på: `i18n` tar bare `true`, `false`
+  og `duplicate`. Navnet ligger derfor i `nearby.json`, som hører til en
+  collection uten `i18n` og som oversetteren aldri ser. Se «Avvik fra planen».
 
 ### 3. Skjema – `src/content.config.ts`
 
@@ -77,27 +86,43 @@ Alle nye felter får `.default(...)` slik at eksisterende innhold bygger videre
 uten endring før seksjonen tas i bruk (seksjonen skjules når lista er tom):
 
 ```ts
-nearbyTitle: z.string().default(''),
-nearbyIntro: z.string().default(''),
-nearbyCategoryLabels: z.record(z.string()).default({}),
-nearbyPlaces: z
-  .array(z.object({ id: z.string(), name: z.string(), description: z.string().default('') }))
-  .default([]),
+nearby: z
+  .object({
+    title: z.string().default(''),
+    intro: z.string().default(''),
+    categoryLabels: z
+      .object({
+        shop: z.string().default(''),
+        restaurant: z.string().default(''),
+        activity: z.string().default(''),
+      })
+      .default({}),
+    items: z
+      .array(z.object({ id: z.string(), description: z.string().max(140).default('') }))
+      .default([]),
+  })
+  .default({}),
 ```
 
-Vurder samtidig å zod-validere `nearby.json` i `src/lib/` (samme mønster som
-`src/lib/site.ts`) slik at slug-/kategorifeil oppdages ved bygg.
+`nearby.json` zod-valideres i `src/lib/nearby.ts` (samme mønster som
+`src/lib/site.ts`), slik at slug-, kategori- og lenkefeil oppdages ved bygg.
+Samme fil har koblingen `buildNearbyGroups()` og en vakt mot at diakritiske tegn
+faller bort i oversatt tekst.
 
 ## CMS – `public/admin/config.yml`
 
-1. **Ny collection «Nærområdet (avstand + lenker)»** for `src/data/nearby.json`:
-   liste med `id` (string, pattern-validert), `category`
-   (select: shop/restaurant/activity), `distanceKm` (number), `url` (string,
-   valgfri).
-2. **Nye felter i «Sideinnhold»** (husk: ALLE felter må ha i18n-flagg):
-   - `nearbyTitle`, `nearbyIntro`: `i18n: true`
-   - `nearbyCategoryLabels` (object med shop/restaurant/activity): `i18n: true`
-   - `nearbyPlaces` (list): `i18n: true`, med `id` som `i18n: duplicate`
+1. **Ny collection «Nærområdet (steder, avstand og lenker)»** for
+   `src/data/nearby.json`: liste med `id` (string, pattern-validert), `name`
+   (egennavn), `area` (valgfritt), `category` (select:
+   shop/restaurant/activity), `distanceKm` (number), `url` (string, valgfri).
+   Collectionen har **ingen `i18n`-nøkkel** – det er nettopp derfor navnene ikke
+   kan maskinoversettes.
+2. **Ny gruppe «I nærheten»** i «Sideinnhold»: ett `object`-felt `nearby` med
+   `i18n: true`, plassert etter «Husbeskrivelser» (husk: ALLE felter må ha
+   i18n-flagg):
+   - `title`, `intro`: `i18n: true`
+   - `categoryLabels` (object med shop/restaurant/activity): `i18n: true`
+   - `items` (list): `i18n: true`, med `id` som `i18n: duplicate`
      (holdes automatisk lik i alle språk – samme grep som hus-ID-en).
 
 ## Komponent og plassering
@@ -106,47 +131,94 @@ Vurder samtidig å zod-validere `nearby.json` i `src/lib/` (samme mønster som
   - grupperer stedene per kategori (rekkefølge: shop → restaurant → activity),
     kategorier uten steder skjules; hele seksjonen skjules når lista er tom
     (samme mønster som karusellen),
-  - kompakte rader/kort: kategori-ikon (emoji/inline-SVG), navn, valgfri
-    beskrivelse, avstands-chip («~2,1 km»), ekstern lenke med
-    `target="_blank" rel="noopener noreferrer"` (som Airbnb-knappene),
+  - kompakte kort: navn, valgfritt område, valgfri beskrivelse, avstands-chip
+    («~2,1 km»), ekstern lenke med `target="_blank" rel="noopener noreferrer"`
+    (som Airbnb-knappene). Ingen kategori-ikoner: kategorioverskriften sier
+    allerede hva lista er, så emojiene ble bare støy,
   - gjenbruker `.container`, `.section-title`, kort-stil (`--surface`,
     `--border`, `--radius`, `--shadow`) fra `global.css`; `id="nearby"` +
     `aria-label` som de andre seksjonene. Ingen ny klient-JS.
-- Monteres i `src/pages/[lang]/index.astro` **rett etter `<Map …/>`** (hører
-  tematisk til «Området») og før `<Contact …/>`. Data slås sammen i
-  frontmatter på samme måte som `houses` (join på `id`, hopp over steder uten
-  oversatt navn).
+- Monteres i `src/pages/[lang]/index.astro` **mellom `<Carousel …/>` og
+  `<Reviews …/>`**: den følger naturlig etter omgivelsesbildene, og kommer før
+  anmeldelsene og kartet. Koblingen ligger i `buildNearbyGroups()` i
+  `src/lib/nearby.ts`, ikke inline i frontmatteret som for `houses` – da kan en
+  eventuell egen rute senere gjenbruke den.
+
+### Hvorfor seksjon og ikke egen rute?
+
+Vurdert og valgt bort. En `/[lang]/nearby/`-rute krever mer enn den ser ut til:
+
+- `Layout.astro` bygger canonical, hreflang og `og:url` med `localizedPath(lang)`,
+  altså alltid språkets forside. På en underside ville canonical pekt vekk fra
+  sida selv.
+- `LanguagePicker.astro` og språklenkene i footeren gjør det samme: å bytte språk
+  fra `/no/nearby/` ville havnet på `/en/`, ikke `/en/nearby/`.
+- Skript-et som gjenoppretter scrollposisjon ved språkbytte lagrer en ren
+  pikselverdi uten å vite hvilken side den kom fra.
+- Det finnes **ingen navigasjon** på siden: headeren inneholder bare
+  språkvelgeren. En rute ingen kan klikke seg til måtte fått en meny først.
+
+De tre første feiler dessuten stille, ikke ved bygg. Med 6–10 korte punkter er
+tre nesten like tynne URL-er heller ingen SEO-gevinst.
+
+Seksjonen er likevel bygget slik at en senere flytting er billig: all markup
+ligger i `Nearby.astro` med et selvstendig prop-grensesnitt, koblingen ligger i
+`src/lib/nearby.ts`, og `id="nearby"` gjør `/no/#nearby` til et stabilt anker.
+**Vurder rute på nytt hvis lista passerer ~15 steder, eller hvis hvert sted skal
+ha bilde.**
 
 ## SEO (valgfritt, i samme slengen)
 
 - Stedsnavnene i ren tekst er SEO-verdien i seg selv (lokale søkeord: Tūja,
-  Liepupe, Veczemju klintis …). Ingen endring i strukturerte data er nødvendig;
-  eventuelt kan `LodgingBusiness.amenityFeature` utvides.
-- Legg de viktigste stedene til i `public/llms.txt` under en ny «Nearby»-liste.
+  Liepupe, Veczemju klintis …).
+- **Ingen endring i strukturerte data.** Forslaget om å utvide
+  `LodgingBusiness.amenityFeature` er bevisst droppet: de oppføringene beskriver
+  eiendommens EGNE fasiliteter (strandtilgang, badstue, parkering). Butikker og
+  severdigheter i nærheten er ikke fasiliteter ved utleieobjektet, og å legge ut
+  `Place`-markup for virksomheter man ikke eier er i strid med retningslinjene
+  for strukturerte data.
+- De viktigste stedene ligger i `public/llms.txt` under «Nearby».
 
-## Gjennomføring (sjekkliste)
+## Avklarte spørsmål
 
-1. `src/data/nearby.json` med de faktiske stedene (se åpne spørsmål).
-2. Zod-oppdatering i `src/content.config.ts` (+ evt. `src/lib/nearby.ts`).
-3. Nye nøkler i `sections/en.md`, `no.md`, `lv.md`.
-4. `src/components/Nearby.astro` + montering i `[lang]/index.astro`.
-5. CMS-felter i `public/admin/config.yml` (begge stedene, med i18n-flagg).
-6. Oppdater README-tabellen «Redigere innhold» + `public/llms.txt`.
-7. Verifiser: `npm run build` (skjema validerer), og CMS-et lokalt via
-   «Work with Local Repository» (åpne «Sideinnhold» og «Nærområdet»).
+1. **Hvilke steder?** Ikke avklart ennå. `nearby.json` inneholder foreløpig tre
+   oppføringer, to av dem tydelig merket `PLACEHOLDER`. **Erstatt dem med
+   virkelige navn, avstander og lenker før neste publisering.**
+2. **Avstand:** langs vei fra eiendommen. Vises med `~` foran, og formateres per
+   språk (`2,1 km` på norsk og latvisk, `2.1 km` på engelsk).
+3. **Lenkepolicy:** Google Maps. Lenk til selve stedet – **aldri** en kjørerute
+   fra Klintskalni 1, som ville røpet nøyaktig adresse og undergravd
+   `showMarker: false` i `site.json`. En ren lenke laster ikke noe skript, så
+   $0- og sporingsfri-kravene holder.
+4. **Kategorilista:** `shop` / `restaurant` / `activity`. Ingen `beach`-kategori:
+   stranda er eiendommens egen, med direkte tilgang, ikke et sted i nærheten.
+   NB: lista finnes tre steder (`src/lib/nearby.ts`, `src/content.config.ts`,
+   `public/admin/config.yml`) og må endres alle tre stedene samtidig.
+5. **Bilder per sted:** nei. Det ville krevd rettighetsklarering, og hvert bilde
+   trenger alt-tekst – som er oversatt tekst, og dermed ville dratt stedsnavn
+   tilbake inn i feltene AI-oversettingen skriver om.
 
-Estimert omfang: ~6 filer endret + 2 nye. Ingen avhengigheter, ingen ny JS.
+## Avvik fra planen
 
-## Åpne spørsmål (avklar før implementering)
+Den ferdige løsningen avviker bevisst fra skissen over på fem punkter:
 
-1. **Hvilke steder?** Trenger navn + reell avstand for butikk(er),
-   restaurant(er)/kafé(er) og 3–6 aktiviteter. (Airbnb-annonsene og lokalkunnskap
-   er beste kilde.)
-2. **Avstand**: langs vei/gange (anbefalt – det gjestene faktisk kjører/går)
-   eller luftlinje? Og fra porten eller stranda?
-3. **Lenkepolicy**: Google Maps-lenker (enkelt, men Google), OpenStreetMap
-   (mest i tråd med personvernprofilen), eller stedets egen nettside der den
-   finnes?
-4. **Kategorilista**: holder shop/restaurant/activity, eller ønskes egen
-   `beach`-kategori?
-5. **Bilder per sted** i en senere versjon – ja/nei?
+1. **Stedsnavnet ligger i `src/data/nearby.json`, ikke i `sections/<lang>.md`.**
+   Dette er det viktigste avviket. Sveltias «Translate» skriver om alle felt med
+   `i18n: true`, og feltnivå-`i18n` har bare verdiene `true`, `false` og
+   `duplicate` – det finnes ingen «oversett ikke dette feltet». Et navnefelt i
+   sections ville derfor blitt maskinoversatt, mest sannsynlig ved at
+   diakritiske tegn faller bort (Tūja → Tuja) eller at latvisk bøyer navnet
+   (Tūja → Tūjā). Løsningen er strukturell: collectionen for `nearby.json` har
+   ingen `i18n`-nøkkel, så oversetteren når den ikke. Kategorioverskriften
+   fungerer dessuten som den generiske beskrivelsen, så «Matbutikk i Tūja» er
+   unødvendig – «Rimi» under «Butikker» leser bedre og gir mindre å oversette.
+2. **`categoryLabels` er et eksplisitt `z.object`, ikke `z.record`.** Et record
+   svelger en skrivefeil (`shopp:`) i stillhet; objektet fanger den ved bygg.
+3. **Lista i sections heter `items`, ikke `places`.** Det matcher `houses.items`
+   og skiller den fra `places` i `nearby.json`, som er andre data (navn, ikke
+   beskrivelser).
+4. **Ingen endring i strukturerte data** (se SEO over).
+5. **Koblingen ligger i `src/lib/nearby.ts`**, ikke inline i `index.astro`.
+
+Samtidig ble `hero.title` satt til `i18n: duplicate`: eiendomsnavnet er et
+egennavn og hadde ingen grunn til å være eksponert for «Translate».

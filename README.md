@@ -43,8 +43,8 @@ og kan ikke gjøres for deg:
 
 1. **Anmeldelser.** `src/content/reviews/reviews.json` inneholder de ekte,
    utvalgte anmeldelsene fra Airbnb (Adam og Knut). Legg til eller fjern
-   sitater ved behov (fornavn, kilde, dato). `reviewsNote` i `sections/*.md`
-   står på «★ 5,0».
+   sitater ved behov (fornavn, kilde, dato). `general.reviewsNote` i
+   `sections/*.md` står på «★ 5,0».
 
 2. **E-post.** I `src/data/contact.json`: bytt `email` til din dedikerte
    adresse – ett sted, felles for alle språk (sett `""` for å skjule
@@ -103,8 +103,9 @@ under **Custom domains** når du er klar.
 
 | Hva | Fil |
 |-----|-----|
-| All tekst (hero, husene, omgivelser, kontakt, SEO, alt-tekst) | `src/content/sections/<språk>.md` |
+| All tekst (hero, husene, omgivelser, kontakt, SEO, alt-tekst) | `src/content/sections/<språk>.md` (gruppert i `hero:`, `about:`, `houses:`, `nearby:` og `general:`) |
 | **Husenes Airbnb-lenke + bilde** (felles, store/lille) | `src/data/houses.json` |
+| **Nærområdet** (stedsnavn, kategori, avstand, lenke) – felles | `src/data/nearby.json` |
 | **Eiendoms-/omgivelsesbilder** (hero, galleri) – felles | `src/data/media.json` |
 | Eiendomsnavn + kartposisjon (felles for alle språk) | `src/data/site.json` |
 | E-postadresse (felles for alle språk) | `src/data/contact.json` |
@@ -113,11 +114,17 @@ under **Custom domains** når du er klar.
 
 > **To hus, delt eiendom.** Hvert hus har egne detaljer og egen Airbnb-lenke.
 > Bilde + lenke per hus ligger i `src/data/houses.json`; den oversatte teksten
-> (navn, beskrivelse, nøkkelpunkter) ligger under `houses:` i `sections/<språk>.md`
-> og kobles sammen via `id` (`large` / `small`).
+> (navn, beskrivelse, nøkkelpunkter) ligger under `houses.items:` i
+> `sections/<språk>.md` og kobles sammen via `id` (`house` / `cottage`).
 >
 > **Bilder er felles for alle språk.** Bytt et bilde ett sted; kun **alt-tekstene**
-> oversettes. `galleryAlts` må stå i **samme rekkefølge** som `gallery` i `media.json`.
+> oversettes. `general.galleryAlts` må stå i **samme rekkefølge** som `gallery` i
+> `media.json`.
+>
+> **Stedsnavn oversettes aldri.** Navn som Tūja, Veczemju klintis og Salacgrīva
+> ligger i `src/data/nearby.json`, som ikke er flerspråklig. Derfor kan
+> AI-oversettingen i CMS-et ikke røre dem. Kun kategorinavnene og en valgfri kort
+> beskrivelse ligger i `sections/<språk>.md`, koblet til stedet via `id`.
 
 ### Via Sveltia CMS på `/admin` (skjema i nettleser)
 
@@ -152,6 +159,13 @@ engelsk og latvisk automatisk:
 4. **Se over** resultatet (særlig latvisk) og **lagre**. Alle språk havner i én
    commit, og Cloudflare bygger siden på nytt.
 
+> **Sjekk stedsnavnene.** De fleste egennavn er trygge: eiendomsnavnet og
+> stedene i «Nærområdet» ligger utenfor rekkevidden til «Translate». Men
+> `general.mapAreaLabel`, `general.seoTitle`, `general.seoDescription` og
+> «Om»-brødteksten *må* være oversatt og nevner likevel stedsnavn. Der kan AI-en
+> miste diakritiske tegn (Tūja → Tuja, Salacgrīva → Salacgriva). Bygget stopper
+> hvis det skjer med et navn som finnes i `nearby.json`, men les likevel over.
+
 > Nøkkelen lagres **kun i nettleseren** og committes aldri – den brukes bare i
 > redigeringsverktøyet. Den **publiserte siden forblir uten sporing og uten
 > API-nøkler**.
@@ -176,7 +190,8 @@ src/
 │   ├── sections/    # all synlig tekst per språk (+ "om huset"-brødtekst)
 │   └── reviews/     # kuraterte anmeldelser
 ├── data/            # FELLES innhold, ett sted per ting: site.json (navn + kart),
-│                    # houses.json (Airbnb-lenker + bilder), media.json, contact.json
+│                    # houses.json (Airbnb-lenker + bilder), media.json, contact.json,
+│                    # nearby.json (steder i nærområdet – navnene oversettes aldri)
 ├── images/          # bilder (optimaliseres ved bygg av Astro)
 ├── components/      # gjenbrukbare seksjoner (Hero, Galleri, Kart, Kontakt …)
 ├── i18n/            # språkliste (languages.ts) + hjelpefunksjoner
@@ -187,7 +202,7 @@ public/
 ├── admin/           # Sveltia CMS (index.html + config.yml) → /admin
 ├── favicon.ico, robots.txt, llms.txt
 docs/
-└── nearby-plan.md   # plan for ny «I nærheten»-seksjon (ikke implementert ennå)
+└── nearby-plan.md   # bakgrunn for «I nærheten»-seksjonen (implementert)
 ```
 
 ## Vedlikehold

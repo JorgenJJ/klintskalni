@@ -37,6 +37,9 @@ const fullMap = `https://www.openstreetmap.org/#map=12/${lat}/${lon}`;
         src={embed.href}
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"></iframe>
+      {/* Fanger scroll så siden ikke «låser seg» i kartet. Slippes gjennom
+          når Ctrl holdes, eller etter et klikk (for å dra kartet). */}
+      <div class="scroll-guard" aria-hidden="true"></div>
     </div>
     {
       linkLabel && (
@@ -56,12 +59,21 @@ const fullMap = `https://www.openstreetmap.org/#map=12/${lat}/${lon}`;
     margin-top: -0.75rem;
   }
   .frame {
+    position: relative;
     border-radius: var(--radius);
     overflow: hidden;
     border: 1px solid var(--border);
     box-shadow: var(--shadow);
     aspect-ratio: 16 / 9;
     background: var(--border);
+  }
+  /* Ligger over kartet og tar imot scroll. Slås av ved å legge til .active. */
+  .scroll-guard {
+    position: absolute;
+    inset: 0;
+  }
+  .frame.active .scroll-guard {
+    pointer-events: none;
   }
   iframe {
     width: 100%;
@@ -76,3 +88,32 @@ const fullMap = `https://www.openstreetmap.org/#map=12/${lat}/${lon}`;
     font-weight: 600;
   }
 </style>
+
+<script>
+  // Kartet skal ikke stjele scrollen. Vaktlaget over iframen slippes gjennom
+  // bare når Ctrl holdes (zoom), eller etter et klikk (for å dra kartet).
+  document.querySelectorAll<HTMLElement>('.map .frame').forEach((frame) => {
+    const release = () => frame.classList.remove('active');
+
+    frame.addEventListener(
+      'wheel',
+      (e) => {
+        if (e.ctrlKey) {
+          // Uten dette zoomer nettleseren hele siden i stedet for kartet.
+          e.preventDefault();
+          frame.classList.add('active');
+        } else {
+          release();
+        }
+      },
+      { passive: false },
+    );
+
+    frame.addEventListener('click', () => frame.classList.add('active'));
+    frame.addEventListener('mouseleave', release);
+    // Scroll havner i iframen når vakta er av, så Ctrl-slipp fanges globalt.
+    document.addEventListener('keyup', (e) => {
+      if (e.key === 'Control') release();
+    });
+  });
+</script>
