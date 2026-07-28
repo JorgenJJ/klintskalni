@@ -20,6 +20,11 @@
 
 html {
   scroll-behavior: smooth;
+  /* Toppmenyen er «sticky» og ville ellers dekket overskriften man nettopp
+     hoppet til. Gjelder alle ankerhopp: innholdsmenyen, hero-knappen og
+     «hopp til innhold». Litt mer enn menyens høyde (60px), så tittelen får
+     luft over seg. */
+  scroll-padding-top: 4.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
