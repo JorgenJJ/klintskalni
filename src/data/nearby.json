@@ -55,6 +55,14 @@
       "category": "restaurant",
       "distanceKm": 8.4,
       "url": "https://maps.app.goo.gl/6AGtZNrSwxLtjt6e8"
+    },
+    {
+      "id": "fyret",
+      "name": "Ķurmraga bāka",
+      "area": "Tūja",
+      "category": "activity",
+      "distanceKm": 3.9,
+      "url": "https://maps.app.goo.gl/q4HDLN8CabvW3xa18"
     }
   ]
 }
