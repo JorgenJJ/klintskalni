@@ -3,26 +3,29 @@
     {
       "id": "house",
       "airbnbUrl": "https://www.airbnb.no/rooms/1028053261687651967",
-      "image": "hero/house-exterior.jpg",
-      "guests": 8,
+      "guests": 9,
       "bedrooms": 3,
-      "beds": 5,
+      "beds": 6,
+      "image": "/src/images/huset.avif",
       "gallery": [
-        "hero/house-exterior.jpg",
-        "gallery/house-garden.jpg",
-        "gallery/seaside-bluff.jpg",
-        "gallery/beach.jpg",
-        "gallery/sunset-sea.jpg",
-        "gallery/volleyball-court.jpg"
+        "/src/images/huset2.avif",
+        "/src/images/innihus1.avif",
+        "/src/images/innihus3.avif",
+        "/src/images/innihus2.avif",
+        "/src/images/pasted-image-1786737996309.png",
+        "/src/images/innihus4.avif",
+        "/src/images/innihus5.avif",
+        "/src/images/innihus6.avif",
+        "/src/images/innihus8.webp"
       ]
     },
     {
       "id": "cottage",
       "airbnbUrl": "https://www.airbnb.no/rooms/1033329284775400298",
-      "image": "gallery/cabin-evening.jpg",
       "guests": 7,
       "bedrooms": 3,
       "beds": 4,
+      "image": "gallery/cabin-evening.jpg",
       "gallery": [
         "gallery/cabin-evening.jpg",
         "gallery/house-garden.jpg",
