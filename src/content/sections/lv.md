@@ -1,6 +1,6 @@
 ---
 hero:
-  title: Klintskalni 1
+  title: Klintskalni 2
   tagline: Divas guļbūves vienā piejūras īpašumā, tieši pie garas smilšu pludmales. Īrē vienu vai abas.
   alt: Klintskalni 1 īpašums ar guļbūves māju un vasarnīcu aizmugurē, skats no dārza
   ctaLabel: Apskati abas ēkas

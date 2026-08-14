@@ -1,6 +1,6 @@
 ---
 hero:
-  title: Klintskalni 1
+  title: Klintskalni 2
   tagline: Two log homes on one seaside property, with direct access to a long sandy beach. Rent one, or both.
   alt: The Klintskalni 1 property with the log house and the cottage behind, seen from the garden
   ctaLabel: See the two homes

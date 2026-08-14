@@ -1,6 +1,6 @@
 ---
 hero:
-  title: Klintskalni 1
+  title: Klintskalni 2
   tagline: To tømmerhus på samme tomt, rett ved en lang sandstrand. Lei ett eller begge.
   alt: Klintskalni 1-eiendommen med tømmerhuset og hytta bak, sett fra hagen
   ctaLabel: Se de to enhetene
