@@ -60,12 +60,13 @@ nearby:
     - id: butikk-elvi
       description: Groceries, open all week.
     - id: mat-sidrabini
-      description: ''
+      description: Hotel with good food and its own butcher's shop.
     - id: mat-meke
-      description: ''
+      description: Restaurant.
     - id: mat-pernigele
-      description: ''
+      description: Restaurant.
     - id: fyret
+      description: Old lighthouse on the beach.
 general:
   galleryTitle: The surroundings
   galleryAlts:

@@ -66,6 +66,7 @@ nearby:
     - id: mat-pernigele
       description: ''
     - id: fyret
+      description: ''
 general:
   galleryTitle: Apkārtne
   galleryAlts:
