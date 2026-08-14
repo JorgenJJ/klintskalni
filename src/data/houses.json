@@ -26,14 +26,12 @@
       "guests": 7,
       "bedrooms": 3,
       "beds": 4,
-      "image": "gallery/cabin-evening.jpg",
+      "image": "/src/images/pasted-image-1786738678035.png",
       "gallery": [
-        "gallery/cabin-evening.jpg",
-        "gallery/house-garden.jpg",
-        "gallery/beach-forest.jpg",
-        "gallery/beach.jpg",
-        "gallery/seaside-bluff.jpg",
-        "gallery/volleyball-court.jpg"
+        "/src/images/pasted-image-1786738713985.png",
+        "/src/images/pasted-image-1786738771709.png",
+        "/src/images/pasted-image-1786738805559.png",
+        "/src/images/pasted-image-1786738819160.png"
       ]
     }
   ]
