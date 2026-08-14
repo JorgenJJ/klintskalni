@@ -60,8 +60,12 @@ nearby:
     - id: butikk-elvi
       description: Groceries, open all week.
     - id: mat-sidrabini
+      description: ''
     - id: mat-meke
+      description: ''
     - id: mat-pernigele
+      description: ''
+    - id: fyret
 general:
   galleryTitle: The surroundings
   galleryAlts:

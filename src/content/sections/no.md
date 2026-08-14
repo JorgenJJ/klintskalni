@@ -65,6 +65,8 @@ nearby:
       description: Restaurant.
     - id: mat-pernigele
       description: Restaurant.
+    - id: fyret
+      description: Gammelt fyrtårn på stranden.
 general:
   galleryTitle: Omgivelsene
   galleryAlts:

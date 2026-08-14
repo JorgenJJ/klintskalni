@@ -60,8 +60,12 @@ nearby:
     - id: butikk-elvi
       description: Pārtikas preces, atvērts visu nedēļu.
     - id: mat-sidrabini
+      description: ''
     - id: mat-meke
+      description: ''
     - id: mat-pernigele
+      description: ''
+    - id: fyret
 general:
   galleryTitle: Apkārtne
   galleryAlts:
