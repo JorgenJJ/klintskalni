@@ -15,14 +15,14 @@ houses:
       tagline: Plaša guļbūves māja ar tiešu piekļuvi pludmalei.
       keyPoints:
         - icon: 👥
-          label: 8 viesi
+          label: 9 viesi
         - icon: 🛏️
-          label: 3 guļamistabas
+          label: 3 istabas
         - icon: 🛌
           label: 5 gultas
         - icon: 🛁
           label: 1,5 vannasistabas
-      description: Skaista guļbūves māja ar tiešu piekļuvi garajai smilšu pludmalei, kas stiepjas kilometriem abos virzienos. Trīs plašas guļamistabas un vannasistaba otrajā stāvā; nesen atjaunota virtuve, plaša dzīvojamā istaba un tualete pirmajā stāvā. Liela, nojumēta terase un dārzs ar rotaļu laukumu, sporta laukumu un savu pirti.
+      description: Skaists koka māja ar tiešu pieeju garajai smilšu pludmalei, kas stiepjas vairākus kilometrus abos virzienos. Trīs plašas guļamistabas un vannas istaba otrajā stāvā; jaunatjaunotā virtuve, plašs dzīvojamais istabas un tualete pirmajā stāvā. 3 dubultgulši un 2 viengulši. Liela segtā terase, dārzs ar rotaļu laukumu, volejbola laukumu un privāto saunu (jauna 2023. gadā).
       bookLabel: Rezervēt māju Airbnb
       imageAlt: Guļbūves māja ar balkonu un terasi
     - id: cottage
@@ -32,12 +32,12 @@ houses:
         - icon: 👥
           label: 7 viesi
         - icon: 🛏️
-          label: 3 guļamistabas
+          label: 3 istabas
         - icon: 🛌
           label: 4 gultas
         - icon: 🛁
-          label: 1 vannasistaba
-      description: Skaista guļbūves vasarnīca ar tiešu piekļuvi tai pašai garajai smilšu pludmalei. Trīs plašas guļamistabas, virtuve, dzīvojamā istaba un vannasistaba. Liela, daļēji nojumēta terase un dārzs ar rotaļu laukumu, sporta laukumu un pirti (jauna 2023. gadā).
+          label: 1 vannas istaba
+      description: Skaista koka māja ar tiešu pieeju tādam pašam garam smilšu pludmalē. Trīs plaši guļamnami, virtuve, dzīvojamā istaba un vannasistaba. Trīs dubultgulši un viens viengulšis. Liela, daļēji segta terase, dārzs ar rotaļu laukumu, volejbola laukumu un privāto saunu (jauna kopš 2023. gada).
       bookLabel: Rezervēt vasarnīcu Airbnb
       imageAlt: Guļbūves vasarnīca vakara gaismā
   photosButtonLabel: Skatīt bildes
@@ -60,13 +60,13 @@ nearby:
     - id: butikk-elvi
       description: Pārtikas preces, atvērts visu nedēļu.
     - id: mat-sidrabini
-      description: ''
+      description: Viesnīca ar labu ēdienu un pašu savu gaļas veikaliņu.
     - id: mat-meke
-      description: ''
+      description: Restorāns.
     - id: mat-pernigele
-      description: ''
+      description: Restorāns.
     - id: fyret
-      description: ''
+      description: Vecais bāka uz pludmales.
 general:
   galleryTitle: Apkārtne
   galleryAlts:
@@ -92,8 +92,8 @@ general:
   tocLabel: Saturs
 ---
 
-Klintskalni 1 atrodas Liepupē pie Latvijas krasta ar tiešu piekļuvi smilšu pludmalei, kas stiepjas vairākus kilometrus abos virzienos. Uz zemesgabala atrodas divas atsevišķas vienības, māja un vasarnīca, kuras tiek izīrētas atsevišķi.
+Klintskalni 1 atrodas Liepupē Latvijas piekrastē un tam ir tieša pieeja smilšu pludmalei, kas stiepjas vairākus kilometrus abos virzienos. Īpašumā ir divas atsevišķas vienības — māja un koka māja, kuras tiek izīrētas atsevišķi.
 
-Abu vienību kopīga dārza teritorijā ir bērnu laukums, sporta zona un pirts. Abu vienības var izīrēt arī kopā lielākām grupām. Lūdzu, sazinieties.
+Abi vienību kopīgi izmanto dārzu ar augļu dārzu, spēļu laukumu un volejbola laukumu. Katrai mājai ir sava pirts. Abas vienības var arī izīrēt kopā lielākām grupām. Lūdzu, sazinieties ar mums.
 
-Katram objektam ir sava sludinājuma vieta Airbnb, kur var pārbaudīt pieejamību un veikt rezervāciju.
+Katram dzīvoklim ir savs sludinājums Airbnb, kur var pārbaudīt pieejamību un veikt rezervāciju. Vasaras sezonā (no sestdienas līdz sestdienai) izīrēšana notiek tikai nedēļas garumā.
