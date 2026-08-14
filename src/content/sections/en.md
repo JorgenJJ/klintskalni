@@ -10,7 +10,7 @@ about:
 houses:
   title: The houses
   items:
-    - id: cottage
+    - id: house
       name: The House
       tagline: Spacious log house with direct beach access.
       keyPoints:
@@ -25,7 +25,7 @@ houses:
       description: A beautiful log house with direct access to the long sandy beach that stretches for kilometres in both directions. Three spacious bedrooms and a bathroom upstairs; a newly renovated kitchen, a spacious living room and a toilet downstairs. Large covered terrace, with a garden that has a playground, a sports area and its own sauna.
       bookLabel: Book the House on Airbnb
       imageAlt: The log house with balcony and terrace
-    - id: house
+    - id: cottage
       name: The Cottage
       tagline: Cosy log cottage with direct beach access.
       keyPoints:
@@ -59,6 +59,9 @@ nearby:
       description: Red sandstone cliffs and small caves along the shore.
     - id: butikk-elvi
       description: Groceries, open all week.
+    - id: mat-sidrabini
+    - id: mat-meke
+    - id: mat-pernigele
 general:
   galleryTitle: The surroundings
   galleryAlts:

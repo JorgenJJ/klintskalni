@@ -10,21 +10,6 @@ about:
 houses:
   title: Huset og hytta
   items:
-    - id: cottage
-      name: Hytta
-      tagline: Koselig tømmerhytte med direkte tilgang til stranden.
-      keyPoints:
-        - icon: 👥
-          label: 9 gjester
-        - icon: 🛏️
-          label: 3 soverom
-        - icon: 🛌
-          label: 5 senger
-        - icon: 🛁
-          label: 1 bad
-      description: Vakker tømmerhytte med direkte tilgang til den samme lange sandstranden. Tre romslige soverom, kjøkken, stue og bad. Stor, delvis overbygd terrasse, og hage med lekeplass, sportsområde og badstue (ny i 2023).
-      bookLabel: Book hytta på Airbnb
-      imageAlt: Tømmerhytta i kveldslys
     - id: house
       name: Huset
       tagline: Romslig tømmerhus med direkte tilgang til stranden.
@@ -37,9 +22,24 @@ houses:
           label: 5 senger
         - icon: 🛁
           label: 1,5 bad
-      description: Vakkert tømmerhus med direkte tilgang til den lange sandstranden som strekker seg flere kilometer i begge retninger. Tre romslige soverom og bad i andre etasje; nyoppusset kjøkken, romslig stue og toalett i første. Stor overbygd terrasse, og hage med lekeplass, sportsområde og egen badstue.
+      description: Vakkert tømmerhus med direkte tilgang til den lange sandstranden som strekker seg flere kilometer i begge retninger. Tre romslige soverom og bad i andre etasje; nyoppusset kjøkken, romslig stue og toalett i første. Stor overbygd terrasse, og hage med lekeplass, volleyballbane og egen badstue (ny i 2023).
       bookLabel: Book huset på Airbnb
       imageAlt: Tømmerhuset med balkong og terrasse
+    - id: cottage
+      name: Hytta
+      tagline: Koselig tømmerhytte med direkte tilgang til stranden.
+      keyPoints:
+        - icon: 👥
+          label: 9 gjester
+        - icon: 🛏️
+          label: 3 soverom
+        - icon: 🛌
+          label: 5 senger
+        - icon: 🛁
+          label: 1 bad
+      description: Vakker tømmerhytte med direkte tilgang til den samme lange sandstranden. Tre romslige soverom, kjøkken, stue og bad. Stor, delvis overbygd terrasse, og hage med lekeplass, volleyballbane og egen badstue (ny i 2023).
+      bookLabel: Book hytta på Airbnb
+      imageAlt: Tømmerhytta i kveldslys
   photosButtonLabel: Se bilder
   closeLabel: Lukk
 nearby:
@@ -59,6 +59,12 @@ nearby:
       description: Røde sandsteinsklipper og små huler langs stranden.
     - id: butikk-elvi
       description: Dagligvarer, åpent hele uka.
+    - id: mat-sidrabini
+      description: Kro med god mat og eget slakteri-utsalg.
+    - id: mat-meke
+      description: Restaurant.
+    - id: mat-pernigele
+      description: Restaurant.
 general:
   galleryTitle: Omgivelsene
   galleryAlts:
@@ -88,7 +94,7 @@ Klintskalni 1 ligger i Liepupe på den latviske kysten, med direkte tilgang til 
 sandstrand som strekker seg flere kilometer i begge retninger. På tomta står det
 to separate enheter, et hus og ei hytte, som leies hver for seg.
 
-Begge deler samme hage med lekeplass, sportsområde og badstue. De to enhetene kan også leies sammen for større grupper. Ta kontakt.
+Begge deler samme hage med hage, lekeplass, volleyballbane. Husene har hver sin badstue. De to enhetene kan også leies sammen for større grupper. Ta kontakt.
 
 Hver enhet har sin egen annonse på Airbnb, der du kan sjekke tilgjengelighet og
 booke.

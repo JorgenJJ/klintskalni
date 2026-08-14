@@ -10,7 +10,7 @@ about:
 houses:
   title: Māja un vasarnīca
   items:
-    - id: cottage
+    - id: house
       name: Māja
       tagline: Plaša guļbūves māja ar tiešu piekļuvi pludmalei.
       keyPoints:
@@ -25,7 +25,7 @@ houses:
       description: Skaista guļbūves māja ar tiešu piekļuvi garajai smilšu pludmalei, kas stiepjas kilometriem abos virzienos. Trīs plašas guļamistabas un vannasistaba otrajā stāvā; nesen atjaunota virtuve, plaša dzīvojamā istaba un tualete pirmajā stāvā. Liela, nojumēta terase un dārzs ar rotaļu laukumu, sporta laukumu un savu pirti.
       bookLabel: Rezervēt māju Airbnb
       imageAlt: Guļbūves māja ar balkonu un terasi
-    - id: house
+    - id: cottage
       name: Vasarnīca
       tagline: Mājīga guļbūves vasarnīca ar tiešu piekļuvi pludmalei.
       keyPoints:
@@ -59,6 +59,9 @@ nearby:
       description: Sarkanā smilšakmens klintis un nelielas alas gar krastu.
     - id: butikk-elvi
       description: Pārtikas preces, atvērts visu nedēļu.
+    - id: mat-sidrabini
+    - id: mat-meke
+    - id: mat-pernigele
 general:
   galleryTitle: Apkārtne
   galleryAlts:
