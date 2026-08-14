@@ -8,6 +8,7 @@
       "beds": 6,
       "image": "/src/images/huset.avif",
       "gallery": [
+        "/src/images/huset.avif",
         "/src/images/huset2.avif",
         "/src/images/innihus1.avif",
         "/src/images/innihus3.avif",
