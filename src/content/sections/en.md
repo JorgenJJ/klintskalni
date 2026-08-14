@@ -8,36 +8,36 @@ about:
   title: About Klintskalni 1
   emailNote: 'You can also book directly by email:'
 houses:
-  title: The houses
+  title: The house and the cabin
   items:
     - id: house
       name: The House
       tagline: Spacious log house with direct beach access.
       keyPoints:
         - icon: 👥
-          label: Sleeps 8
+          label: 9 guests
         - icon: 🛏️
           label: 3 bedrooms
         - icon: 🛌
           label: 5 beds
         - icon: 🛁
-          label: 1.5 baths
-      description: A beautiful log house with direct access to the long sandy beach that stretches for kilometres in both directions. Three spacious bedrooms and a bathroom upstairs; a newly renovated kitchen, a spacious living room and a toilet downstairs. Large covered terrace, with a garden that has a playground, a sports area and its own sauna.
+          label: 1.5 bathrooms
+      description: Beautiful timber house with direct access to the long sandy beach stretching for several kilometers in both directions. Three spacious bedrooms and a bathroom on the second floor; newly renovated kitchen, spacious living room and toilet on the first floor. 3 double beds and 2 single beds. Large covered terrace, and garden with playground, volleyball court and private sauna (new in 2023).
       bookLabel: Book the House on Airbnb
-      imageAlt: The log house with balcony and terrace
+      imageAlt: The log cabin with balcony and terrace
     - id: cottage
       name: The Cottage
       tagline: Cosy log cottage with direct beach access.
       keyPoints:
         - icon: 👥
-          label: Sleeps 7
+          label: 7 guests
         - icon: 🛏️
           label: 3 bedrooms
         - icon: 🛌
           label: 4 beds
         - icon: 🛁
-          label: 1 bath
-      description: A beautiful log cottage with direct access to the same long sandy beach. Three spacious bedrooms, a kitchen, living room and bathroom. Large, partly covered terrace, with a garden that has a playground, a sports area and a sauna (new in 2023).
+          label: 1 bathroom
+      description: Beautiful timber cabin with direct access to the same long sandy beach. Three spacious bedrooms, kitchen, living room, and bathroom. Three double beds and one single bed. Large, partially covered terrace, and garden with playground, volleyball court, and private sauna (new in 2023).
       bookLabel: Book the Cottage on Airbnb
       imageAlt: The log cottage in evening light
   photosButtonLabel: See photos
@@ -94,6 +94,6 @@ general:
 
 Klintskalni 1 is located in Liepupe on the Latvian coast, with direct access to a sandy beach that stretches for several kilometers in both directions. On the property there are two separate units, a house and a cabin, which are rented out individually.
 
-Both share a garden with a playground, sports area, and sauna. The two units can also be rented together for larger groups. Contact us.
+Both share a garden with a garden, playground, volleyball court. Each house has its own sauna. The two units can also be rented together for larger groups. Please contact us.
 
-Each unit has its own listing on Airbnb, where you can check availability and book.
+Each unit has its own listing on Airbnb, where you can check availability and book. Only weekly rentals during the summer season (Saturday to Saturday).
