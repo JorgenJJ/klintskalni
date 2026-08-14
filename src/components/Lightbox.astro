@@ -1,10 +1,14 @@
 ---
 // Delt «forstørr bilde»-overlay. Alle elementer med attributtet data-full
 // (stor bilde-URL) blir trykkbare og åpner dette i stor versjon.
+// Elementer med data-lb-group + data-lb-index tilhører en samling: da vises
+// pilknapper (og piltaster virker) for å bla mellom bildene i samlingen.
 interface Props {
   closeLabel?: string;
+  prevLabel?: string;
+  nextLabel?: string;
 }
-const { closeLabel = 'Close' } = Astro.props;
+const { closeLabel = 'Close', prevLabel = 'Previous image', nextLabel = 'Next image' } = Astro.props;
 ---
 
 <dialog class="lightbox" id="lightbox" aria-label={closeLabel}>
@@ -18,7 +22,30 @@ const { closeLabel = 'Close' } = Astro.props;
         stroke-linecap="round"></path>
     </svg>
   </button>
+  <button class="lb-nav lb-prev" type="button" data-lb-prev aria-label={prevLabel} hidden>
+    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+      <path
+        d="M15 5l-7 7 7 7"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+  </button>
+  <button class="lb-nav lb-next" type="button" data-lb-next aria-label={nextLabel} hidden>
+    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+      <path
+        d="M9 5l7 7-7 7"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+  </button>
   <img class="lb-img" alt="" />
+  <span class="lb-counter" data-lb-counter hidden aria-hidden="true"></span>
 </dialog>
 
 <script is:inline>
@@ -26,10 +53,67 @@ const { closeLabel = 'Close' } = Astro.props;
     var dlg = document.getElementById('lightbox');
     if (!dlg) return;
     var img = dlg.querySelector('.lb-img');
+    var prevBtn = dlg.querySelector('[data-lb-prev]');
+    var nextBtn = dlg.querySelector('[data-lb-next]');
+    var counter = dlg.querySelector('[data-lb-counter]');
 
-    function open(src, alt) {
-      img.src = src;
-      img.alt = alt || '';
+    // Bildene i samlingen som er åpen nå ({src, alt}), og posisjonen i den.
+    var items = [];
+    var current = 0;
+
+    // Finn alle bilder i samme samling som utløseren. Karusellen dupliserer
+    // fliser for sømløs rulling, så det ryddes opp per data-lb-index.
+    function collect(trigger) {
+      var group = trigger.getAttribute('data-lb-group');
+      if (!group) {
+        items = [{ src: trigger.getAttribute('data-full'), alt: trigger.getAttribute('data-full-alt') || '' }];
+        current = 0;
+        return;
+      }
+      var seen = {};
+      var list = [];
+      document.querySelectorAll('[data-lb-group]').forEach(function (el) {
+        if (el.getAttribute('data-lb-group') !== group) return;
+        var idx = parseInt(el.getAttribute('data-lb-index'), 10);
+        if (isNaN(idx) || seen[idx]) return;
+        seen[idx] = true;
+        list.push({ idx: idx, src: el.getAttribute('data-full'), alt: el.getAttribute('data-full-alt') || '' });
+      });
+      list.sort(function (a, b) {
+        return a.idx - b.idx;
+      });
+      items = list;
+      var triggerIdx = parseInt(trigger.getAttribute('data-lb-index'), 10);
+      current = 0;
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].idx === triggerIdx) {
+          current = i;
+          break;
+        }
+      }
+    }
+
+    function render() {
+      var it = items[current];
+      if (!it) return;
+      img.src = it.src;
+      img.alt = it.alt;
+      var multi = items.length > 1;
+      prevBtn.hidden = !multi;
+      nextBtn.hidden = !multi;
+      counter.hidden = !multi;
+      if (multi) counter.textContent = current + 1 + ' / ' + items.length;
+    }
+
+    function step(delta) {
+      if (items.length < 2) return;
+      current = (current + delta + items.length) % items.length;
+      render();
+    }
+
+    function open(trigger) {
+      collect(trigger);
+      render();
       if (typeof dlg.showModal === 'function') dlg.showModal();
       else dlg.setAttribute('open', '');
       requestAnimationFrame(function () {
@@ -47,12 +131,30 @@ const { closeLabel = 'Close' } = Astro.props;
       var trigger = e.target.closest('[data-full]');
       if (trigger) {
         e.preventDefault();
-        open(trigger.getAttribute('data-full'), trigger.getAttribute('data-full-alt'));
+        open(trigger);
+        return;
+      }
+      if (e.target.closest && e.target.closest('[data-lb-prev]')) {
+        step(-1);
+        return;
+      }
+      if (e.target.closest && e.target.closest('[data-lb-next]')) {
+        step(1);
         return;
       }
       // Klikk på bakgrunn eller lukkeknapp lukker.
       if (e.target === dlg || (e.target.closest && e.target.closest('[data-lb-close]'))) {
         close();
+      }
+    });
+    // Piltaster blar mellom bildene mens visningen er åpen.
+    dlg.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        step(-1);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        step(1);
       }
     });
     // Escape (native dialog) – rydd opp klassen.
@@ -116,6 +218,56 @@ const { closeLabel = 'Close' } = Astro.props;
   }
   .lb-close:hover {
     background: rgba(0, 0, 0, 0.75);
+  }
+  /* Pilknapper for å bla i samlingen */
+  .lb-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: inline-flex;
+    padding: 0.6rem;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    cursor: pointer;
+  }
+  .lb-nav:hover {
+    background: rgba(0, 0, 0, 0.75);
+  }
+  .lb-nav[hidden] {
+    display: none;
+  }
+  .lb-prev {
+    left: 1rem;
+  }
+  .lb-next {
+    right: 1rem;
+  }
+  .lb-counter {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+  }
+  @media (max-width: 640px) {
+    .lb-nav {
+      padding: 0.45rem;
+    }
+    .lb-prev {
+      left: 0.5rem;
+    }
+    .lb-next {
+      right: 0.5rem;
+    }
   }
   @media (prefers-reduced-motion: reduce) {
     .lb-img {

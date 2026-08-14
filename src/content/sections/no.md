@@ -42,6 +42,8 @@ houses:
       imageAlt: Tømmerhytta i kveldslys
   photosButtonLabel: Se bilder
   closeLabel: Lukk
+  prevImageLabel: Forrige bilde
+  nextImageLabel: Neste bilde
 nearby:
   title: Butikker og aktiviteter i nærheten
   intro: ''

@@ -136,13 +136,15 @@ for (const house of houses) {
                   </div>
                   <div class="modal-body">
                     <div class="modal-grid">
-                      {galleryImgs.map((gi) => (
+                      {galleryImgs.map((gi, i) => (
                         <figure>
                           <button
                             class="zoomable"
                             type="button"
                             data-full={gi.full}
                             data-full-alt={gi.alt}
+                            data-lb-group={`house-${house.id}`}
+                            data-lb-index={i}
                             aria-label={gi.alt}
                           >
                             <Image

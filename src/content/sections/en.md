@@ -42,6 +42,8 @@ houses:
       imageAlt: The log cottage in evening light
   photosButtonLabel: See photos
   closeLabel: Close
+  prevImageLabel: Previous image
+  nextImageLabel: Next image
 nearby:
   title: Nearby shops and activities
   intro: ''
