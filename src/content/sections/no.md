@@ -10,6 +10,21 @@ about:
 houses:
   title: Huset og hytta
   items:
+    - id: cottage
+      name: Hytta
+      tagline: Koselig tømmerhytte med direkte tilgang til stranden.
+      keyPoints:
+        - icon: 👥
+          label: 9 gjester
+        - icon: 🛏️
+          label: 3 soverom
+        - icon: 🛌
+          label: 5 senger
+        - icon: 🛁
+          label: 1 bad
+      description: Vakker tømmerhytte med direkte tilgang til den samme lange sandstranden. Tre romslige soverom, kjøkken, stue og bad. Stor, delvis overbygd terrasse, og hage med lekeplass, sportsområde og badstue (ny i 2023).
+      bookLabel: Book hytta på Airbnb
+      imageAlt: Tømmerhytta i kveldslys
     - id: house
       name: Huset
       tagline: Romslig tømmerhus med direkte tilgang til stranden.
@@ -25,21 +40,6 @@ houses:
       description: Vakkert tømmerhus med direkte tilgang til den lange sandstranden som strekker seg flere kilometer i begge retninger. Tre romslige soverom og bad i andre etasje; nyoppusset kjøkken, romslig stue og toalett i første. Stor overbygd terrasse, og hage med lekeplass, sportsområde og egen badstue.
       bookLabel: Book huset på Airbnb
       imageAlt: Tømmerhuset med balkong og terrasse
-    - id: cottage
-      name: Hytta
-      tagline: Koselig tømmerhytte med direkte tilgang til stranden.
-      keyPoints:
-        - icon: 👥
-          label: 7 gjester
-        - icon: 🛏️
-          label: 3 soverom
-        - icon: 🛌
-          label: 4 senger
-        - icon: 🛁
-          label: 1 bad
-      description: Vakker tømmerhytte med direkte tilgang til den samme lange sandstranden. Tre romslige soverom, kjøkken, stue og bad. Stor, delvis overbygd terrasse, og hage med lekeplass, sportsområde og badstue (ny i 2023).
-      bookLabel: Book hytta på Airbnb
-      imageAlt: Tømmerhytta i kveldslys
   photosButtonLabel: Se bilder
   closeLabel: Lukk
 nearby:
