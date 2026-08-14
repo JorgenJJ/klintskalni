@@ -63,6 +63,9 @@ const sections = defineCollection({
         // Knapp + modal for bildegalleriet per hus
         photosButtonLabel: z.string().default('Se bilder'),
         closeLabel: z.string().default('Lukk'),
+        // Pilknappene i stor bildevisning (forrige/neste)
+        prevImageLabel: z.string().default('Forrige bilde'),
+        nextImageLabel: z.string().default('Neste bilde'),
       })
       .default({}),
     // «I nærheten»: NAVN, kategori, avstand og lenke ligger i src/data/nearby.json

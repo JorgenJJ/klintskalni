@@ -16,7 +16,9 @@ for (let i = 0; i < files.length; i++) {
   const im = resolveImage(files[i]);
   if (!im) continue;
   const full = await getImage({ src: im, width: 1600, format: 'webp' });
-  base.push({ im, alt: alts[i] ?? '', full: full.src });
+  // `idx` er posisjonen i det samlede settet – brukes av bildevisningen
+  // (Lightbox) til å bla i riktig rekkefølge på tvers av de to radene.
+  base.push({ im, alt: alts[i] ?? '', full: full.src, idx: base.length });
 }
 
 const n = base.length;
@@ -64,6 +66,8 @@ const rows = [
                       type="button"
                       data-full={t.full}
                       data-full-alt={t.alt}
+                      data-lb-group="surroundings"
+                      data-lb-index={t.idx}
                       aria-label={exposed ? t.alt : undefined}
                       tabindex={exposed ? 0 : -1}
                     >

@@ -126,6 +126,8 @@ collections:
                   - { label: "Bildebeskrivelse (alt)", name: "imageAlt", widget: "string", required: false, i18n: true }
               - { label: "Knapp: Se bilder", name: "photosButtonLabel", widget: "string", required: false, default: "Se bilder", i18n: true }
               - { label: "Lukk-knapp (bildevisning)", name: "closeLabel", widget: "string", required: false, default: "Lukk", i18n: true }
+              - { label: "Forrige-knapp (bildevisning)", name: "prevImageLabel", widget: "string", required: false, default: "Forrige bilde", i18n: true }
+              - { label: "Neste-knapp (bildevisning)", name: "nextImageLabel", widget: "string", required: false, default: "Neste bilde", i18n: true }
 
           # --- Gruppe 4: I nærheten ------------------------------------------
           #  NB: stedsNAVN ligger IKKE her. De ligger i «Nærområdet»

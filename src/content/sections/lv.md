@@ -42,6 +42,8 @@ houses:
       imageAlt: Guļbūves vasarnīca vakara gaismā
   photosButtonLabel: Skatīt bildes
   closeLabel: Aizvērt
+  prevImageLabel: Iepriekšējais attēls
+  nextImageLabel: Nākamais attēls
 nearby:
   title: Veikali un aktivitātes tuvumā
   intro: ''
