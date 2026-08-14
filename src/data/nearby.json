@@ -31,6 +31,30 @@
       "category": "activity",
       "distanceKm": 8,
       "url": ""
+    },
+    {
+      "id": "mat-sidrabini",
+      "name": "Sidrabiņi, krogs",
+      "area": "",
+      "category": "restaurant",
+      "distanceKm": 8.9,
+      "url": "https://maps.app.goo.gl/UGK8TrqVbK85aVgV9"
+    },
+    {
+      "id": "mat-meke",
+      "name": "Restorāns Meke",
+      "area": "",
+      "category": "restaurant",
+      "distanceKm": 12.3,
+      "url": "https://maps.app.goo.gl/bGugScxSPCP3viDQ6"
+    },
+    {
+      "id": "mat-pernigele",
+      "name": "Grill House & Hotel Pernigele",
+      "area": "",
+      "category": "restaurant",
+      "distanceKm": 8.4,
+      "url": "https://maps.app.goo.gl/6AGtZNrSwxLtjt6e8"
     }
   ]
 }
