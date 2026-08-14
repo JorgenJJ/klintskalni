@@ -15,14 +15,14 @@ houses:
       tagline: Romslig tømmerhus med direkte tilgang til stranden.
       keyPoints:
         - icon: 👥
-          label: 8 gjester
+          label: 9 gjester
         - icon: 🛏️
           label: 3 soverom
         - icon: 🛌
           label: 5 senger
         - icon: 🛁
           label: 1,5 bad
-      description: Vakkert tømmerhus med direkte tilgang til den lange sandstranden som strekker seg flere kilometer i begge retninger. Tre romslige soverom og bad i andre etasje; nyoppusset kjøkken, romslig stue og toalett i første. Stor overbygd terrasse, og hage med lekeplass, volleyballbane og egen badstue (ny i 2023).
+      description: Vakkert tømmerhus med direkte tilgang til den lange sandstranden som strekker seg flere kilometer i begge retninger. Tre romslige soverom og bad i andre etasje; nyoppusset kjøkken, romslig stue og toalett i første. 3 dobbeltsenger og 2 enkeltsenger. Stor overbygd terrasse, og hage med lekeplass, volleyballbane og egen badstue (ny i 2023).
       bookLabel: Book huset på Airbnb
       imageAlt: Tømmerhuset med balkong og terrasse
     - id: cottage
@@ -30,14 +30,14 @@ houses:
       tagline: Koselig tømmerhytte med direkte tilgang til stranden.
       keyPoints:
         - icon: 👥
-          label: 9 gjester
+          label: 7 gjester
         - icon: 🛏️
           label: 3 soverom
         - icon: 🛌
-          label: 5 senger
+          label: 4 senger
         - icon: 🛁
           label: 1 bad
-      description: Vakker tømmerhytte med direkte tilgang til den samme lange sandstranden. Tre romslige soverom, kjøkken, stue og bad. Stor, delvis overbygd terrasse, og hage med lekeplass, volleyballbane og egen badstue (ny i 2023).
+      description: Vakker tømmerhytte med direkte tilgang til den samme lange sandstranden. Tre romslige soverom, kjøkken, stue og bad. Tre dobbeltsenger og en enkeltseng. Stor, delvis overbygd terrasse, og hage med lekeplass, volleyballbane og egen badstue (ny i 2023).
       bookLabel: Book hytta på Airbnb
       imageAlt: Tømmerhytta i kveldslys
   photosButtonLabel: Se bilder
@@ -99,4 +99,4 @@ to separate enheter, et hus og ei hytte, som leies hver for seg.
 Begge deler samme hage med hage, lekeplass, volleyballbane. Husene har hver sin badstue. De to enhetene kan også leies sammen for større grupper. Ta kontakt.
 
 Hver enhet har sin egen annonse på Airbnb, der du kan sjekke tilgjengelighet og
-booke.
+booke. Kun ukesutleie i sommersesongen (lørdag-lørdag).
