@@ -98,7 +98,9 @@ Klintskalni 1 ligger i Liepupe på den latviske kysten, med direkte tilgang til 
 sandstrand som strekker seg flere kilometer i begge retninger. På tomta står det
 to separate enheter, et hus og ei hytte, som leies hver for seg.
 
-Begge deler samme hage med hage, lekeplass, volleyballbane. Husene har hver sin badstue. De to enhetene kan også leies sammen for større grupper. Ta kontakt.
+Husene deler den samme hage, med lekeplass, volleyballbane og parkeringsplasser. Husene har hver sin badstue. De to enhetene kan også leies sammen for større grupper. Ta kontakt.
 
 Hver enhet har sin egen annonse på Airbnb, der du kan sjekke tilgjengelighet og
-booke. Kun ukesutleie i sommersesongen (lørdag-lørdag).
+booke. 
+
+Kun ukesutleie (lørdag-lørdag).

@@ -94,8 +94,10 @@ general:
   tocLabel: Contents
 ---
 
-Klintskalni 1 is located in Liepupe on the Latvian coast, with direct access to a sandy beach that stretches for several kilometers in both directions. On the property there are two separate units, a house and a cabin, which are rented out individually.
+Klintskalni 1 is located in Liepupe on the Latvian coast, with direct access to a sandy beach that stretches for several kilometers in both directions. On the property there are two separate units, a house and a cottage, which are rented separately.
 
-Both share a garden with a garden, playground, volleyball court. Each house has its own sauna. The two units can also be rented together for larger groups. Please contact us.
+The houses share the same garden, with a playground, volleyball court, and parking spaces. Each house has its own sauna. The two units can also be rented together for larger groups. Get in touch.
 
-Each unit has its own listing on Airbnb, where you can check availability and book. Only weekly rentals during the summer season (Saturday to Saturday).
+Each unit has its own listing on Airbnb, where you can check availability and book.
+
+Weekly rental only (Saturday–Saturday).

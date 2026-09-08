@@ -94,8 +94,10 @@ general:
   tocLabel: Saturs
 ---
 
-Klintskalni 1 atrodas Liepupē Latvijas piekrastē un tam ir tieša pieeja smilšu pludmalei, kas stiepjas vairākus kilometrus abos virzienos. Īpašumā ir divas atsevišķas vienības — māja un koka māja, kuras tiek izīrētas atsevišķi.
+Klintskalni 1 atrodas Liepupē, Latvijas piekrastē, ar tiešu pieeju smilšu pludmalei, kas abos virzienos stiepjas vairākus kilometrus. Uz zemesgabala atrodas divas atsevišķas vienības — māja un vasarnīca —, ko izīrē katru atsevišķi.
 
-Abi vienību kopīgi izmanto dārzu ar augļu dārzu, spēļu laukumu un volejbola laukumu. Katrai mājai ir sava pirts. Abas vienības var arī izīrēt kopā lielākām grupām. Lūdzu, sazinieties ar mums.
+Mājām ir kopīgs pagalms/dārzs ar rotaļu laukumu, volejbola laukumu un autostāvvietām. Katrai mājai ir sava pirts. Abas vienības var izīrēt arī kopā lielākām grupām. Sazinieties ar mums.
 
-Katram dzīvoklim ir savs sludinājums Airbnb, kur var pārbaudīt pieejamību un veikt rezervāciju. Vasaras sezonā (no sestdienas līdz sestdienai) izīrēšana notiek tikai nedēļas garumā.
+Katrai vienībai ir savs sludinājums Airbnb, kur var pārbaudīt pieejamību un veikt rezervāciju.
+
+Tikai iznomāšana pa nedēļām (sestdiena–sestdiena).
