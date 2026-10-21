@@ -42,6 +42,65 @@ Sveltia, med mindre det finnes et konkret behov som bare Tina dekker.
 - Innlogging: fine-grained PAT lagret i nettleseren. Ingen secrets i bygget.
 - Redigering skjer i dag rett mot `main` (se commitene «Update Sideinnhold»).
 
+## Forskjeller mellom Sveltia og TinaCMS
+
+Sammenlignet med Sveltia CMS 0.250 og TinaCMS 3.15 (siste versjoner på npm,
+oktober 2026). Funksjonene er kontrollert mot pakkene selv, ikke bare omtaler.
+
+| Egenskap | Sveltia (i dag) | TinaCMS |
+|---|---|---|
+| Hva det er | Ferdig nettleserapp fra CDN, ett `<script>`, konfig i YAML | npm-pakker (React, GraphQL); skjema i TypeScript (`tina/config.ts`); admin bygges ved hver deploy |
+| Lisens | MIT | Apache-2.0 (Tina Cloud er en kommersiell tjeneste) |
+| Hvor innholdet ligger | Filer i Git | Filer i Git, pluss en indeks i Tina Cloud eller egen database |
+| Server og database | Ingen | Tina Cloud, eller egen Node-backend med MongoDB/Redis |
+| Nøkler i bygget | Ingen | `TINA_CLIENT_ID` og `TINA_TOKEN` |
+| Innlogging | GitHub-PAT (eller OAuth); lokalt uten innlogging | Tina Cloud-konto, eller egen løsning (Auth.js, Clerk) |
+| Flerspråk | Innebygd: alle språk i ett skjema, side om side | Ikke innebygd: ett dokument per språk, eller ett felt per språk |
+| Felt som er like på alle språk | `i18n: duplicate` holder dem synkronisert | Finnes ikke; må vedlikeholdes for hånd |
+| Maskinoversetting | Innebygd: Google, DeepL, Mistral, OpenAI, Anthropic, DeepSeek; nøkkelen ligger bare i nettleseren | Finnes ikke |
+| Visuell redigering (klikk i selve siden) | Nei, bare forhåndsvisning ved skjemaet | Ja, men krever React og Tina-klient i komponentene |
+| Brødtekst | Markdown-editor | Rik tekst-editor (Plate), kan bygge inn egne komponenter (MDX) |
+| Bilder | Opplasting rett til `src/images`; kan optimalisere/konvertere til WebP ved opplasting; bildebanker (Unsplash, Pexels, Pixabay) | Mediebehandler, standard i `public/`; ekstern lagring (Cloudinary, S3) mulig |
+| Søk i CMS-et | Fulltekst i innhold og bilder | Innebygd søk |
+| Utkast og godkjenning | «Editorial workflow» (PR-basert), gratis | Editorial workflow, kun i betalte Tina Cloud-planer |
+| Validering | `required`, `pattern`, `min`/`max` i YAML | Egne `ui.validate`-funksjoner i TypeScript (mer fleksibelt) |
+| Lokal redigering | «Work with Local Repository» i Chrome/Edge, null oppsett | `tinacms dev` starter en lokal backend; krever Node |
+| Oppdateringer | Lastes fra CDN ved hver åpning | Via npm, med nytt bygg |
+| Påvirkning på bygget | Ingen | `tinacms build` kjøres før hvert Astro-bygg |
+
+### Funksjonalitet du mister ved å bytte
+
+1. **«Translate»-knappen.** Engelsk og latvisk fylles ikke lenger automatisk fra
+   norsk. Dette er det største tapet.
+2. **Alle språk i ett skjema.** I Tina åpner du tre separate dokumenter
+   (`no`, `en`, `lv`) og må selv holde dem i takt.
+3. **Automatisk like felt på tvers av språk.** Eiendomsnavn, hus-ID og steds-ID
+   synkroniseres ikke. En ny plass i «I nærheten» må legges inn tre ganger med
+   samme ID.
+4. **Gratis utkast og godkjenning.** Brukes ikke i dag, men er tilgjengelig i
+   Sveltia uten kostnad; i Tina koster det.
+5. **Bildeoptimalisering ved opplasting og bildebanker.** Ikke slått på i dag,
+   men nyttig: flere bilder i `src/images` er 1,5–5 MB PNG-er. Astro optimaliserer
+   uansett ved bygg, så besøkende merker ikke forskjellen.
+6. **Drift uten tredjepart.** Ingen konto, ingen byggnøkler og ingen tjeneste
+   som kan gå ned eller endre pris.
+7. **Lokal redigering uten Node.** I dag holder det med Chrome og prosjektmappen.
+
+### Funksjonalitet du får
+
+1. **Visuell redigering direkte i siden** (forutsatt React, se risikoene).
+2. **Rik tekst-editor** med mulighet for egne blokker i teksten.
+3. **Skjema i TypeScript** med mer fleksibel validering.
+4. **Innlogging med Tina-konto** i stedet for en PAT som utløper.
+5. **GraphQL-API**, men det gir lite her, siden Astro leser filene direkte.
+
+Uten visuell redigering er det bare punkt 3 og 4 som er reelle gevinster, og
+begge veier lett mot tapene i punkt 1–3 over.
+
+Merk, uavhengig av Tina: `public/admin/index.html` laster alltid siste
+Sveltia-versjon (`unpkg.com/@sveltia/cms/...` uten versjonsnummer). Det er
+bekvemt, men en ny versjon kan i teorien endre oppførsel uten varsel.
+
 ## Hvor mye jobb
 
 | Del | Innsats |
@@ -85,8 +144,7 @@ Sveltia, med mindre det finnes et konkret behov som bare Tina dekker.
 | Sveltia-redigering mot `main` midt i byttet gir konflikter | Lav | Innholdsfrys under byttet |
 | `public/admin/` kolliderer (Sveltia-filer og Tinas genererte admin) | Lav | Fjern Sveltia-filene i samme commit som Tina legges til |
 
-Fordeler å veie mot: ingen PAT som utløper (innlogging via Tina-konto),
-mer moderne grensesnitt, og visuell redigering hvis man aksepterer React.
+Fordeler å veie mot: se «Funksjonalitet du får» over.
 
 ## Plan for å bytte i én deploy
 
@@ -127,3 +185,9 @@ tina.io/pricing før en eventuell migrering. Relevante sider:
 - Flerspråk i Tina: https://tina.io/docs/guides/internationalization
 - Selvhosting: https://tina.io/docs/self-hosted/overview
 - Cloudflare: https://tina.io/docs/tinacloud/deployment-options/cloudflare-workers
+- TinaCMS kildekode: https://github.com/tinacms/tinacms (npm `tinacms` 3.15.0)
+- Sveltia CMS kildekode: https://github.com/sveltia/sveltia-cms (npm `@sveltia/cms` 0.250.1)
+
+Funksjonene i sammenligningstabellen er kontrollert ved å søke i de publiserte
+npm-pakkene (for eksempel oversettingstjenestene i Sveltia, og at Tina ikke har
+noen oversettingsfunksjon).
