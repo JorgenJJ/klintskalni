@@ -1,10 +1,11 @@
-# Vurdering: migrere fra Sveltia CMS til TinaCMS
+# Vurdering: TinaCMS og Pages CMS som erstatning for Sveltia
 
 Status: vurdering, ikke vedtatt. Skrevet oktober 2026.
 
 Spørsmålet: kan CMS-et på `/admin` byttes fra Sveltia til TinaCMS, hvor mye jobb
 er det, hvordan bevares innholdet, hvilke risikoer finnes, og hvordan kan byttet
-gjøres i én deploy?
+gjøres i én deploy? Pages CMS er vurdert på de samme punktene i seksjonen
+«Alternativ: Pages CMS» nederst.
 
 ## Kort konklusjon
 
@@ -175,6 +176,107 @@ Fordeler å veie mot: se «Funksjonalitet du får» over.
    - Tilbakerulling: `git revert` av merge-commiten; Cloudflare publiserer
      Sveltia-versjonen igjen. Innholdsfilene er de samme, så ingenting går tapt.
 
+## Alternativ: Pages CMS
+
+Pages CMS (hunvreus/pagescms, MIT, versjon 2.1.8) er en Next.js-app som
+redigerer filer rett i et GitHub-repo. Konfigurasjonen er én fil, `.pages.yml`,
+i repo-roten. Den hostede versjonen på app.pagescms.org er oppgitt som gratis
+(tredjepartskilde, bør bekreftes): man logger inn med GitHub og installerer
+Pages CMS sin GitHub-app på repoet. Selvhosting krever Postgres, en egen
+GitHub-app og hemmeligheter (`DATABASE_URL`, `BETTER_AUTH_SECRET`, `CRYPTO_KEY`),
+og er derfor ikke gratis uten videre.
+
+### Kort konklusjon
+
+**Mye mindre jobb enn Tina, men samme hovedtap.** Pages CMS påvirker verken
+bygget eller nettstedet, men har ingen flerspråkstøtte. Issue #48
+(«Localisation support») har stått åpent siden mars 2024, og vedlikeholderen har
+skrevet at felt som deles mellom språk ikke er planlagt. PR #405 gjelder å
+oversette selve CMS-grensesnittet, ikke innholdet. Maskinoversetting finnes ikke.
+
+### Hvor mye jobb
+
+Ca. 1–1,5 dag:
+
+- Skrive om `public/admin/config.yml` til `.pages.yml`. Formatet ligner
+  (YAML med `string`, `text`, `rich-text`, `number`, `boolean`, `select`,
+  `image`, `object`, `list: true`, `required`, `default`), så det er stort sett
+  en oversettelse felt for felt.
+- `sections` blir tre `type: file`-oppføringer, én per språk (`no.md`, `en.md`,
+  `lv.md`). De fem `json`-filene og `reviews.json` blir én oppføring hver.
+- Teste rundtur, oppdatere README og CLAUDE.md.
+- Ingen npm-avhengigheter, ingen endring i `package.json` eller bygget, ingen
+  nøkler i Cloudflare.
+
+### Hvordan innholdet bevares
+
+- Samme filer og feltnavn som i dag; ingen data flyttes.
+- **Bilder passer rett inn:** `media: { input: src/images, output: /src/images }`
+  gir nøyaktig stiformatet som allerede står i `houses.json`. `resolveImage` i
+  `src/lib/images.ts` trenger ingen endring.
+- Må testes: om `rich-text` lagrer «Om»-teksten (markdown-body) som markdown
+  eller HTML. Blir det HTML, brukes et vanlig `text`-felt i stedet.
+- YAML-frontmatter skrives om ved lagring (anførselstegn, rekkefølge); zod-
+  skjemaet i `src/content.config.ts` fanger feil ved bygg som før.
+
+### Funksjonalitet du mister (sammenlignet med Sveltia)
+
+De samme kjernetapene som med Tina:
+
+1. «Translate»-knappen (AI-oversetting norsk til engelsk og latvisk).
+2. Alle språk i ett skjema, side om side.
+3. Automatisk like felt på tvers av språk (`i18n: duplicate`).
+4. Bildebanker og bildeoptimalisering ved opplasting.
+5. Lokal redigering via Chrome uten innlogging.
+
+### Funksjonalitet du får
+
+1. **Invitere redaktører på e-post**, uten GitHub-konto eller PAT.
+2. Ingen PAT som utløper.
+3. Ingen CMS-kode i repoet, bare én konfigfil.
+
+### Risikoer
+
+| Risiko | Alvor | Tiltak |
+|---|---|---|
+| Ingen flerspråkstøtte; språkene må holdes i takt for hånd | Høy | Byggsjekk for like ID-er på tvers av språk (som for Tina) |
+| Tredjepartstjeneste med skrivetilgang til repoet, drevet av én hovedutvikler, gratis uten avtale | Middels | Begrens GitHub-appen til dette ene repoet; Git er fortsatt sannhetskilden |
+| Innhold mellomlagres i Pages CMS sin database | Lav | Innholdet er offentlig på nettstedet uansett; ingen hemmeligheter i repoet |
+| `rich-text` kan skrive HTML i markdown-filen | Lav | Test først; bruk `text` om nødvendig |
+
+### Bytteplan
+
+Pages CMS kjører utenfor nettstedet, så det kan **prøves parallelt med Sveltia
+uten deploy og uten risiko**:
+
+1. Legg til `.pages.yml` på `main`. Ingen effekt på siden eller bygget.
+2. Koble repoet i app.pagescms.org og test alle oppføringene; `git diff` etter
+   lagring uten endringer skal være tom eller kun formatering.
+3. Når du er fornøyd: fjern `public/admin/` og `adminDevFallback` i
+   `astro.config.mjs` i én commit. Tilbakerulling er `git revert`.
+
+### Anbefaling
+
+Fortsatt Sveltia, fordi AI-oversettingen er kjernen i arbeidsflyten. Hvis
+behovet er å la andre redigere uten GitHub-konto, er Pages CMS et bedre valg
+enn Tina, og det kan brukes **ved siden av** Sveltia: Sveltia for oversetting,
+Pages CMS for enkle endringer.
+
+### Tre-veis-sammenligning
+
+| | Sveltia (i dag) | TinaCMS | Pages CMS |
+|---|---|---|---|
+| Drift | Ingen server | Tina Cloud eller egen server + database | Hostet tjeneste, eller egen server + Postgres |
+| Nøkler i bygget | Ingen | `TINA_CLIENT_ID`, `TINA_TOKEN` | Ingen |
+| Endring i bygget | Ingen | `tinacms build` før hvert bygg | Ingen |
+| Flerspråk, side om side | Ja | Nei | Nei |
+| AI-oversetting | Ja | Nei | Nei |
+| Bildestier (`/src/images`) | Passer | Krever omvei | Passer |
+| Visuell redigering | Nei | Ja (krever React) | Nei |
+| Redaktører uten GitHub | Nei (PAT) | Ja (Tina-konto) | Ja (e-postinvitasjon) |
+| Arbeid for å bytte | | Ca. 3,5–4 dager | Ca. 1–1,5 dag |
+| Kan prøves parallelt | | Nei, deler `/admin` | Ja |
+
 ## Kilder og forbehold
 
 Tinas egne sider (tina.io) var ikke tilgjengelige da vurderingen ble skrevet, så
@@ -187,6 +289,13 @@ tina.io/pricing før en eventuell migrering. Relevante sider:
 - Cloudflare: https://tina.io/docs/tinacloud/deployment-options/cloudflare-workers
 - TinaCMS kildekode: https://github.com/tinacms/tinacms (npm `tinacms` 3.15.0)
 - Sveltia CMS kildekode: https://github.com/sveltia/sveltia-cms (npm `@sveltia/cms` 0.250.1)
+
+- Pages CMS kildekode: https://github.com/hunvreus/pagescms (versjon 2.1.8)
+- Pages CMS, flerspråk-issue: https://github.com/pages-cms/pages-cms/issues/48
+- Pages CMS, Astro-eksempel: https://github.com/pagescms/astro-blog-template
+
+pagescms.org var heller ikke tilgjengelig; Pages CMS-funnene bygger på
+kildekoden, README og issues på GitHub.
 
 Funksjonene i sammenligningstabellen er kontrollert ved å søke i de publiserte
 npm-pakkene (for eksempel oversettingstjenestene i Sveltia, og at Tina ikke har
